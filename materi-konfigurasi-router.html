@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materi: Konfigurasi Dasar Router</title> <style>
+        /* Palet Warna Biru Navy Muda (konsisten dengan halaman utama) */
+       :root {
+            --dark-blue-navy: #2C3E50;
+            --light-blue-navy: #34495E;
+            --accent-blue: #3498DB;
+            --text-color: #ECF0F1;
+            --dark-text-color: #2C3E50;
+            --background-light: #ECF0F1;
+            --border-color: #BDC3C7;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-light);
+            color: var(--dark-text-color);
+        }
+        header {
+            background-color: var(--dark-blue-navy);
+            color: var(--text-color);
+            padding: 1.5em 0;
+            text-align: center;
+        }
+        nav {
+            background-color: var(--light-blue-navy);
+            overflow: hidden;
+            text-align: center;
+        }
+        nav a {
+            display: inline-block;
+            color: var(--text-color);
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        nav a:hover {
+            background-color: var(--accent-blue);
+            color: white;
+        }
+        .content-wrapper {
+            padding: 20px;
+            max-width: 960px;
+            margin: auto;
+            background-color: white;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            margin-top: 25px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+        }
+        .content-wrapper h1 {
+            color: var(--dark-blue-navy);
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent-blue);
+        }
+        .content-wrapper h2 {
+            color: var(--light-blue-navy);
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .content-wrapper h3 {
+            color: var(--dark-blue-navy);
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+        .back-button {
+            background-color: var(--light-blue-navy); /* Warna tombol kembali */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 20px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        .back-button:hover {
+            background-color: #2980B9; /* Sedikit lebih gelap saat hover */
+        }
+        .paragraf-indent {
+            padding-left: 20px; /* Indentasi sebesar 50 piksel */
+            margin-top: 0;
+        }
+        p {
+            line-height: 1.6;
+            margin-bottom: 3px;
+            margin-top: 3px;
+        }
+        ul, ol {
+            margin-bottom: 15px;
+            padding-left: 25px;
+        }
+        pre {
+            background-color: #f4f4f4;
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto; /* Untuk kode yang panjang */
+            margin-bottom: 20px;
+        }
+        code {
+            font-family: Consolas, monospace;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table, th, td {
+            border: 1px solid var(--border-color);
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: var(--background-light);
+            color: var(--dark-blue-navy);
+        }
+
+        footer {
+            background-color: var(--dark-blue-navy);
+            color: var(--text-color);
+            text-align: center;
+            padding: 25px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+        footer p {
+            margin: 5px 0;
+        }
+        footer a {
+            color: var(--accent-blue);
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Portal Pembelajaran<br>Teknik Komputer dan Jaringan</h1>
+    </header>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="materi.html">Materi</a>
+        <a href="praktik.html">Praktik</a>
+        <a href="nilai.html">Nilai</a>
+        <a href="tugas.html">Tugas</a>
+    </nav>
+
+    <div class="content-wrapper">
+        <a href="materi.html" class="back-button">← Kembali ke Daftar Materi</a>
+
+        <h1>Konfigurasi Dasar Router</h1> 
+        <h2>1. Reset Konfigurasi MikroTik</h2>
+        <p>Menghapus semua konfigurasi Router MikroTik dan mengembalikan ke pengaturan awal.</p>
+        <p>a. <b>System</b> &#8594; <b>Reset Configuration</b>.</p>
+        <p>b. Beri tanda &#10004; pada <b>No Default Configuration</b>.</p>
+        <p>c. Klik tombol <b>Reset Configuration</b> &#8594; <b>Yes</b>.</p>
+        <p>d. Tunggu beberapa saat dan koneksi dengan Router akan terputus. Kemudian ulangi proses menhubungkan Router dari awal.</p>
+
+        <h2>2. Konfigurasi Hostname</h2>
+        <p>Merubah nama Router MikroTik.</p>
+        <p>a. <b>System</b> &#8594; <b>Identity</b>.</p>
+        <p>b. Isikan <b>Nama Router</b> pada kotak Identity.</p>
+        <p>c. Klik tombol <b>Apply</b> &#8594; <b>OK</b>.</p>
+
+        <h2>3. Konfigurasi Alamat IP</h2>
+        <p>a. <b>IP</b> &#8594; <b>Addressess</b>.</p>
+        <p>b. Klik tombol <b>+</b> untuk menambah alamat IP.</p>
+        <p>c. Isikan sesuai ketentuan berikut:</p>
+        <p class="paragraf-indent">
+            IP Address: <b><font color="darkorange">[Alamat IP]</font></b><br>
+            Network: <b><font color="darkorange">[Alamat Network]</font></b><br>
+            Interface: <b><font color="darkorange">[Port yang dipakai]</font></b><br>   
+        </p>
+        <p>d. Klik tombol <b>Apply</b> &#8594; <b>OK</b>.</p>
+        <pre><code>
+Contoh Alamat IP:
+Address	 : 192.168.10.1/24 
+Network	 : 192.168.10.0
+Interface: ether1
+        </code></pre>
+        
+        <h2>4. Konfigurasi IP DNS</h2>
+        <p>a. <b>IP</b> &#8594; <b>DNS</b>.</p>
+        <p>b. Isikan IP DNS Primer di kotak <b>Servers</b>.</p>
+        <p>c. Gunakan tombol segitiga dibagian kanan untuk menambah dan menghapus IP DNS.
+        <p class="paragraf-indent">
+            <svg width="10" height="10"><polygon points="5,10 0,0 10,0" style="fill:currentColor;" /> </svg> digunakan untuk menambah IP DNS bisa menggunakan tombol </p> 
+        <p class="paragraf-indent">
+            <svg width="10" height="10"><polygon points="5,0 0,10 10,10" style="fill:currentColor;" /> </svg> digunakan untuk menghapus IP DNS bisa menggunakan tombol </p> 
+        <p>d. Beri tanda &#10004; pada opsi <b>Allow Remote Request</b>.</p>
+        <p class="paragraf-indent">
+            bagian ini digunakan untuk menyimpan permintaan DNS dan membuat Router MikroTik sebagai DNS Server.</p>
+        <p>e. Klik tombol <b>Apply</b> &#8594; <b>OK</b>.</p>
+        <pre><code>
+Contoh IP DNS yang bisa digunakan:
+Google DNS     : 8.8.8.8
+                 8.8.4.4
+Cloudflare DNS : 1.1.1.1
+                 1.0.0.1
+        </code></pre>
+
+        <h2>5. Konfigurasi NAT</h2>
+        <p>a. <b>IP</b> &#8594; <b>Firewall</b> &#8594; <b>NAT</b>.</p>
+        <p>b. Klik tombol <b>+</b> untuk menambah NAT.</p>
+        <p>c. Atur sesuai ketentuan berikut:
+        <p class="paragraf-indent">
+            Tab General<br>
+            - Chain: <b>srcnat</b><br>
+            - Out. Interface: <b><font color="darkorange">[port yang digunakan]</font></b></b><br>
+            Tab Action<br>
+            - Action: <b>masquerade</b><br>
+        </p> 
+        <p>e. Klik tombol <b>Apply</b> &#8594; <b>OK</b>.</p>
+        <p>*) Konfigurasi ini diulang sesuai port yang digunakan</p>
+
+        <h2>6. Konfigurasi Gateway</h2>
+        <p>a. <b>IP</b> &#8594; <b>Routes</b>.</p>
+        <p>b. Klik tombol <b>+</b> untuk menambah IP Gateway.</p>
+        <p>c. Isikan IP gateway di kotak <b>Gateway</b>.
+        <p>e. Klik tombol <b>Apply</b> &#8594; <b>OK</b>.</p>
+        <pre><code>
+Contoh IP Gateway
+Gateway: 192.168.10.254
+        </code></pre>
+
+
+        <h2>7. Pengujian Koneksi Jaringan</h2>
+        <p>a. <b>New Terminal</b>.</p>
+        <p>b. Uji koneksi jaringan menggunakan perintan ping dengan format seperti berikut:</p>
+        <p class="paragraf-indent"><code>ping   <font color="darkorange"><b>[alamat tujuan]</b></font></code></p>
+        <p>c. Tekan Enter.
+        <pre><code>
+Contoh:
+Pengujian ke alamat web
+    <b>ping  <font color="darkorange">[alamat web]</font></b>
+    <b>ping  <font color="darkorange">google.com</font></b>
+
+Pengujian ke perangkat jaringan (PC, Router, dll)
+    <b>ping  <font color="darkorange">[alamat IP]</font></b>
+    <b>ping  <font color="darkorange">192.168.10.1</font></b>
+        </code></pre>

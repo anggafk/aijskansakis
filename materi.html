@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Materi AIJ</title>
+    <style>
+        /* Palet Warna Biru Navy Muda (konsisten) */
+        :root {
+            --dark-blue-navy: #2C3E50;
+            --light-blue-navy: #34495E;
+            --accent-blue: #3498DB;
+            --text-color: #ECF0F1;
+            --dark-text-color: #2C3E50;
+            --background-light: #ECF0F1;
+            --border-color: #BDC3C7;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-light);
+            color: var(--dark-text-color);
+        }
+        header {
+            background-color: var(--dark-blue-navy);
+            color: var(--text-color);
+            padding: 1.5em 0;
+            text-align: center;
+        }
+        nav {
+            background-color: var(--light-blue-navy);
+            overflow: hidden;
+            text-align: center;
+        }
+        nav a {
+            display: inline-block;
+            color: var(--text-color);
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        nav a:hover {
+            background-color: var(--accent-blue);
+            color: white;
+        }
+        .container {
+            padding: 20px;
+            max-width: 960px;
+            margin: auto;
+            background-color: white;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            margin-top: 25px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+        }
+        .category-section {
+            margin-bottom: 40px;
+            padding: 20px;
+            background-color: #FFFFFF;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+        .category-section > h2 {
+            color: var(--dark-blue-navy);
+            text-align: center;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent-blue);
+        }
+
+        /* Styling untuk item materi tanpa accordion */
+        .materi-list-item {
+            display: flex; /* Menggunakan flexbox untuk tata letak samping */
+            justify-content: space-between; /* Memisahkan judul dan tombol */
+            align-items: center; /* Meratakan secara vertikal */
+            padding: 15px 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            margin-bottom: 10px; /* Jarak antar item materi */
+            background-color: #f9f9f9;
+        }
+        .materi-list-item h3 {
+            margin: 0; /* Hapus margin default h3 */
+            color: var(--dark-blue-navy);
+            font-size: 1.1em;
+        }
+        .button {
+            background-color: var(--accent-blue);
+            color: white;
+            padding: 8px 15px; /* Padding sedikit lebih kecil untuk tombol ini */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            white-space: nowrap; /* Mencegah teks tombol patah baris */
+        }
+        .button:hover {
+            background-color: #2980B9;
+        }
+        footer {
+            background-color: var(--dark-blue-navy);
+            color: var(--text-color);
+            text-align: center;
+            padding: 25px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+        footer p {
+            margin: 5px 0;
+        }
+        footer a {
+            color: var(--accent-blue);
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Portal Pembelajaran<br>Teknik Komputer dan Jaringan</h1>
+    </header>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="materi.html">Materi</a>
+        <a href="praktik.html">Praktik</a>
+        <a href="nilai.html">Nilai</a>
+        <a href="tugas.html">Tugas</a>
+    </nav>
+
+    <div class="container">
+        <h2 id="materi" style="text-align: center; color: var(--dark-blue-navy); margin-bottom: 30px;">Daftar Materi AIJ</h2>
+
+        <div class="category-section">
+            <h2>Perencanaan dan Pengalamatan Jaringan</h2>
+            
+            <div class="materi-list-item">
+                <h3>Alamat Jaringan Komputer</h3>
+                <a href="materi-alamat-jaringan.html" class="button">Lihat Materi</a>
+            </div>
+
+            <div class="materi-list-item">
+                <h3>Alamat IP</h3>
+                <a href="materi-alamat-ip.html" class="button">Lihat Materi</a>
+            </div>
+            
+            <div class="materi-list-item">
+                <h3>Konfigurasi Alamat IP di Windows</h3>
+                <a href="materi-konfigurasi-ip-windows.html" class="button">Lihat Materi</a>
+            </div>
+            
+            <div class="materi-list-item">
+                <h3>Pemecahan Alamat IP (Subnetting)<i><font color="darkorange"> *New</font></i></h3>
+                <a href="materi-pemecahan-ip.html" class="button">Lihat Materi</a>
+            </div>
+
+        </div>
+
+        <div class="category-section">
+            <h2>Pemasangan dan Konfigurasi Perangkat Jaringan</h2>
+            
+            <div class="materi-list-item">
+                <h3>Menghubungkan Router ke PC</h3>
+                <a href="materi-menghubungkan-router.html" class="button">Lihat Materi</a>
+            </div>
+
+            <div class="materi-list-item">
+                <h3>Konfigurasi Dasar Router</h3>
+                <a href="materi-konfigurasi-router.html" class="button">Lihat Materi</a>
+            </div>
+
+            <div class="materi-list-item">
+                <h3>Konfigurasi DHCP <i><font color="darkorange">*New</font></i></h3>
+                <a href="materi-konfigurasi-dhcp.html" class="button">Lihat Materi</a>
+            </div>
+
+        </div>
+
+    </div>
+
+    <footer>
+        <h3 id="kontak">Angga Fajar Kusuma</h3>
+        <p>No. HP: <a href="https://api.whatsapp.com/send/?phone=6285229327220&text&type=phone_number&app_absent=0">085229327220</a></p>
+        <p>Email: <a href="mailto:anggafk@gmail.com" target="_blank">anggafk@gmail.com</a></p>
+        <p>Instagram: <a href="https://www.instagram.com/anggafk/" target="_blank">@anggafk</a></p>
+		<p>Youtube: <a href="https://www.youtube.com/anggafk" target="_blank">@anggafk</a></p>
+    </footer>
+
+</body>
+</html>

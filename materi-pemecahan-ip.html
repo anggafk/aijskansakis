@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materi: Pemecahan Alamat IP</title> <style>
+        /* Palet Warna Biru Navy Muda (konsisten dengan halaman utama) */
+        :root {
+            --dark-blue-navy: #2C3E50;
+            --light-blue-navy: #34495E;
+            --accent-blue: #3498DB;
+            --text-color: #ECF0F1;
+            --dark-text-color: #2C3E50;
+            --background-light: #ECF0F1;
+            --border-color: #BDC3C7;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-light);
+            color: var(--dark-text-color);
+        }
+        header {
+            background-color: var(--dark-blue-navy);
+            color: var(--text-color);
+            padding: 1.5em 0;
+            text-align: center;
+        }
+        nav {
+            background-color: var(--light-blue-navy);
+            overflow: hidden;
+            text-align: center;
+        }
+        nav a {
+            display: inline-block;
+            color: var(--text-color);
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        nav a:hover {
+            background-color: var(--accent-blue);
+            color: white;
+        }
+        .content-wrapper {
+            padding: 20px;
+            max-width: 960px;
+            margin: auto;
+            background-color: white;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            margin-top: 25px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+        }
+        .content-wrapper h1 {
+            color: var(--dark-blue-navy);
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent-blue);
+        }
+        .content-wrapper h2 {
+            color: var(--light-blue-navy);
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .content-wrapper h3 {
+            color: var(--dark-blue-navy);
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+        .back-button {
+            background-color: var(--light-blue-navy); /* Warna tombol kembali */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 20px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        .back-button:hover {
+            background-color: #2980B9; /* Sedikit lebih gelap saat hover */
+        }
+        .paragraf-indent {
+            padding-left: 20px; /* Indentasi sebesar 50 piksel */
+            margin-top: 0;
+        }
+        .border-hijau {
+            border: 1px solid green;   /* Garis hijau tipis */
+            padding: 5px;              /* Sedikit padding */
+            background-color: #e0ffe0; /* Warna latar belakang ringan untuk melihat efek */
+        }
+        .border-biru {
+            border: 1px solid var(--dark-blue-navy);   /* Garis hijau tipis */
+            padding: 5px;              /* Sedikit padding */
+            background-color: #e0f4ff; /* Warna latar belakang ringan untuk melihat efek */
+        }
+        .bordered-text {
+            border: 2px solid;
+            padding: 5px;
+        }
+        p {
+            line-height: 1.6;
+            margin-bottom: 10px;
+            margin-top: 10px;
+        }
+        ul, ol {
+            margin-bottom: 15px;
+            padding-left: 25px;
+        }
+        pre {
+            background-color: #f4f4f4;
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto; /* Untuk kode yang panjang */
+            margin-bottom: 20px;
+        }
+        code {
+            font-family: Consolas, monospace;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table, th, td {
+            border: 1px solid var(--border-color);
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: var(--background-light);
+            color: var(--dark-blue-navy);
+        }
+
+        footer {
+            background-color: var(--dark-blue-navy);
+            color: var(--text-color);
+            text-align: center;
+            padding: 25px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+        footer p {
+            margin: 5px 0;
+        }
+        footer a {
+            color: var(--accent-blue);
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+        
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Portal Pembelajaran<br>Teknik Komputer dan Jaringan</h1>
+    </header>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="materi.html">Materi</a>
+        <a href="praktik.html">Praktik</a>
+        <a href="nilai.html">Nilai</a>
+        <a href="tugas.html">Tugas</a>
+    </nav>
+
+    <div class="content-wrapper">
+        <a href="materi.html" class="back-button">← Kembali ke Daftar Materi</a>
+
+        <h1>Pemecahan Alamat IP (Subnetting)</h1>
+        <p>Subnetting adalah proses membagi satu jaringan besar (network) menjadi beberapa jaringan kecil (subnetwork atau subnet). Salah satu tujuannya adalah efisiensi alamat IP, agar alamat IP yang tidak digunakan tidak terbuang percuma.</p>
+        <p>Dalam kelompok alamat IP ada 2 buah IP yang mempunyai sifat khusus yaitu:<br>
+        <b>IP Network</b>: Alamat IP yang merupakan identitas dari kelompok IP. Merupakan Alamat IP terkecil dari sebuah jaringan.<br>
+        <b>IP Broadcast</b>: Alamat IP yang digunakan untuk memanggil semua IP dalam suatu kelompok. Merupakan Alamat IP terbesar dari sebuah jaringan.<br>
+        </p>
+        <h2>A. Prefix yang bisa digunakan masing-masing kelas IP</h2>
+        <table border="1" width="50%">
+        <thead>
+            <tr >
+                <th width="50px" >Kelas IP</th>
+                <th colspan="2">Default Prefix<br> & Subnetmask</th>
+                <th>Prefix yang<br>bisa digunakan</th>
+                <th>Keterangan</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td ><code>A</code></td>
+                <td width="50px"><code>/8</code></td>
+                <td width="150px"><code>255.0.0.0</code></td>
+                <td ><code>/8 s.d. /30</code></td>
+                <td rowspan="3"><code>Kelas yang lebih besar <br>bisa menggunakan prefix<br>kelas yang lebih kecil</code></td>
+            </tr>
+            <tr>
+                <td><code>B</code></td>
+                <td><code>/16</code></td>
+                <td><code>255.255.0.0</code></td>
+                <td><code>/16 s.d. /30</code></td>
+            </tr>
+            <tr>
+                <td><code>C</code></td>
+                <td><code>/24</code></td>
+                <td><code>255.255.255.0</code></td>
+                <td><code>/24 s.d. /30</code></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <h2>B. Menentukan Subnetmask, IP Network, IP Broadcast dan IP Host (Kelas C)</h2>
+        <h2>1. Menghitung Blok Subnet dan Subnetmask</h2>
+        <p style="font-size: 16px;"><b>a. Cara Pertama<br>
+        Menghitung Subnetmask</b><br>
+        Ubah prefix menjadi subnetmask biner lalu konversikan menjadi desimal.</p>
+        <pre style="font-size: 18px;">
+Contoh: 192.168.10.150/<font color="02A3A8"><b>26</b></font>
+Subnetmask biner = <font color="02A3A8"><b>11111111.11111111.11111111.11</b></font>000000
+                   26 bit pertama merupakan bilangan 1, bit tersisa merupakan bilangan 0
+Dikonversi menjadi bilangan desimal
+Subnetmask       = <font color="02A3A8"><b>255.255.255.192</b></font></pre>
+        <p style="font-size: 16px;"><b>Menghitung Blok Subnet</b></p>
+        <p style="font-size: 16px;">
+        <span class="bordered-text" style="font-size: 20px;">Blok Subnet = 256 - <b><font color="02A3A8">Oktet ke-4 Subnetmask</font></b></span></p>
+        <pre style="font-size: 18px;">
+Contoh: 192.168.10.150/26
+Blok subnet = 256 - <font color="02A3A8"><b>Oktet ke-4 Subnetmask</b></font>
+            = 256 - <font color="02A3A8"><b>192</b></font>
+Blok Subnet = <font color="red"><b>64</b></font></pre>
+
+
+        <p style="font-size: 16px;"><b>b. Cara Kedua<br>
+        Menghitung Blok Subnet</b><br>
+        <p style="font-size: 16px;">
+        <span class="bordered-text" style="font-size: 20px;">Blok Subnet = <b>2 <sup>(32 - <font color="02A3A8">prefix</font>)</sup></b></span></p>
+        <pre style="font-size: 18px;">
+Contoh: 192.168.10.150/<font color="02A3A8"><b>26</b></font>
+Blok subnet = 2<sup>(32 - <font color="02A3A8"><b>prefix</b></font>)</sup>
+            = 2<sup>(32 - <font color="02A3A8"><b>26</b></font>)</sup>
+            = 2<sup>6</sup>
+Blok Subnet = <font color="red"><b>64</b></font></pre>
+        <p style="font-size: 16px;"><b>Menghitung Subnetmask</b></p>
+        <p style="font-size: 16px;">
+        <span class="bordered-text" style="font-size: 20px;">Subnetmask = 255.255.255.<b>(256-<font color="red">Blok Subnet</font>)</b></span></p>
+        <pre style="font-size: 18px;">
+Contoh: 192.168.10.150/26
+Subnetmask  = 255.255.255.<b>(256-<font color="red">Blok Subnet</font>)</b>
+            = 255.255.255.<b>(256-<font color="red">64</font>)</b>
+            = 255.255.255.<font color="02A3A8"><b>192</b></font></pre>
+
+        <h2>2. Menghitung IP Network</h2>
+        <p>Oktet ke-1 sampai oktet ke-3 tidak diubah, oktet ke-4 mengikuti perhitungan berikut.<br></p>
+        <span class="bordered-text" style="font-size: 20px;"><font color="darkorange"><b>Nilai oktet ke-4</b></font> / <font color="red"><b>Blok subnet</b></font><br></span><br>
+        <span class="bordered-text" style="font-size: 20px;"><font color="blue"><b>Angka sebelum koma</b></font> x <font color="red"><b>Blok subnet</b></font><br></span></p>
+        <pre style="font-size: 18px;">
+Contoh: 192.168.10.150/26
+Nilai Oktet ke-4 / Blok Subnet   = <font color="darkorange"><b>150</b></font> / <font color="red"><b>64</b></font>
+                                 = <font color="blue"><b>2</b></font>,343
+Angka Sebelum Koma x Blok Subnet = <font color="blue"><b>2</b></font> x <font color="red"><b>64</b></font>
+                                 = <font color="green"><b>128</b></font>
+
+IP Network = <b>192.168.10.<font color="green">128</font></b></pre>
+
+        <h2>3. Menghitung IP Broadcast</h2>
+        <span class="bordered-text" style="font-size: 20px;"><font color="green"><b>Nilai oktet ke-4 IP Network</b></font> + <font color="red"><b>Blok subnet</b></font> - <b>1</b><br></span><br>
+        <pre style="font-size: 18px;">
+Contoh: 192.168.10.150/26
+Nilai Oktet ke-4 IP Network + Blok Subnet - 1  = <font color="green"><b>128</b></font> + <font color="red"><b>64</b></font> - <b>1</b>
+                                               = <font color="purple"><b>191</b></font>
+
+IP Broadcast = <b>192.168.10.<font color="purple">191</font></b></pre>
+
+        <h2>4. Menghitung IP Host</h2>
+        <p>IP Host adalah alamat IP yang bisa digunakan untuk konfigurasi perangkat jaringan.<br>Merupakan Alamat IP yang berada diantara IP Network dengan IP Broadcast</p>
+        <pre style="font-size: 18px;">
+Contoh: 192.168.10.150/26
+IP Network              IP Broadcast
+192.168.10.<b><font color="green">128</font></b>          192.168.10.<b><font color="purple">191</font></b>
+           <b><font color="green">+1</font></b>                      <b><font color="purple">-1</font></b>
+192.168.10.<b><font color="green">129</font></b>  sampai  192.168.10.<b><font color="purple">190</font></b>
+
+IP Host = <b>192.168.10.129 - 192.168.10.190</b></pre>
+
+        <pre style="font-size: 18px;">
+Hasil akhir perhitungan alamat IP diatas
+Alamat IP    = 192.168.10.150/26
+Subnetmask   = 255.255.255.192
+Blok Subnet  = 64
+IP Network   = 192.168.10.128
+IP Broadcast = 192.168.10.191
+IP Host      = 192.168.10.129 - 192.168.10.190</pre>

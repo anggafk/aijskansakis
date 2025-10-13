@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materi: Alamat IP</title> <style>
+        /* Palet Warna Biru Navy Muda (konsisten dengan halaman utama) */
+        :root {
+            --dark-blue-navy: #2C3E50;
+            --light-blue-navy: #34495E;
+            --accent-blue: #3498DB;
+            --text-color: #ECF0F1;
+            --dark-text-color: #2C3E50;
+            --background-light: #ECF0F1;
+            --border-color: #BDC3C7;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-light);
+            color: var(--dark-text-color);
+        }
+        header {
+            background-color: var(--dark-blue-navy);
+            color: var(--text-color);
+            padding: 1.5em 0;
+            text-align: center;
+        }
+        nav {
+            background-color: var(--light-blue-navy);
+            overflow: hidden;
+            text-align: center;
+        }
+        nav a {
+            display: inline-block;
+            color: var(--text-color);
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        nav a:hover {
+            background-color: var(--accent-blue);
+            color: white;
+        }
+        .content-wrapper {
+            padding: 20px;
+            max-width: 960px;
+            margin: auto;
+            background-color: white;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            margin-top: 25px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+        }
+        .content-wrapper h1 {
+            color: var(--dark-blue-navy);
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent-blue);
+        }
+        .content-wrapper h2 {
+            color: var(--light-blue-navy);
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .content-wrapper h3 {
+            color: var(--dark-blue-navy);
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+        .back-button {
+            background-color: var(--light-blue-navy); /* Warna tombol kembali */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 20px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        .back-button:hover {
+            background-color: #2980B9; /* Sedikit lebih gelap saat hover */
+        }
+        .paragraf-indent {
+            padding-left: 20px; /* Indentasi sebesar 50 piksel */
+            margin-top: 0;
+        }
+        .border-hijau {
+            border: 1px solid green;   /* Garis hijau tipis */
+            padding: 5px;              /* Sedikit padding */
+            background-color: #e0ffe0; /* Warna latar belakang ringan untuk melihat efek */
+        }
+        .border-biru {
+            border: 1px solid var(--dark-blue-navy);   /* Garis hijau tipis */
+            padding: 5px;              /* Sedikit padding */
+            background-color: #e0f4ff; /* Warna latar belakang ringan untuk melihat efek */
+        }
+        p {
+            line-height: 1.6;
+            margin-bottom: 10px;
+            margin-top: 10px;
+        }
+        ul, ol {
+            margin-bottom: 15px;
+            padding-left: 25px;
+        }
+        pre {
+            background-color: #f4f4f4;
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto; /* Untuk kode yang panjang */
+            margin-bottom: 20px;
+        }
+        code {
+            font-family: Consolas, monospace;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table, th, td {
+            border: 1px solid var(--border-color);
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: var(--background-light);
+            color: var(--dark-blue-navy);
+        }
+
+        footer {
+            background-color: var(--dark-blue-navy);
+            color: var(--text-color);
+            text-align: center;
+            padding: 25px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+        footer p {
+            margin: 5px 0;
+        }
+        footer a {
+            color: var(--accent-blue);
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Portal Pembelajaran<br>Teknik Komputer dan Jaringan</h1>
+    </header>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="materi.html">Materi</a>
+        <a href="praktik.html">Praktik</a>
+        <a href="nilai.html">Nilai</a>
+        <a href="tugas.html">Tugas</a>
+    </nav>
+
+    <div class="content-wrapper">
+        <a href="materi.html" class="back-button">← Kembali ke Daftar Materi</a>
+
+        <h1>Alamat IP (versi 4)</h1>
+
+        <h2>1. Kelas Alamat IP</h2>
+        
+        <p>Ada lima kelas utama alamat IP, yaitu Kelas A, B, C, D, dan E. Namun, hanya Kelas A, B, dan C yang umum digunakan untuk pengalamatan perangkat dalam jaringan. Kelas D digunakan untuk IP multicasting dan kelas E dicadangkan untuk eksperimen.<br>Penentuan alamat IP adalah dengan melihat <b>nilai dari oktet pertama</b> sebuah alamat IP.</p>
+        
+        <p><b>Kelas A</b>: Rentang IP dari 0 s.d. 127 (IP 0 dan 127 dicadangkan)<br>
+        </p>
+        <p><b>Kelas B</b>: Rentang IP dari 128 s.d. 191<br>
+        </p>
+        <p><b>Kelas C</b>: Rentang IP dari 192 s.d. 223<br>
+        </p>
+        <p><b>Kelas D</b>: Rentang IP dari 224 s.d. 239<br>
+        </p>
+        <p><b>Kelas E</b>: Rentang IP dari 240 s.d. 255<br>
+        </p>
+
+        <h2>2. Prefix length dan Subnet Mask</h2>
+        <p>Prefix length adalah bagian dari alamat IP yang menunjukkan jaringan tempat suatu perangkat berada. Prefix menunjukkan banyaknya binary 1 secara berurutan dimulai dari bit pertama. Prefix digunakan untuk menentukan subnet mask dari alamat IP.</p>
+        
+        <p>Subnet mask digunakan untuk membedakan network ID dengan host ID, menunjukkan letak suatu host, apakah berada di jaringan lokal atau jaringan luar.</p>
+        <p>Bit-bit subnet mask yang didefinisikan, adalah sebagai berikut:<br>
+            Semua bit yang digunakan oleh Network Id memiliki nilai 1.<br>
+            Semua bit yang digunakan oleh Host Id memiliki nilai 0.</p>
+        <p><b><center>Subnet mask bawaan dari kelas IP</center></b></p>
+        <table border="1">
+        <thead>
+            <tr>
+                <th>Kelas IP</th>
+                <th>Subnet Mask Biner</th>
+                <th>Subnet Mask</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>A</code></td>
+                <td><code>11111111.00000000.00000000.00000000</code></td>
+                <td><code>255.0.0.0</code></td>
+            </tr>
+            <tr>
+                <td><code>B</code></td>
+                <td><code>11111111.11111111.00000000.00000000</code></td>
+                <td><code>255.255.0.0</code></td>
+            </tr>
+            <tr>
+                <td><code>C</code></td>
+                <td><code>11111111.11111111.11111111.00000000</code></td>
+                <td><code>255.255.255.0</code></td>
+            </tr>
+            </tbody>
+    </table>
+
+        <h2>3. Alamat Network dan Host</h2>
+        
+        <p>Setiap alamat IP terdiri dari 2 bagian, Alamat Network dan Alamat Host</p>
+        <p><b>Alamat Network atau Network ID</b> merupakan bagian dari alamat IP yang mengidentifikasi jaringan tertentu di mana sebuah perangkat berada. Semua perangkat jaringan harus mempunyai alamat network yang sama untuk bisa saling terhubung.</p>
+        <p><b>Alamat Host atau Host ID</b> merupakan bagian dari alamat IP yang mengidentifikasi perangkat spesifik secara individu. Dalam  jaringan yang sama, tidak boleh ada 2 atau lebih alamat host yang sama.</p>
+        
+        <p><b>Kelas A</b></p>
+        <span class="border-hijau"><code>Net ID</code></span> . <span class="border-biru"><code>HostID</code></span> . <span class="border-biru"><code>HostID</code></span> . <span class="border-biru"><code>HostID</code></span>
+        
+        <p><b>Kelas B</b></p>
+        <span class="border-hijau"><code>Net ID</code></span> . <span class="border-hijau"><code>Net ID</code></span> . <span class="border-biru"><code>HostID</code></span> . <span class="border-biru"><code>HostID</code></span>
+        
+        <p><b>Kelas C</b></p>
+        <span class="border-hijau"><code>Net ID</code></span> . <span class="border-hijau"><code>Net ID</code></span> . <span class="border-hijau"><code>Net ID</code></span> . <span class="border-biru"><code>HostID</code></span>
+
+        <h2>Penulisan Alamat IP</h2>
+        <p>Penulisan IP address umumnya adalah dengan 192.168.1.2. <br>
+        Namun adakalanya ditulis dengan 192.168.1.2/24.<br>
+        Artinya adalah IP address 192.168.1.2 dengan subnet mask 255.255.255.<br>
+        /24 berarti bahwa 24 bit pertama subnet mask merupakan binari 1.<br>
+        Atau dengan kata lain, subnet masknya adalah: 11111111.11111111.11111111.00000000. Yang dikonversi menjadi bilangan desimal menjadi 255.255.255.0.
+        </p>

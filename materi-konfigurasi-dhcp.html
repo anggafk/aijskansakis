@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materi: Konfigurasi DHCP</title> <style>
+        /* Palet Warna Biru Navy Muda (konsisten dengan halaman utama) */
+       :root {
+            --dark-blue-navy: #2C3E50;
+            --light-blue-navy: #34495E;
+            --accent-blue: #3498DB;
+            --text-color: #ECF0F1;
+            --dark-text-color: #2C3E50;
+            --background-light: #ECF0F1;
+            --border-color: #BDC3C7;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-light);
+            color: var(--dark-text-color);
+        }
+        header {
+            background-color: var(--dark-blue-navy);
+            color: var(--text-color);
+            padding: 1.5em 0;
+            text-align: center;
+        }
+        nav {
+            background-color: var(--light-blue-navy);
+            overflow: hidden;
+            text-align: center;
+        }
+        nav a {
+            display: inline-block;
+            color: var(--text-color);
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        nav a:hover {
+            background-color: var(--accent-blue);
+            color: white;
+        }
+        .content-wrapper {
+            padding: 20px;
+            max-width: 960px;
+            margin: auto;
+            background-color: white;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            margin-top: 25px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+        }
+        .content-wrapper h1 {
+            color: var(--dark-blue-navy);
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent-blue);
+        }
+        .content-wrapper h2 {
+            color: var(--light-blue-navy);
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .content-wrapper h3 {
+            color: var(--dark-blue-navy);
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+        .back-button {
+            background-color: var(--light-blue-navy); /* Warna tombol kembali */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 20px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        .back-button:hover {
+            background-color: #2980B9; /* Sedikit lebih gelap saat hover */
+        }
+        .paragraf-indent {
+            padding-left: 20px; /* Indentasi sebesar 50 piksel */
+            margin-top: 0;
+        }
+        p {
+            line-height: 1.6;
+            margin-bottom: 3px;
+            margin-top: 3px;
+        }
+        ul, ol {
+            margin-bottom: 15px;
+            padding-left: 25px;
+        }
+        pre {
+            background-color: #f4f4f4;
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto; /* Untuk kode yang panjang */
+            margin-bottom: 20px;
+        }
+        code {
+            font-family: Consolas, monospace;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table, th, td {
+            border: 1px solid var(--border-color);
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: var(--background-light);
+            color: var(--dark-blue-navy);
+        }
+
+        footer {
+            background-color: var(--dark-blue-navy);
+            color: var(--text-color);
+            text-align: center;
+            padding: 25px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+        footer p {
+            margin: 5px 0;
+        }
+        footer a {
+            color: var(--accent-blue);
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Portal Pembelajaran<br>Teknik Komputer dan Jaringan</h1>
+    </header>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="materi.html">Materi</a>
+        <a href="praktik.html">Praktik</a>
+        <a href="nilai.html">Nilai</a>
+        <a href="tugas.html">Tugas</a>
+    </nav>
+
+    <div class="content-wrapper">
+        <a href="materi.html" class="back-button">← Kembali ke Daftar Materi</a>
+
+        <h1>Dynamic Host Configuration Protocol (DHCP)</h1>
+        <p>Layanan yang memungkinkan perangkat dapat memberikan/meminta/menyalurkan alamat secara otomatis pada host dalam sebuah jaringan. DHCP juga mampu mendistribusikan informasi IP Address, subnetmask, IP gateway, IP DNS dan informasi lain sesuai dengan pengaturan DHCP.</p>
+
+        <h2>A. Konfigurasi DHCP Server</h2>
+        <h2>1. Menambahkan IP Gateway, IP Network & IP DNS</h2>
+        <p>a. <b>IP</b> &#8594; <b>DHCP Server</b> &#8594; <b>Network</b>.</p>
+        <p>b. Klik tombol <b>+</b></p>
+        <p>c. Atur sesuai ketentuan berikut:</p>
+        <p class="paragraf-indent">
+            Address: <b><font color="darkorange">[IP Network]</font></b><br>
+            Gateway: <b><font color="darkorange">[IP Gateway]</font></b><br>
+            DNS: <b><font color="darkorange">[IP DNS]</font></b><br>   
+        </p>
+        <p>d. Klik tombol <b>Apply</b> &#8594; <b>OK</b>.</p>
+
+        <pre><code>Contoh:
+Address	 : <b>192.168.10.0/24</b> 
+Network	 : <b>192.168.10.1</b>
+DNS      : <b>1.1.1.1</b></code></pre>
+
+        <h2>2. Menambahkan Rentang IP</h2>
+        <p>a. <b>IP</b> &#8594; <b>Pool</b>.</p>
+        <p>b. Klik tombol <b>+</b></p>
+        <p>c. Atur sesuai ketentuan berikut:</p>
+        <p class="paragraf-indent">
+            Name: <b><font color="darkorange">[Nama Rentang IP]</font></b><br>
+            Addressess: <b><font color="darkorange">[Rentang IP]</font></b><br>
+        </p>
+        <p>d. Klik tombol <b>Apply</b> &#8594; <b>OK</b>.</p>
+
+        <pre><code>Contoh:
+Name	   : <b>rentang_dhcp</b> 
+Addressess : <b>192.168.10.11-192.168.10.30</b></code></pre>
+
+
+        <h2>3. Membuat DHCP Server</h2>
+        <p>a. <b>IP</b> &#8594; <b>DHCP Server</b> &#8594; <b>DHCP</b>.</p>
+        <p>b. Klik tombol <b>+</b></p>
+        <p>c. Atur sesuai ketentuan berikut:</p>
+        <p class="paragraf-indent">
+            Name: <b><font color="darkorange">[Nama DHCP Server]</font></b><br>
+            Interfaces: <b><font color="darkorange">[Port yang dipakai]</font></b><br>
+            Lease Time: <b><font color="darkorange">[Lama Waktu DHCP]</font></b><br>
+            Address Pool: <b><font color="darkorange">[Nama Rentang IP]</font></b><br>
+        </p>
+        <p>d. Klik tombol <b>Apply</b> &#8594; <b>OK</b>.</p>
+
+        <pre><code>Contoh:
+Name	     : <b>dhcp_lab_tkj</b> 
+Interfaces   : <b>ether2</b>
+Lease Time   : <b>00:20:00</b> 
+Address Pool : <b>rentang_dhcp</b></code></pre>

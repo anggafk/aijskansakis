@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materi: Menghubungkan Router</title> <style>
+        /* Palet Warna Biru Navy Muda (konsisten dengan halaman utama) */
+        :root {
+            --dark-blue-navy: #2C3E50;
+            --light-blue-navy: #34495E;
+            --accent-blue: #3498DB;
+            --text-color: #ECF0F1;
+            --dark-text-color: #2C3E50;
+            --background-light: #ECF0F1;
+            --border-color: #BDC3C7;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-light);
+            color: var(--dark-text-color);
+        }
+        header {
+            background-color: var(--dark-blue-navy);
+            color: var(--text-color);
+            padding: 1.5em 0;
+            text-align: center;
+        }
+        nav {
+            background-color: var(--light-blue-navy);
+            overflow: hidden;
+            text-align: center;
+        }
+        nav a {
+            display: inline-block;
+            color: var(--text-color);
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        nav a:hover {
+            background-color: var(--accent-blue);
+            color: white;
+        }
+        .content-wrapper {
+            padding: 20px;
+            max-width: 960px;
+            margin: auto;
+            background-color: white;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            margin-top: 25px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+        }
+        .content-wrapper h1 {
+            color: var(--dark-blue-navy);
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent-blue);
+        }
+        .content-wrapper h2 {
+            color: var(--light-blue-navy);
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .content-wrapper h3 {
+            color: var(--dark-blue-navy);
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+        .back-button {
+            background-color: var(--light-blue-navy); /* Warna tombol kembali */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 20px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        .back-button:hover {
+            background-color: #2980B9; /* Sedikit lebih gelap saat hover */
+        }
+        .paragraf-indent {
+            padding-left: 20px; /* Indentasi sebesar 50 piksel */
+            margin-top: 0;
+        }
+        p {
+            line-height: 1.6;
+            margin-bottom: 3px;
+            margin-top: 3px;
+        }
+        ul, ol {
+            margin-bottom: 15px;
+            padding-left: 25px;
+        }
+        pre {
+            background-color: #f4f4f4;
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto; /* Untuk kode yang panjang */
+            margin-bottom: 20px;
+        }
+        code {
+            font-family: Consolas, monospace;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table, th, td {
+            border: 1px solid var(--border-color);
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: var(--background-light);
+            color: var(--dark-blue-navy);
+        }
+
+        footer {
+            background-color: var(--dark-blue-navy);
+            color: var(--text-color);
+            text-align: center;
+            padding: 25px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+        footer p {
+            margin: 5px 0;
+        }
+        footer a {
+            color: var(--accent-blue);
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Portal Pembelajaran<br>Teknik Komputer dan Jaringan</h1>
+    </header>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="materi.html">Materi</a>
+        <a href="praktik.html">Praktik</a>
+        <a href="nilai.html">Nilai</a>
+        <a href="tugas.html">Tugas</a>
+    </nav>
+
+    <div class="content-wrapper">
+        <a href="materi.html" class="back-button">← Kembali ke Daftar Materi</a>
+
+        <h1>Cara Akses Router MikroTik menggunakan Winbox</h1> 
+        <h2>1. Cara akses Router MikroTik dengan menggunakan Winbox</h2>
+        <img src="images/winbox-1.png" alt="Tampilan Awal Winbox">
+        <p>1. Hubungkan Router MikroTik dengan PC dengan menggunakan kabel UTP.</p>
+        <p>2. Pastikan lampu port LAN di PC dan Router menyala.</p>
+        <p>3. Ubah pengaturan alamat IP di PC menjadi <b>Otomatis</b>.</p>
+        <p>4. Buka aplikasi <b>Winbox</b> di PC.</p>
+        <p>5. Terdapat dua pilihan tab di Winbox, Managed dan Neighbor, pilih Tab <b>Neighbor</b>.</p>
+        <p class="paragraf-indent">
+        Tab Managed berisi informasi router yang sudah disimpan sebelumnya. Sedangkan Neighbor berisi informasi Router yang terhubung langsung dengan PC.
+        </p>
+        <p>6. Perhatikan tabel, pastikan muncul informasi Router di tabel (Klik Refresh jika belum muncul).</p>
+        <p class="paragraf-indent">
+        Jika router belum muncul di tabel<br>
+        a. Klik Tombol Refresh.<br>
+        b. Cek sambungan kabel dari Router ke PC.<br>
+        c. Cek pengaturan alamat IP di PC.<br>
+        </p>
+        <p>7. Klik nomor <b>MAC Address</b> di tabel, pastikan MAC Address di Connect to sama dengan MAC Address Router.</p>
+        <p>8. Isikan username di kotak login, dan password di kotak password. Setelah itu klik <b>Connect</b>.</p>
+        <p class="paragraf-indent">
+        Username dan Password bawaan Router MikroTik adalah:<br>
+        Username: <b>admin</b><br>
+        Password: <b>tanpa password (kosong)</b><br>
+        </p>

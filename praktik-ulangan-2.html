@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ulangan Praktik 1</title> <style>
+        /* Palet Warna Biru Navy Muda (konsisten dengan halaman utama) */
+        :root {
+            --dark-blue-navy: #2C3E50;
+            --light-blue-navy: #34495E;
+            --accent-blue: #3498DB;
+            --text-color: #ECF0F1;
+            --dark-text-color: #2C3E50;
+            --background-light: #ECF0F1;
+            --border-color: #BDC3C7;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-light);
+            color: var(--dark-text-color);
+        }
+        header {
+            background-color: var(--dark-blue-navy);
+            color: var(--text-color);
+            padding: 1.5em 0;
+            text-align: center;
+        }
+        nav {
+            background-color: var(--light-blue-navy);
+            overflow: hidden;
+            text-align: center;
+        }
+        nav a {
+            display: inline-block;
+            color: var(--text-color);
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        nav a:hover {
+            background-color: var(--accent-blue);
+            color: white;
+        }
+        .content-wrapper {
+            padding: 20px;
+            max-width: 960px;
+            margin: auto;
+            background-color: white;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            margin-top: 25px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+        }
+        .content-wrapper h1 {
+            color: var(--dark-blue-navy);
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent-blue);
+        }
+        .content-wrapper h2 {
+            color: var(--light-blue-navy);
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .content-wrapper h3 {
+            color: var(--dark-blue-navy);
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+        .back-button {
+            background-color: var(--light-blue-navy); /* Warna tombol kembali */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 20px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        .back-button:hover {
+            background-color: #2980B9; /* Sedikit lebih gelap saat hover */
+        }
+        .paragraf-indent {
+            padding-left: 20px; /* Indentasi sebesar 50 piksel */
+            margin-top: 0;
+        }
+        .border-hijau {
+            border: 1px solid green;   /* Garis hijau tipis */
+            padding: 5px;              /* Sedikit padding */
+            background-color: #e0ffe0; /* Warna latar belakang ringan untuk melihat efek */
+        }
+        .border-biru {
+            border: 1px solid var(--dark-blue-navy);   /* Garis hijau tipis */
+            padding: 5px;              /* Sedikit padding */
+            background-color: #e0f4ff; /* Warna latar belakang ringan untuk melihat efek */
+        }
+        p {
+            line-height: 1.6;
+            margin-bottom: 10px;
+            margin-top: 10px;
+        }
+        ul, ol {
+            margin-bottom: 15px;
+            padding-left: 25px;
+        }
+        pre {
+            background-color: #f4f4f4;
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto; /* Untuk kode yang panjang */
+            margin-bottom: 20px;
+        }
+        code {
+            font-family: Consolas, monospace;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table, th, td {
+            border: 1px solid var(--border-color);
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: var(--background-light);
+            color: var(--dark-blue-navy);
+        }
+        /* Styling untuk item materi tanpa accordion */
+        .materi-list-item {
+            display: flex; /* Menggunakan flexbox untuk tata letak samping */
+            justify-content: space-between; /* Memisahkan judul dan tombol */
+            align-items: center; /* Meratakan secara vertikal */
+            padding: 15px 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            margin-bottom: 10px; /* Jarak antar item materi */
+            background-color: #f9f9f9;
+        }
+        .materi-list-item h3 {
+            margin: 0; /* Hapus margin default h3 */
+            color: var(--dark-blue-navy);
+            font-size: 1.1em;
+        }
+        .button {
+            background-color: var(--accent-blue);
+            color: white;
+            padding: 8px 15px; /* Padding sedikit lebih kecil untuk tombol ini */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            white-space: nowrap; /* Mencegah teks tombol patah baris */
+        }
+        .button:hover {
+            background-color: #2980B9;
+        }
+        footer {
+            background-color: var(--dark-blue-navy);
+            color: var(--text-color);
+            text-align: center;
+            padding: 25px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+        footer p {
+            margin: 5px 0;
+        }
+        footer a {
+            color: var(--accent-blue);
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .kolom-kiri {
+            flex: 5; /* Mengambil 75% dari ruang */
+        }
+
+        .kolom-kanan {
+            flex: 2; /* Mengambil 25% dari ruang */
+        }
+
+        .kolom-kiri img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 6px;
+        }
+        iframe {
+            width: 100%; /* Memastikan embed mengisi seluruh lebar kolom */
+            height: 600px; /* Atur tinggi embed sesuai kebutuhan */
+            border: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Portal Pembelajaran<br>Teknik Komputer dan Jaringan</h1>
+    </header>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="materi.html">Materi</a>
+        <a href="praktik.html">Praktik</a>
+        <a href="nilai.html">Nilai</a>
+        <a href="tugas.html">Tugas</a>
+    </nav>
+
+    <div class="content-wrapper">
+        <a href="praktik.html" class="back-button">← Kembali ke Daftar Praktik</a>
+
+        <h1>Ulangan Praktik 1</h1>
+
+
+    <div class="container">
+        <div class="kolom-kiri">
+               <img width="100%" src="images/ulangan-praktik-2.png" alt="Soal 1">
+        </div>
+        
+        <div class="kolom-kanan">
+            <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTlCCtqUgECjPuaBpRAOIU0OlZ9P3rJf-XQM4rvPjfW5KRb7rYtUNjZO_v4hnxucintA6hZ3kMQy_Q4/pubhtml?gid=1303977118&single=true&amp;widget=true&amp;headers=false" height="1600" width="100%"></iframe>
+        </div>
+    </div>	
