@@ -194,26 +194,22 @@
         <img src="images/routing-statis-1.png" alt="Topologi Routing Statis" width="600" height="400">
 
         <pre><code>
-Router A terhubung langsung dengan 3 Alamat Network: 10.10.10.0/24, 20.20.20.0/24 dan 40.40.40.0/24.
-Jaringan yang tidak terhubung langsung dengan Router A, membutuhkan pengaturan routing statis 
-untuk masing-masing jaringan.
-
-Sehingga konfigurasi routing statis untuk router A adalah sebagai berikut:
-1.  Dst. Address: 50.50.50.0/24
-    Gateway: 20.20.20.2
-    Keterangan: Router A akan dihubungkan ke Jaringan 50.50.50.0/24
-                melewati port dengan alamat IP 20.20.20.2
+Router B terhubung langsung dengan 3 Alamat Network: 20.20.20.0/24, 30.30.30.0/24 dan 50.50.50.0/24.
+Jaringan yang tidak terhubung langsung dengan Router B adalah 40.40.40.0/24 dan 60.60.60.0/24.
+Agar bisa terhubung, Router B perlu ditambah pengaturan routing statis ke alamat jaringan tersebut.
+            
+Sehingga konfigurasi routing statis untuk router B adalah sebagai berikut:
+1.  Dst. Address: 40.40.40.0/24
+    Gateway: 20.20.20.1
+    Keterangan: Router B akan dihubungkan ke Jaringan 40.40.40.0/24
+                melewati port dengan alamat IP 20.20.20.1
 
 2.  Dst. Address: 60.60.60.0/24
-    Gateway: 20.20.20.2
+    Gateway: 30.30.30.2
     Keterangan: Router A akan dihubungkan ke Jaringan 60.60.60.0/24
-                melewati port dengan alamat IP 20.20.20.2
-                
-3.  Dst. Address: 30.30.30.0/24
-    Gateway: 20.20.20.2
-    Keterangan: Router A akan dihubungkan ke Jaringan 30.30.30.0/24
-                melewati port dengan alamat IP 20.20.20.2
+                melewati port dengan alamat IP 30.30.30.2
             
-Dilanjutkan dengan konfigurasi Router B dan Router C. 
+Dilanjutkan dengan konfigurasi routing statis untuk Router A dan Router C.
         </code></pre>
+
 
