@@ -32,6 +32,9 @@
             background-color: var(--light-blue-navy);
             overflow: hidden;
             text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
         nav a {
             display: inline-block;
@@ -177,7 +180,7 @@
         <h1>Konfigurasi Routing</h1> 
         <h2>1. Pengertian</h2>
         <p>Routing adalah proses dimana suatu router me-forward pesan dari satu jaringan ke jaringan lain yang dituju. Routing dibagi mejadi 2, Routing Statis dan Routing Dinamis.<br></p>
-        <p><b>Routing Statis atau Static Routing</b> adalah routing yang untuk terhubung ke jaringan lain harus dikonfigurasikan secara manual. Administrator jaringan harus mengkonfigurasikan semua alamat jaringan yang akan dituju. Mereka harus memasukkan atau menghapus rute statis jika adanya perubahan topologi.<br></p>
+        <p><b>Routing statis atau Static Routing</b> adalah routing yang untuk terhubung ke jaringan lain harus dikonfigurasikan secara manual. Administrator jaringan harus mengkonfigurasikan semua alamat jaringan yang akan dituju. Mereka harus memasukkan atau menghapus rute statis jika adanya perubahan topologi.<br></p>
         <p><b>Routing Dinamis atau Dynamic Routing</b> adalah routing yang mampu membuat tabel routing secara otomatis berdasarkan lalu lintas jaringan dan router yang terhubung. Administrator jaringan hanya perlu mengkonfigurasikan jaringan yang terhubung langsung dengan sebuah router. Jika ada perubahaan di Router lain akan secara otomatis menambahkan alamat jaringan di tabel routing.
         </p>
 
@@ -191,30 +194,26 @@
         </p>
         <p>e. Klik tombol <b>Apply</b> &#8594; <b>OK</b>.</p>
         <h3>Contoh Routing Statis</h3>
-        <img src="images/routing-statis-1.png" alt="Topologi Routing Statis" width="600" height="400">
+        <img src="images/routing-statis-1.png" alt="Topologi Routing Statis">
 
         <pre><code>
-Router B terhubung langsung dengan 3 Alamat Network: 20.20.20.0/24, 30.30.30.0/24 dan 50.50.50.0/24.
-Jaringan yang tidak terhubung langsung dengan Router B adalah 40.40.40.0/24 dan 60.60.60.0/24.
-Agar bisa terhubung, Router B perlu ditambah pengaturan routing statis ke alamat jaringan tersebut.
-            
-Sehingga konfigurasi routing statis untuk router B adalah sebagai berikut:
-1.  Dst. Address: 40.40.40.0/24
-    Gateway: 20.20.20.1
-    Keterangan: Router B akan dihubungkan ke Jaringan 40.40.40.0/24
-                melewati port dengan alamat IP 20.20.20.1
+Router A terhubung langsung dengan 3 Alamat Network: 10.10.10.0/24, 20.20.20.0/24 dan 40.40.40.0/24.
+Jaringan yang tidak terhubung langsung dengan Router A, membutuhkan pengaturan routing statis 
+untuk masing-masing jaringan.
+
+Sehingga konfigurasi routing statis untuk router A adalah sebagai berikut:
+1.  Dst. Address: 50.50.50.0/24
+    Gateway: 20.20.20.2
+    Keterangan: Router A akan dihubungkan ke Jaringan 50.50.50.0/24
+                melewati port dengan alamat IP 20.20.20.2
 
 2.  Dst. Address: 60.60.60.0/24
-    Gateway: 30.30.30.2
-    Keterangan: Router B akan dihubungkan ke Jaringan 60.60.60.0/24
-                melewati port dengan alamat IP 30.30.30.2
-            
-Dilanjutkan dengan konfigurasi routing statis untuk Router A dan Router C.
-Semua router harus dikonfigurasikan routing statis.
-Jika belum dikonfigurasikan, akan ada jaringan yang tidak terhubung satu dengan yang lain.
+    Gateway: 20.20.20.2
+    Keterangan: Router A akan dihubungkan ke Jaringan 60.60.60.0/24
+                melewati port dengan alamat IP 20.20.20.2
+                
+3.  Dst. Address: 30.30.30.0/24
+    Gateway: 20.20.20.2
+    Keterangan: Router A akan dihubungkan ke Jaringan 30.30.30.0/24
+                melewati port dengan alamat IP 20.20.20.2
         </code></pre>
-
-
-
-
-

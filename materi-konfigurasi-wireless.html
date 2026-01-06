@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Praktik 3</title> <style>
+    <title>Materi: Konfigurasi Wireless</title> <style>
         /* Palet Warna Biru Navy Muda (konsisten dengan halaman utama) */
-        :root {
+       :root {
             --dark-blue-navy: #2C3E50;
             --light-blue-navy: #34495E;
             --accent-blue: #3498DB;
@@ -94,20 +94,10 @@
             padding-left: 20px; /* Indentasi sebesar 50 piksel */
             margin-top: 0;
         }
-        .border-hijau {
-            border: 1px solid green;   /* Garis hijau tipis */
-            padding: 5px;              /* Sedikit padding */
-            background-color: #e0ffe0; /* Warna latar belakang ringan untuk melihat efek */
-        }
-        .border-biru {
-            border: 1px solid var(--dark-blue-navy);   /* Garis hijau tipis */
-            padding: 5px;              /* Sedikit padding */
-            background-color: #e0f4ff; /* Warna latar belakang ringan untuk melihat efek */
-        }
         p {
             line-height: 1.6;
-            margin-bottom: 10px;
-            margin-top: 10px;
+            margin-bottom: 3px;
+            margin-top: 3px;
         }
         ul, ol {
             margin-bottom: 15px;
@@ -148,38 +138,7 @@
             background-color: var(--background-light);
             color: var(--dark-blue-navy);
         }
-        /* Styling untuk item materi tanpa accordion */
-        .materi-list-item {
-            display: flex; /* Menggunakan flexbox untuk tata letak samping */
-            justify-content: space-between; /* Memisahkan judul dan tombol */
-            align-items: center; /* Meratakan secara vertikal */
-            padding: 15px 20px;
-            border: 1px solid var(--border-color);
-            border-radius: 5px;
-            margin-bottom: 10px; /* Jarak antar item materi */
-            background-color: #f9f9f9;
-        }
-        .materi-list-item h3 {
-            margin: 0; /* Hapus margin default h3 */
-            color: var(--dark-blue-navy);
-            font-size: 1.1em;
-        }
-        .button {
-            background-color: var(--accent-blue);
-            color: white;
-            padding: 8px 15px; /* Padding sedikit lebih kecil untuk tombol ini */
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
-            white-space: nowrap; /* Mencegah teks tombol patah baris */
-        }
-        .button:hover {
-            background-color: #2980B9;
-        }
+
         footer {
             background-color: var(--dark-blue-navy);
             color: var(--text-color);
@@ -216,14 +175,44 @@
     </nav>
 
     <div class="content-wrapper">
-        <a href="praktik.html" class="back-button">← Kembali ke Daftar Praktik</a>
+        <a href="materi.html" class="back-button">← Kembali ke Daftar Materi</a>
 
-        <h1>Praktik 3</h1>
+        <h1>Konfigurasi Wireless</h1> 
+        <h2>1. Mengaktifkan Interface Wireless</h2>
+        <p>Interface wireless di MikroTik bernama wlan. Interface wlan tidak otomatis aktif secara langsung. Interface wlan akan berwarna abu-abu sebagai tanda bahwa interface wlan tidak aktif.</p>
+        <p>a. Buka menu <b>Wireless</b>/<b>Interfaces</b>.</p>
+        <p>b. Pilih interface wlan dan aktifkan dengan menekan tombol  &#10004;.</p>
 
-            <div class="materi-list-item">
-                <h3>Kelompok</h3>
-                <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vTC0O7LK_NaYDmfT1JrVvy1ZSshKOs133AFzOyQNRHnKmIEkDleA-cQO5uRqImT2vFyo0xQHm2oSPgf/pubhtml" class="button" target="_blank">Buka</a>
-            </div>
+        <h2>2. Konfigurasi wlan</h2>
+        <p>Merubah nama Router MikroTik.</p>
+        <p>a. Klik 2X pada <b>wlan</b>.</p>
+        <p>b. Pilih Tab <b>Wireless</b>
+        <p>c. Isikan sesuai ketentuan berikut:</p>
+        <p class="paragraf-indent">
+            Mode: <b><font color="darkorange">[Mode Wireless]</font></b><br>
+            SSID: <b><font color="darkorange">[Nama Jaringan Wireless]</font></b><br>
+        </p>
+        <p>d. Klik tombol <b>Apply</b> &#8594; <b>OK</b>.</p><br>
 
-        <h2>Topologi</h2>
-        <img src="images/static-1.png" alt="Topologi Praktik 3" width="600" height="400">
+        <p><b>Pilihan mode wireless</b></p>
+        <p class="paragraf-indent">
+            Sebagai Pemancar: <b><font color="darkorange">AP Bridge</font></b><br>
+            Sebagai Penerima: <b><font color="darkorange">Station</font></b><br>
+        </p>
+        
+        <h2>3. Konfigurasi Keamanan</h2>
+        <p>a. Buka menu <b>Wireless</b>.</p>
+        <p>b. Pilih Tab <b>Security Profiles</b>.</p>
+        <p>c. Klik tombol + untuk membuat password.</p>
+        <p>d. Isikan sesuai ketentuan berikut:</p>
+        <p class="paragraf-indent">
+            Name: <b><font color="darkorange">[Nama Profil]</font></b><br>
+            Authentication Types: <b><font color="darkorange">[WPA2 PSK]</font></b><br>
+            WPA Pre Shared Key: <b><font color="darkorange">[Password]</font></b><br>
+        </p>
+        <p>e. Klik tombol <b>Apply</b> &#8594; <b>OK</b>.</p>
+        <p>f. Masuk ke pengaturan wlan di langkah sebelumnya.</p>
+        <p>g. Di parameter <font color="darkorange"><b>Security Profile</b></font></b>, pilih nama profil yang sudah dibuat.</p>
+        <p>e. Klik tombol <b>Apply</b> &#8594; <b>OK</b>.</p>
+
+
