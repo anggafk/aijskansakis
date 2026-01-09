@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Praktik 3</title> <style>
-        /* Palet Warna Biru Navy Muda (konsisten dengan halaman utama) */
+    <title>Ujian</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Palet Warna Biru Navy Muda (konsisten) */
         :root {
             --dark-blue-navy: #2C3E50;
             --light-blue-navy: #34495E;
@@ -48,7 +50,7 @@
             background-color: var(--accent-blue);
             color: white;
         }
-        .content-wrapper {
+        .container {
             padding: 20px;
             max-width: 960px;
             margin: auto;
@@ -58,96 +60,21 @@
             margin-bottom: 25px;
             border-radius: 8px;
         }
-        .content-wrapper h1 {
+        .category-section {
+            margin-bottom: 40px;
+            padding: 20px;
+            background-color: #FFFFFF;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+        .category-section > h2 {
             color: var(--dark-blue-navy);
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             padding-bottom: 10px;
             border-bottom: 2px solid var(--accent-blue);
         }
-        .content-wrapper h2 {
-            color: var(--light-blue-navy);
-            margin-top: 30px;
-            margin-bottom: 15px;
-        }
-        .content-wrapper h3 {
-            color: var(--dark-blue-navy);
-            margin-top: 25px;
-            margin-bottom: 10px;
-        }
-        .back-button {
-            background-color: var(--light-blue-navy); /* Warna tombol kembali */
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            text-decoration: none;
-            display: inline-block;
-            margin-bottom: 20px;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
-        }
-        .back-button:hover {
-            background-color: #2980B9; /* Sedikit lebih gelap saat hover */
-        }
-        .paragraf-indent {
-            padding-left: 20px; /* Indentasi sebesar 50 piksel */
-            margin-top: 0;
-        }
-        .border-hijau {
-            border: 1px solid green;   /* Garis hijau tipis */
-            padding: 5px;              /* Sedikit padding */
-            background-color: #e0ffe0; /* Warna latar belakang ringan untuk melihat efek */
-        }
-        .border-biru {
-            border: 1px solid var(--dark-blue-navy);   /* Garis hijau tipis */
-            padding: 5px;              /* Sedikit padding */
-            background-color: #e0f4ff; /* Warna latar belakang ringan untuk melihat efek */
-        }
-        p {
-            line-height: 1.6;
-            margin-bottom: 10px;
-            margin-top: 10px;
-        }
-        ul, ol {
-            margin-bottom: 15px;
-            padding-left: 25px;
-        }
-        pre {
-            background-color: #f4f4f4;
-            border: 1px solid var(--border-color);
-            padding: 15px;
-            border-radius: 5px;
-            overflow-x: auto; /* Untuk kode yang panjang */
-            margin-bottom: 20px;
-        }
-        code {
-            font-family: Consolas, monospace;
-        }
-        img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            margin: 20px auto;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-        table, th, td {
-            border: 1px solid var(--border-color);
-        }
-        th, td {
-            padding: 10px;
-            text-align: left;
-        }
-        th {
-            background-color: var(--background-light);
-            color: var(--dark-blue-navy);
-        }
+
         /* Styling untuk item materi tanpa accordion */
         .materi-list-item {
             display: flex; /* Menggunakan flexbox untuk tata letak samping */
@@ -199,6 +126,45 @@
         footer a:hover {
             text-decoration: underline;
         }
+        /* --- STYLE KHUSUS KONTAK SOSMED --- */
+        footer {
+            background-color: var(--dark-blue-navy);
+            color: var(--text-color);
+            text-align: center;
+            padding: 25px 0;
+            width: 100%;
+        }
+        .social-container {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 10px;
+        }
+        .social-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        /* Warna Hover sesuai Sosmed */
+        .social-btn.email:hover { background-color: #EA4335; border-color: #EA4335; }
+        .social-btn.whatsapp:hover { background-color: #25D366; border-color: #25D366; }
+        .social-btn.instagram:hover { background-color: #E1306C; border-color: #E1306C; }
+        .social-btn.youtube:hover { background-color: #FF0000; border-color: #FF0000; }
+        .social-btn.facebook:hover { background-color: #1877F2; border-color: #1877F2; }
+
+        .social-btn:hover {
+            transform: translateY(-3px);
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -217,15 +183,37 @@
         <a href="ujian.html">Ujian</a>
     </nav>
 
-    <div class="content-wrapper">
-        <a href="praktik.html" class="back-button">← Kembali ke Daftar Praktik</a>
-
-        <h1>Praktik 3</h1>
-
+    <div class="container">
+        <div class="category-section">
+<!--            <h2>Daftar Tugas</h2> --> 
+            
             <div class="materi-list-item">
-                <h3>Kelompok</h3>
-                <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vTC0O7LK_NaYDmfT1JrVvy1ZSshKOs133AFzOyQNRHnKmIEkDleA-cQO5uRqImT2vFyo0xQHm2oSPgf/pubhtml" class="button" target="_blank">Buka</a>
-            </div>
+<!--                <h3>Tugas 1</h3>
+                <a href="" class="button">Buka</a>--> 
+            </div>         
+        </div>
+    </div>
 
-        <h2>Topologi</h2>
-        <img src="images/topologi-praktik-3.png" alt="Topologi Praktik 3" width="600" height="400">
+    <footer>
+        <h3 id="kontak" style="margin: 0 0 10px 0;">Angga Fajar Kusuma</h3>
+        <div class="social-container">
+            <a href="mailto:anggafk@gmail.com" class="social-btn email" title="Email">
+                <i class="fas fa-envelope"></i>
+            </a>
+            <a href="https://api.whatsapp.com/send/?phone=6285229327220" class="social-btn whatsapp" target="_blank" title="WhatsApp">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+            <a href="https://www.instagram.com/anggafk/" class="social-btn instagram" target="_blank" title="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.youtube.com/anggafk" class="social-btn youtube" target="_blank" title="YouTube">
+                <i class="fab fa-youtube"></i>
+            </a>
+            <a href="https://facebook.com/" class="social-btn facebook" target="_blank" title="Facebook">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+        </div>
+    </footer>
+
+</body>
+</html>

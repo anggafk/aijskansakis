@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ulangan Praktik 1</title> <style>
+    <title>Materi: Hotspot</title> <style>
         /* Palet Warna Biru Navy Muda (konsisten dengan halaman utama) */
-        :root {
+       :root {
             --dark-blue-navy: #2C3E50;
             --light-blue-navy: #34495E;
             --accent-blue: #3498DB;
@@ -94,20 +94,10 @@
             padding-left: 20px; /* Indentasi sebesar 50 piksel */
             margin-top: 0;
         }
-        .border-hijau {
-            border: 1px solid green;   /* Garis hijau tipis */
-            padding: 5px;              /* Sedikit padding */
-            background-color: #e0ffe0; /* Warna latar belakang ringan untuk melihat efek */
-        }
-        .border-biru {
-            border: 1px solid var(--dark-blue-navy);   /* Garis hijau tipis */
-            padding: 5px;              /* Sedikit padding */
-            background-color: #e0f4ff; /* Warna latar belakang ringan untuk melihat efek */
-        }
         p {
             line-height: 1.6;
-            margin-bottom: 10px;
-            margin-top: 10px;
+            margin-bottom: 3px;
+            margin-top: 3px;
         }
         ul, ol {
             margin-bottom: 15px;
@@ -148,38 +138,7 @@
             background-color: var(--background-light);
             color: var(--dark-blue-navy);
         }
-        /* Styling untuk item materi tanpa accordion */
-        .materi-list-item {
-            display: flex; /* Menggunakan flexbox untuk tata letak samping */
-            justify-content: space-between; /* Memisahkan judul dan tombol */
-            align-items: center; /* Meratakan secara vertikal */
-            padding: 15px 20px;
-            border: 1px solid var(--border-color);
-            border-radius: 5px;
-            margin-bottom: 10px; /* Jarak antar item materi */
-            background-color: #f9f9f9;
-        }
-        .materi-list-item h3 {
-            margin: 0; /* Hapus margin default h3 */
-            color: var(--dark-blue-navy);
-            font-size: 1.1em;
-        }
-        .button {
-            background-color: var(--accent-blue);
-            color: white;
-            padding: 8px 15px; /* Padding sedikit lebih kecil untuk tombol ini */
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
-            white-space: nowrap; /* Mencegah teks tombol patah baris */
-        }
-        .button:hover {
-            background-color: #2980B9;
-        }
+
         footer {
             background-color: var(--dark-blue-navy);
             color: var(--text-color);
@@ -198,36 +157,6 @@
         }
         footer a:hover {
             text-decoration: underline;
-        }
-        .container {
-            display: flex;
-            gap: 20px;
-            padding: 20px;
-            max-width: 1200px;
-            margin: auto;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .kolom-kiri {
-            flex: 5; /* Mengambil 75% dari ruang */
-        }
-
-        .kolom-kanan {
-            flex: 2; /* Mengambil 25% dari ruang */
-        }
-
-        .kolom-kiri img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            border-radius: 6px;
-        }
-        iframe {
-            width: 100%; /* Memastikan embed mengisi seluruh lebar kolom */
-            height: 600px; /* Atur tinggi embed sesuai kebutuhan */
-            border: 0;
         }
     </style>
 </head>
@@ -248,17 +177,83 @@
     </nav>
 
     <div class="content-wrapper">
-        <a href="praktik.html" class="back-button">← Kembali ke Daftar Praktik</a>
+        <a href="materi.html" class="back-button">← Kembali ke Daftar Materi</a>
 
-        <h1>Ulangan Praktik 1</h1>
+        <h1>Konfigurasi Hotspot</h1> 
+        <h2>1. Membuat Hotspot</h2>
+        <p>a. Buka <b>IP</b>  &#8594;  <b>Hotspot</b> &#8594;  <b>Servers</b>.</p>
+        <p class="paragraf-indent">Menampilkan daftar Hotspot yang sedang berjalan dan interface yang digunakan</p>
+        <p>b. Klik tombol <b>Hotspot Setup</b>.</p>
+        <p>c. Atur sesuai ketentuan berikut:</p>
+        <p class="paragraf-indent">
+            Interface: <b><font color="darkorange">[Port yang dipakai]</font></b><br>
+            Local Address: <b><font color="darkorange">[IP Gateway]</font></b><br>
+            Address Pool: <b><font color="darkorange">[Rentang IP DHCP]</font></b><br>
+            Certificate: <b>None</b><br>
+            SMTP Server: <b>0.0.0.0</b><br>
+            DNS Server: <b><font color="darkorange">[IP DNS]</font></b><br>
+            DNS Name: <b><font color="darkorange">[Alamat Login Hotspot]</font></b><br>
+            Hotspot User: <b><font color="darkorange">[user hostspot]</font></b><br><br>
+            Keterangan:<br>Pengisian <b>DNS Name</b> disesuaikan dengan format alamat web<br> <font color="darkorange"><b>[Nama Domain] [tanda titik] [top level domain]</b></font><br>
+            Contoh: <b>skansakis.net</b>, <b>skansakis.net</b>, <b>login.hotspot</b>
+            <p>
+        </p>
 
-
-    <div class="container">
-        <div class="kolom-kiri">
-               <img width="100%" src="images/ulangan-praktik-2.png" alt="Soal 1">
-        </div>
+        <h2>2. Konfigurasi Server Profiles</h2>
+        <p>Konfigurasi sistem hotspot. Contoh, merubah alamat login, tampilan login, dan metode login.</p>
+        <p><b>pengaturan agar user tidak tersimpan di satu perangkat.</b></p>
+        <p>a. Buka <b>IP</b>  &#8594;  <b>Hotspot</b> &#8594;  <b>Server Profiles</b>.
+        <p>b. Klik 2X hotspot yang sudah dibuat.
+        <p>c. Pilih tab <b>Login</b></p>
+        <p class="paragraf-indent">
+            Hapus tanda &#10004; pada <b>Cookie</b><br>
+        </p>
+        <p>d. Klik tombol <b>Apply</b> &#8594; <b>OK</b>.</p><br>
         
-        <div class="kolom-kanan">
-            <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTlCCtqUgECjPuaBpRAOIU0OlZ9P3rJf-XQM4rvPjfW5KRb7rYtUNjZO_v4hnxucintA6hZ3kMQy_Q4/pubhtml?gid=1303977118&single=true&amp;widget=true&amp;headers=false" height="1600" width="100%"></iframe>
-        </div>
-    </div>	
+        <h2>3. Konfigurasi Profil User</h2>
+        <p>Mengatur batasan dan mengelompokkan beberapa user.</p>
+        <p>a. Buka <b>IP</b>  &#8594;  <b>Hotspot</b> &#8594;  <b>User Profiles</b>.
+        <p>b. Klik tombol + untuk membuat profil baru.</p>
+        <p>c. Atur sesuai ketentuan berikut:</p>
+        <p class="paragraf-indent">
+            Name: <b><font color="darkorange">[Nama Profil]</font></b><br>
+            Session timeout: <b><font color="darkorange">[Batas waktu user untuk login dalam satu sesi]</font></b><br>
+            Shared user: <b><font color="darkorange">[Banyak pengguna yang bisa login bersamaan]</font></b><br>
+            Rate Limit: <b><font color="darkorange">[bandwidth]</font></b><br>
+        </p>
+        <p>e. Klik tombol <b>Apply</b> &#8594; <b>OK</b>.</p><br>
+
+        <p class="paragraf-indent">
+            Keterangan:<br>Rate Limit dibagi menjadi 2, <b>rx</b> dan <b>tx</b>, dan dipisahkan dengan garis miring. <br>
+            <b>Rx </b> adalah penerimaan data (download)<br>
+            <b>Tx </b> adalah pengiriman data (upload)<br>
+            Contoh: <b><font color="darkorange">1M/1K</font></b><br>
+            <b><font color="darkorange">M</font></b> untuk Mbps, <b><font color="darkorange">K</font></b> untuk Kbps<br>
+            Dari contoh ini, kecepatan download adalah 1 Mbps dan kecepatan upload adalah 1 Kbps</p>
+        </p>
+
+        <h2>4. Konfigurasi User</h2>
+        <p>Berisi daftar semua akun atau user hotspot.</p>
+        <p>a. Buka <b>IP</b>  &#8594;  <b>Hotspot</b> &#8594;  <b>Users</b>.
+        <p>b. Klik tombol + untuk membuat user baru.</p>
+        <p>c. Tab General:</p>
+        <p class="paragraf-indent">
+            Servers: <b><font color="darkorange">[Hotspot yang digunakan]</font></b><br>
+            Name: <b><font color="darkorange">[Nama User]</font></b><br>
+            Password: <b><font color="darkorange">[Kata Sandi]</font></b><br>
+            Profile: <b><font color="darkorange">[Profil User yang digunakan]</font></b><br>
+        </p>
+        <p>d. Tab Limits:</p>
+        <p class="paragraf-indent">
+            Limit uptime: <b><font color="darkorange">[Batas waktu user bisa digunakan]</font></b><br>
+            Limit bytes in: <b><font color="darkorange">[Batas kuota download]</font></b><br>
+            Limit bytes out: <b><font color="darkorange">[Batas kuota upload]</font></b><br>
+            Limit bytes total: <b><font color="darkorange">[Batas kuota download & upload]</font></b><br>
+        </p>
+        <p>e. Klik tombol <b>Apply</b> &#8594; <b>OK</b>.</p><br>
+
+        <h2>5. Menu Lain</h2>
+        <p>a. <b>Active</b>: Berfungsi untuk memantau user yang sedang digunakan.</p>
+        <p>b. <b>Hosts</b>: Berfungsi untuk memantau perangkat yang terhubung dengan jaringan wireless, baik yang sudah maupun belum login.</p>
+        <p>c. <b>IP Binding</b>: Berfungsi untuk bypass atau blokir sebuah perangkat.</p>
+        <p>d. <b>Walled Garden</b>: Berfungsi untuk bypass situs web sehingga bisa dibuka tanpa login terlebih dahulu.</p>
