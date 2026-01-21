@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daftar Nilai</title>
+    <link rel="icon" href="images/favicon.png" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         /* Palet Warna Biru Navy Muda (konsisten) */
@@ -73,6 +74,12 @@
             margin-bottom: 25px;
             padding-bottom: 10px;
             border-bottom: 2px solid var(--accent-blue);
+        }
+        
+        /* Container untuk grup tombol agar rata kanan */
+        .button-group {
+            display: flex;
+            gap: 10px; /* Jarak antar tombol */
         }
 
         /* Styling untuk item materi tanpa accordion */
@@ -167,6 +174,80 @@
             color: white;
         }
 
+        /* Grouping per Tahun */
+        .year-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin-bottom: 40px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .year-header {
+            background-color: var(--dark-blue-navy);
+            color: white;
+            padding: 15px 25px;
+            font-size: 1.4em;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+
+        .year-header i {
+            margin-right: 15px;
+        }
+
+        .class-section {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .class-section:last-child {
+            border-bottom: none;
+        }
+
+        .class-title {
+            font-size: 1.2em;
+            color: var(--accent-blue);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .class-title::before {
+            content: "";
+            width: 4px;
+            height: 20px;
+            background: var(--accent-blue);
+            margin-right: 10px;
+            border-radius: 2px;
+        }
+
+        /* Semester Row */
+        .semester-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            background: #fdfdfd;
+            border: 1px solid #f0f0f0;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            transition: 0.2s;
+        }
+
+        .semester-row:hover {
+            background: #f8f9fa;
+            border-color: var(--border-color);
+        }
+
+        .semester-name {
+            font-weight: 500;
+            color: var(--light-blue-navy);
+        }        
+        
     </style>
 </head>
 <body>
@@ -189,24 +270,48 @@
         <div class="category-section">
             <h2>Daftar Nilai</h2>
             
-            <div class="materi-list-item">
-                <h3>Nilai Praktik</h3>
-                <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vR-s1Z3AQ6BdT9msJH2Nifq3tu2VNuUGaJPJprM9KHMfhuFgSz6-gAdmITjJvk5f5OcsGQ6irxRNqma/pubhtml" target="_blank" class="button">Lihat Nilai</a>
-            </div>   
-            
-            <div class="materi-list-item">
-                <h3>Nilai Tugas</h3>
-                <a href="" class="button">Lihat Nilai</a>
-            </div> 
-            
-            <div class="materi-list-item">
-                <h3>Nilai Kuis</h3>
-                <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vTupb2ssG1Sm-5z2pgZ7jbzj_9zgkFPUeigziwF08-9GOFZiRmIWHEY0nwFxynl7kJ6xo78ohFbdOsR/pubhtml" target="_blank" class="button">Lihat Nilai</a>
-            </div> 
+        <div class="year-card">
+            <div class="year-header">
+                <i class="fas fa-calendar-alt"></i> Tahun Pelajaran 2025/2026
+            </div>
+
+            <div class="class-section">
+                <div class="class-title">XI TJKT</div>
+                
+                <div class="semester-row">
+                    <span class="semester-name">Semester Gasal</span>
+                    <div class="button-group">
+                        <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vR-s1Z3AQ6BdT9msJH2Nifq3tu2VNuUGaJPJprM9KHMfhuFgSz6-gAdmITjJvk5f5OcsGQ6irxRNqma/pubhtml" class="button" target="_blank"><i class="fas fa-laptop-code"></i> Praktik</a>
+                        <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vTupb2ssG1Sm-5z2pgZ7jbzj_9zgkFPUeigziwF08-9GOFZiRmIWHEY0nwFxynl7kJ6xo78ohFbdOsR/pubhtml" class="button" target="_blank"><i class="fas fa-stopwatch"></i> Quiz</a>
+                    </div>
+                </div>
+
+                <div class="semester-row">
+                    <span class="semester-name">Semester Genap</span>
+                    <div class="button-group">
+                        <a href="#" class="button"><i class="fas fa-laptop-code"></i> Praktik</a>
+                        <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vQ_v7l4KojoMDoYdWV8owAFK763pswBVUPwEqrOF2Lwg-NJ5I9EfsPXiDlk38E7u-UR7pj6Nw_rZxiD/pubhtml" class="button" target="_blank"><i class="fas fa-stopwatch"></i> Quiz</a>
+                        <a href="#" class="button"><i class="fas fa-file-alt"></i> Tugas</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="class-section">
+                <div class="class-title">XII TJKT</div>
+                
+                <div class="semester-row">
+                    <span class="semester-name">Semester Genap</span>
+                    <div class="button-group">
+                        <a href="#" class="button"><i class="fas fa-laptop-code"></i> Praktik</a>
+                        <a href="#" class="button"><i class="fas fa-stopwatch"></i> Quiz</a>
+                        <a href="#" class="button"><i class="fas fa-file-alt"></i> Tugas</a>
+                    </div>
+                </div>
+            </div>
         </div>
-
+        </div>
     </div>
-
+    
     <footer>
         <h3 id="kontak" style="margin: 0 0 10px 0;">Angga Fajar Kusuma</h3>
         <div class="social-container">
