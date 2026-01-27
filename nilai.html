@@ -246,7 +246,34 @@
         .semester-name {
             font-weight: 500;
             color: var(--light-blue-navy);
-        }        
+        }
+
+        @media (max-width: 600px) {
+            .semester-row {
+                flex-direction: column; /* Membuat isi berjejer ke bawah */
+                align-items: flex-start; /* Teks rata kiri */
+                padding: 15px;
+            }
+
+            .semester-name {
+                font-size: 1.1em;
+                margin-bottom: 12px; /* Jarak antara nama semester dan tombol pertama */
+                color: var(--dark-blue-navy);
+                font-weight: bold;
+            }
+
+            .button-group {
+                flex-direction: column; /* Tombol disusun menurun */
+                width: 100%; /* Tombol memenuhi lebar layar */
+                gap: 10px;
+            }
+
+            .button {
+                width: 100%; /* Membuat tombol lebar penuh agar mudah diklik jempol */
+                padding: 12px;
+                box-sizing: border-box; /* Memastikan padding tidak merusak lebar */
+                justify-content: flex-start; /* Icon dan teks rata kiri di dalam tombol */
+            }
         
     </style>
 </head>
