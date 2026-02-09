@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Praktik Filter Rule</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;600;800&display=swap');
+        
+        /* Warna kustom berdasarkan sampel gambar */
+        :root {
+            --navy-custom: #2d3e50;
+            --navy-light: #3b5066;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+
+        .navy-accent {
+            color: var(--navy-custom);
+        }
+
+        .bg-navy-custom {
+            background-color: var(--navy-custom);
+        }
+
+        .border-navy-custom {
+            border-color: var(--navy-custom);
+        }
+
+        .param-label {
+            color: #64748b;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            letter-spacing: 0.025em;
+            width: 120px; 
+            flex-shrink: 0;
+        }
+
+        .param-box {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            position: relative;
+        }
+
+        .select-custom {
+            background: #f1f5f9;
+            color: #1e293b;
+            border: 1px solid #cbd5e1;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            width: 100%;
+        }
+
+        .input-custom {
+            background: transparent;
+            border-bottom: 2px solid #e2e8f0;
+            color: var(--navy-custom);
+            outline: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            width: 100%;
+            padding: 0;
+        }
+
+        .input-custom:focus {
+            border-color: var(--navy-custom);
+        }
+
+        .table-textarea {
+            background: transparent;
+            outline: none;
+            width: 100%;
+            font-weight: 700;
+            font-size: 1.125rem;
+            color: var(--navy-custom);
+            resize: none;
+            overflow: hidden;
+            display: block;
+            line-height: 1.5;
+        }
+
+        .status-btn {
+            width: 120px;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .table-bordered th, .table-bordered td {
+            border-right: 1px solid #e2e8f0;
+        }
+        
+        .table-bordered th:nth-child(3), 
+        .table-bordered td:nth-child(3),
+        .table-bordered th:last-child, 
+        .table-bordered td:last-child {
+            border-right: none;
+        }
+
+        /* Warna Pastel untuk Baris */
+        .row-success { background-color: #ecfdf5 !important; } /* emerald-50 */
+        .row-fail { background-color: #fff1f2 !important; }    /* rose-50 */
+
+        @media print {
+            .no-print { display: none; }
+            body { background-color: white; }
+            .row-success { background-color: #f0fdf4 !important; }
+            .row-fail { background-color: #fef2f2 !important; }
+        }
+    </style>
+</head>
+<body class="p-2 md:p-4 min-h-screen">
+
+    <div class="max-w-6xl mx-auto">
+        <!-- Header -->
+        <header class="mb-4 border-b-2 border-navy-custom pb-1 text-center">
+            <h1 class="text-3xl font-extrabold navy-accent uppercase tracking-wider">PRAKTIK FILTER RULE</h1>
+        </header>
+
+        <!-- Skenario Box -->
+        <section class="mb-4">
+            <div class="bg-white border border-navy-custom p-3 rounded shadow-sm">
+                <div class="flex items-center mb-1">
+                    <span class="bg-navy-custom w-1 h-4 rounded mr-2"></span>
+                    <span class="text-xs font-bold navy-accent uppercase">Skenario</span>
+                </div>
+                <textarea id="scenarioInput" class="bg-transparent w-full text-lg font-bold navy-accent outline-none resize-none overflow-hidden h-auto" placeholder="Input Skenario Praktik..."></textarea>
+            </div>
+        </section>
+
+        <!-- Parameters Grid -->
+        <section class="mb-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
+                
+                <!-- Kelompok Kiri -->
+                <div class="param-box p-4 rounded-lg space-y-4">
+                    <div class="flex items-center">
+                        <span class="param-label">Chain</span>
+                        <select class="select-custom param-field">
+                            <option>input</option>
+                            <option>forward</option>
+                            <option>output</option>
+                        </select>
+                    </div>
+
+                    <div class="flex items-center">
+                        <span class="param-label">Action</span>
+                        <select class="select-custom bg-slate-50 border-slate-200 param-field">
+                            <option>accept</option>
+                            <option>drop</option>
+                            <option>reject</option>
+                        </select>
+                    </div>
+
+                    <div class="flex items-center">
+                        <span class="param-label">Src. Address</span>
+                        <input type="text" class="input-custom param-field">
+                    </div>
+
+                    <div class="flex items-center">
+                        <span class="param-label">Dst. Address</span>
+                        <input type="text" class="input-custom param-field">
+                    </div>
+
+                    <div class="flex items-center">
+                        <span class="param-label">In. Interface</span>
+                        <select class="select-custom param-field">
+                            <option>none</option>
+                            <option>ether1</option>
+                            <option>ether2</option>
+                            <option>ether3</option>
+                            <option>ether4</option>
+                            <option>wlan1</option>
+                        </select>
+                    </div>
+
+                    <div class="flex items-center">
+                        <span class="param-label">Out. Interface</span>
+                        <select class="select-custom param-field">
+                            <option>none</option>
+                            <option>ether1</option>
+                            <option>ether2</option>
+                            <option>ether3</option>
+                            <option>ether4</option>
+                            <option>wlan1</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Kelompok Kanan -->
+                <div class="param-box p-4 rounded-lg space-y-4 pb-12">
+                    <div class="flex items-center">
+                        <span class="param-label">Protocol</span>
+                        <select class="select-custom param-field">
+                            <option value="">-</option>
+                            <option>tcp</option>
+                            <option>icmp</option>
+                            <option>udp</option>
+                        </select>
+                    </div>
+
+                    <div class="flex items-center">
+                        <span class="param-label">Dst. Port</span>
+                        <input type="text" class="input-custom param-field">
+                    </div>
+
+                    <div class="flex items-center">
+                        <span class="param-label">Content</span>
+                        <input type="text" class="input-custom param-field">
+                    </div>
+
+                    <div class="flex flex-col space-y-2">
+                        <div class="flex items-center">
+                            <span class="param-label">Time</span>
+                            <div class="flex items-center space-x-2 w-full">
+                                <input type="text" id="timeStart" class="select-custom font-bold text-center param-field" placeholder="00:00:00">
+                                <span class="text-slate-300">-</span>
+                                <input type="text" id="timeEnd" class="select-custom font-bold text-center param-field" placeholder="23:59:59">
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="param-label invisible"></div> 
+                            <div class="checkbox-group flex flex-nowrap gap-x-2 text-[9px] font-bold overflow-x-auto pb-1 w-full">
+                                <label class="flex items-center bg-slate-50 px-1 py-1 rounded border border-slate-200 whitespace-nowrap"><input type="checkbox" class="mr-1 day-cb"> MON</label>
+                                <label class="flex items-center bg-slate-50 px-1 py-1 rounded border border-slate-200 whitespace-nowrap"><input type="checkbox" class="mr-1 day-cb"> TUE</label>
+                                <label class="flex items-center bg-slate-50 px-1 py-1 rounded border border-slate-200 whitespace-nowrap"><input type="checkbox" class="mr-1 day-cb"> WED</label>
+                                <label class="flex items-center bg-slate-50 px-1 py-1 rounded border border-slate-200 whitespace-nowrap"><input type="checkbox" class="mr-1 day-cb"> THU</label>
+                                <label class="flex items-center bg-slate-50 px-1 py-1 rounded border border-slate-200 whitespace-nowrap"><input type="checkbox" class="mr-1 day-cb"> FRI</label>
+                                <label class="flex items-center bg-slate-50 px-1 py-1 rounded border border-slate-200 whitespace-nowrap"><input type="checkbox" class="mr-1 day-cb"> SAT</label>
+                                <label class="flex items-center bg-slate-50 px-1 py-1 rounded border border-slate-200 whitespace-nowrap"><input type="checkbox" class="mr-1 day-cb"> SUN</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tombol Reset Langsung -->
+                    <button onclick="resetApp()" class="no-print absolute bottom-3 right-3 bg-slate-100 hover:bg-rose-600 hover:text-white text-slate-500 font-bold py-1 px-3 rounded text-[10px] transition-all border border-slate-200 shadow-sm flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                        </svg>
+                        RESET
+                    </button>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Tabel Pengujian -->
+        <section>
+            <div class="overflow-hidden rounded border border-navy-custom shadow-sm bg-white">
+                <table class="w-full text-left table-fixed table-bordered">
+                    <thead class="bg-navy-custom text-white">
+                        <tr>
+                            <th class="w-[15%] p-2 uppercase text-sm tracking-wider font-bold">Perangkat</th>
+                            <th class="w-[60%] p-2 uppercase text-sm tracking-wider font-bold">Proses Pengujian</th>
+                            <th class="w-[20%] p-2 uppercase text-sm tracking-wider font-bold text-center">Hasil</th>
+                            <th class="w-[5%] p-2 bg-navy-custom"></th> 
+                        </tr>
+                    </thead>
+                    <tbody id="testingTableBody" class="divide-y divide-slate-100">
+                        <tr class="testing-row transition-colors duration-300">
+                            <td class="p-1">
+                                <textarea class="table-textarea px-2 py-1" rows="1" placeholder="..." oninput="autoExpand(this)"></textarea>
+                            </td>
+                            <td class="p-1">
+                                <textarea class="table-textarea px-2 py-1" rows="1" placeholder="..." oninput="autoExpand(this)"></textarea>
+                            </td>
+                            <td class="p-1 text-center align-middle">
+                                <button onclick="toggleResult(this)" class="status-btn px-2 py-1 rounded text-xs font-black transition-all border border-slate-200 text-slate-400">
+                                    KLIK STATUS
+                                </button>
+                            </td>
+                            <td class="p-1 text-center align-middle no-print">
+                                <button onclick="removeRow(this)" class="text-rose-400 hover:text-rose-600 p-2 transition" title="Hapus Baris">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                    </svg>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="mt-2 no-print flex justify-start">
+                <button onclick="addRow()" class="text-slate-600 hover:navy-accent text-xs font-bold hover:underline flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4" />
+                    </svg>
+                    Tambah Baris Pengujian
+                </button>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="mt-4 text-center text-slate-300 text-[9px] border-t border-slate-100 pt-2 pb-6">
+            <p class="uppercase tracking-widest">MikroTik Lab Dashboard</p>
+        </footer>
+    </div>
+
+    <script>
+        const txScenario = document.getElementById('scenarioInput');
+        txScenario.addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = (this.scrollHeight) + 'px';
+        });
+
+        function autoExpand(el) {
+            el.style.height = 'auto';
+            el.style.height = (el.scrollHeight) + 'px';
+        }
+
+        function toggleResult(btn) {
+            const row = btn.closest('tr');
+            if (btn.innerText === 'KLIK STATUS' || btn.innerText === 'GAGAL') {
+                btn.innerText = 'BERHASIL';
+                btn.className = 'status-btn px-2 py-1 rounded text-xs font-black transition-all bg-emerald-600 text-white border border-emerald-600 shadow-sm';
+                row.classList.remove('row-fail');
+                row.classList.add('row-success');
+            } else {
+                btn.innerText = 'GAGAL';
+                btn.className = 'status-btn px-2 py-1 rounded text-xs font-black transition-all bg-rose-600 text-white border border-rose-600 shadow-sm';
+                row.classList.remove('row-success');
+                row.classList.add('row-fail');
+            }
+        }
+
+        function removeRow(btn) {
+            const row = btn.closest('tr');
+            if (document.querySelectorAll('.testing-row').length > 1) {
+                row.remove();
+            } else {
+                clearRowContent(row);
+            }
+        }
+
+        function clearRowContent(row) {
+            const textareas = row.querySelectorAll('textarea');
+            textareas.forEach(ta => {
+                ta.value = '';
+                ta.style.height = 'auto';
+            });
+            const statusBtn = row.querySelector('.status-btn');
+            statusBtn.innerText = 'KLIK STATUS';
+            statusBtn.className = 'status-btn px-2 py-1 rounded text-xs font-black transition-all border border-slate-200 text-slate-400';
+            row.classList.remove('row-success', 'row-fail');
+        }
+
+        function addRow() {
+            const tbody = document.getElementById('testingTableBody');
+            const row = document.createElement('tr');
+            row.className = 'divide-y divide-slate-100 testing-row transition-colors duration-300';
+            row.innerHTML = `
+                <td class="p-1">
+                    <textarea class="table-textarea px-2 py-1" rows="1" placeholder="..." oninput="autoExpand(this)"></textarea>
+                </td>
+                <td class="p-1">
+                    <textarea class="table-textarea px-2 py-1" rows="1" placeholder="..." oninput="autoExpand(this)"></textarea>
+                </td>
+                <td class="p-1 text-center align-middle">
+                    <button onclick="toggleResult(this)" class="status-btn px-2 py-1 rounded text-xs font-black transition-all border border-slate-200 text-slate-400">
+                        KLIK STATUS
+                    </button>
+                </td>
+                <td class="p-1 text-center align-middle no-print">
+                    <button onclick="removeRow(this)" class="text-rose-400 hover:text-rose-600 p-2 transition" title="Hapus Baris">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                        </svg>
+                    </button>
+                </td>
+            `;
+            tbody.appendChild(row);
+        }
+
+        function resetApp() {
+            txScenario.value = '';
+            txScenario.style.height = 'auto';
+            document.querySelectorAll('.param-field').forEach(field => {
+                if (field.tagName === 'SELECT') {
+                    field.selectedIndex = 0;
+                } else {
+                    field.value = '';
+                }
+            });
+            document.querySelectorAll('.day-cb').forEach(cb => cb.checked = false);
+            const tbody = document.getElementById('testingTableBody');
+            tbody.innerHTML = `
+                <tr class="testing-row transition-colors duration-300">
+                    <td class="p-1">
+                        <textarea class="table-textarea px-2 py-1" rows="1" placeholder="..." oninput="autoExpand(this)"></textarea>
+                    </td>
+                    <td class="p-1">
+                        <textarea class="table-textarea px-2 py-1" rows="1" placeholder="..." oninput="autoExpand(this)"></textarea>
+                    </td>
+                    <td class="p-1 text-center align-middle">
+                        <button onclick="toggleResult(this)" class="status-btn px-2 py-1 rounded text-xs font-black transition-all border border-slate-200 text-slate-400">
+                            KLIK STATUS
+                        </button>
+                    </td>
+                    <td class="p-1 text-center align-middle no-print">
+                        <button onclick="removeRow(this)" class="text-rose-400 hover:text-rose-600 p-2 transition" title="Hapus Baris">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                            </svg>
+                        </button>
+                    </td>
+                </tr>
+            `;
+        }
+    </script>
+</body>
+</html>
