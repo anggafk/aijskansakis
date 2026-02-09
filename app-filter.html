@@ -8,7 +8,6 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;600;800&display=swap');
         
-        /* Warna kustom berdasarkan sampel gambar */
         :root {
             --navy-custom: #2d3e50;
             --navy-light: #3b5066;
@@ -84,7 +83,7 @@
             resize: none;
             overflow: hidden;
             display: block;
-            line-height: 1.5;
+            line-height: 1.2;
         }
 
         .status-btn {
@@ -104,9 +103,22 @@
             border-right: none;
         }
 
-        /* Warna Pastel untuk Baris */
-        .row-success { background-color: #ecfdf5 !important; } /* emerald-50 */
-        .row-fail { background-color: #fff1f2 !important; }    /* rose-50 */
+        .row-success { background-color: #ecfdf5 !important; }
+        .row-fail { background-color: #fff1f2 !important; }
+
+        /* Custom Textarea for Scenario and Description */
+        .dynamic-box {
+            background: transparent;
+            width: 100%;
+            font-weight: 700;
+            color: var(--navy-custom);
+            outline: none;
+            resize: none;
+            overflow: hidden;
+            display: block;
+            line-height: 1.4;
+            min-height: 1.5rem;
+        }
 
         @media print {
             .no-print { display: none; }
@@ -124,14 +136,10 @@
             <h1 class="text-3xl font-extrabold navy-accent uppercase tracking-wider">PRAKTIK FILTER RULE</h1>
         </header>
 
-        <!-- Skenario Box -->
+        <!-- Skenario Box - Rapat (Margin Minimal) -->
         <section class="mb-4">
-            <div class="bg-white border border-navy-custom p-3 rounded shadow-sm">
-                <div class="flex items-center mb-1">
-                    <span class="bg-navy-custom w-1 h-4 rounded mr-2"></span>
-                    <span class="text-xs font-bold navy-accent uppercase">Skenario</span>
-                </div>
-                <textarea id="scenarioInput" class="bg-transparent w-full text-lg font-bold navy-accent outline-none resize-none overflow-hidden h-auto" placeholder="Input Skenario Praktik..."></textarea>
+            <div class="bg-white border border-navy-custom px-3 py-1.5 rounded shadow-sm">
+                <textarea id="scenarioInput" rows="1" class="dynamic-box text-xl" placeholder="" oninput="autoExpand(this)"></textarea>
             </div>
         </section>
 
@@ -239,7 +247,7 @@
                         </div>
                     </div>
 
-                    <!-- Tombol Reset Langsung -->
+                    <!-- Reset Button -->
                     <button onclick="resetApp()" class="no-print absolute bottom-3 right-3 bg-slate-100 hover:bg-rose-600 hover:text-white text-slate-500 font-bold py-1 px-3 rounded text-[10px] transition-all border border-slate-200 shadow-sm flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
@@ -247,7 +255,17 @@
                         RESET
                     </button>
                 </div>
+            </div>
+        </section>
 
+        <!-- Keterangan Box - Rapat (Margin Minimal) -->
+        <section class="mb-4">
+            <div class="bg-white border border-navy-custom px-3 py-1.5 rounded shadow-sm">
+                <div class="flex items-center mb-1">
+                    <span class="bg-navy-custom w-1 h-3 rounded mr-2"></span>
+                    <span class="text-[10px] font-bold navy-accent uppercase">Keterangan</span>
+                </div>
+                <textarea id="descInput" rows="1" class="dynamic-box text-lg" placeholder="" oninput="autoExpand(this)"></textarea>
             </div>
         </section>
 
@@ -266,10 +284,10 @@
                     <tbody id="testingTableBody" class="divide-y divide-slate-100">
                         <tr class="testing-row transition-colors duration-300">
                             <td class="p-1">
-                                <textarea class="table-textarea px-2 py-1" rows="1" placeholder="..." oninput="autoExpand(this)"></textarea>
+                                <textarea class="table-textarea px-2 py-0.5" rows="1" placeholder="..." oninput="autoExpand(this)"></textarea>
                             </td>
                             <td class="p-1">
-                                <textarea class="table-textarea px-2 py-1" rows="1" placeholder="..." oninput="autoExpand(this)"></textarea>
+                                <textarea class="table-textarea px-2 py-0.5" rows="1" placeholder="..." oninput="autoExpand(this)"></textarea>
                             </td>
                             <td class="p-1 text-center align-middle">
                                 <button onclick="toggleResult(this)" class="status-btn px-2 py-1 rounded text-xs font-black transition-all border border-slate-200 text-slate-400">
@@ -304,12 +322,6 @@
     </div>
 
     <script>
-        const txScenario = document.getElementById('scenarioInput');
-        txScenario.addEventListener('input', function() {
-            this.style.height = 'auto';
-            this.style.height = (this.scrollHeight) + 'px';
-        });
-
         function autoExpand(el) {
             el.style.height = 'auto';
             el.style.height = (el.scrollHeight) + 'px';
@@ -357,10 +369,10 @@
             row.className = 'divide-y divide-slate-100 testing-row transition-colors duration-300';
             row.innerHTML = `
                 <td class="p-1">
-                    <textarea class="table-textarea px-2 py-1" rows="1" placeholder="..." oninput="autoExpand(this)"></textarea>
+                    <textarea class="table-textarea px-2 py-0.5" rows="1" placeholder="..." oninput="autoExpand(this)"></textarea>
                 </td>
                 <td class="p-1">
-                    <textarea class="table-textarea px-2 py-1" rows="1" placeholder="..." oninput="autoExpand(this)"></textarea>
+                    <textarea class="table-textarea px-2 py-0.5" rows="1" placeholder="..." oninput="autoExpand(this)"></textarea>
                 </td>
                 <td class="p-1 text-center align-middle">
                     <button onclick="toggleResult(this)" class="status-btn px-2 py-1 rounded text-xs font-black transition-all border border-slate-200 text-slate-400">
@@ -379,8 +391,17 @@
         }
 
         function resetApp() {
-            txScenario.value = '';
-            txScenario.style.height = 'auto';
+            // Clear Scenario
+            const scenario = document.getElementById('scenarioInput');
+            scenario.value = '';
+            scenario.style.height = 'auto';
+
+            // Clear Description
+            const desc = document.getElementById('descInput');
+            desc.value = '';
+            desc.style.height = 'auto';
+
+            // Reset Parameters
             document.querySelectorAll('.param-field').forEach(field => {
                 if (field.tagName === 'SELECT') {
                     field.selectedIndex = 0;
@@ -388,15 +409,19 @@
                     field.value = '';
                 }
             });
+
+            // Clear Checkboxes
             document.querySelectorAll('.day-cb').forEach(cb => cb.checked = false);
+
+            // Reset Table
             const tbody = document.getElementById('testingTableBody');
             tbody.innerHTML = `
                 <tr class="testing-row transition-colors duration-300">
                     <td class="p-1">
-                        <textarea class="table-textarea px-2 py-1" rows="1" placeholder="..." oninput="autoExpand(this)"></textarea>
+                        <textarea class="table-textarea px-2 py-0.5" rows="1" placeholder="..." oninput="autoExpand(this)"></textarea>
                     </td>
                     <td class="p-1">
-                        <textarea class="table-textarea px-2 py-1" rows="1" placeholder="..." oninput="autoExpand(this)"></textarea>
+                        <textarea class="table-textarea px-2 py-0.5" rows="1" placeholder="..." oninput="autoExpand(this)"></textarea>
                     </td>
                     <td class="p-1 text-center align-middle">
                         <button onclick="toggleResult(this)" class="status-btn px-2 py-1 rounded text-xs font-black transition-all border border-slate-200 text-slate-400">
