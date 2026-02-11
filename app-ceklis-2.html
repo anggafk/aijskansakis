@@ -22,13 +22,13 @@
         /* Status Tugas - Hasil Klik */
         .status-recorded-success {
             background-color: #22c55e !important;
-            color: white !important;
+            color: #000000 !important;
             font-weight: 800;
         }
 
         .status-recorded-failed {
             background-color: #ef4444 !important;
-            color: white !important;
+            color: #000000 !important;
             font-weight: 800;
         }
 
@@ -36,13 +36,13 @@
         .student-block {
             background-color: white;
             border: 1px solid #cbd5e1;
-            border-radius: 0.75rem;
+            border-radius: 0.5rem;
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            height: calc((100% / 6) - 0.4rem); 
-            margin-bottom: 0.4rem;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            height: calc((100% / 6) - 0.35rem); 
+            margin-bottom: 0.35rem;
             transition: all 0.2s;
         }
 
@@ -62,18 +62,18 @@
             background-color: #f8fafc;
             display: flex;
             align-items: center;
-            padding: 0 10px;
+            padding: 0 8px;
             border-bottom: 1px solid #e2e8f0;
-            flex: 1;
+            flex: 0.8; 
         }
 
         .input-no {
-            width: 30px;
+            width: 25px;
             background: transparent;
             border: none;
             font-weight: 800;
             color: #0f172a; 
-            font-size: 13px;
+            font-size: 11px;
             outline: none;
         }
 
@@ -83,7 +83,7 @@
             border: none;
             font-weight: 800;
             color: #0f172a; 
-            font-size: 13px;
+            font-size: 11px;
             text-transform: uppercase;
             outline: none;
             padding-left: 2px;
@@ -92,12 +92,12 @@
         .input-nama:focus, .input-no:focus {
             background-color: white;
             box-shadow: inset 0 0 0 1px #3b82f6;
-            border-radius: 4px;
+            border-radius: 3px;
         }
 
         .student-progress-row {
             display: flex;
-            flex: 1.2;
+            flex: 1; 
             background: white;
         }
 
@@ -107,10 +107,10 @@
             align-items: center;
             justify-content: center;
             border-right: 1px solid #f1f5f9;
-            font-size: 11px;
-            font-weight: 700;
-            color: #cbd5e1;
-            transition: all 0.2s;
+            font-size: 9px;
+            font-weight: 800;
+            color: #94a3b8;
+            transition: all 0.1s;
             cursor: pointer;
         }
 
@@ -119,11 +119,11 @@
         }
 
         .waktu-cell {
-            width: 60px;
+            width: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 10px;
+            font-size: 9px;
             font-weight: 900;
             color: #64748b;
             background-color: #f8fafc;
@@ -137,10 +137,9 @@
         }
 
         .timer-text {
-            text-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            text-shadow: 0 4px 12px rgba(0,0,0,0.3);
         }
 
-        /* Modals Overlay */
         #notification-overlay, .modal-overlay {
             display: none;
             position: fixed;
@@ -173,15 +172,23 @@
 </head>
 <body class="p-0">
 
-    <!-- Notifications & Modals -->
+    <!-- Notifications Overlay -->
     <div id="notification-overlay">
         <div class="notif-card max-w-[500px] w-[90%] text-center">
             <div id="notif-icon-box" class="w-16 h-16 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center mx-auto mb-4">
                 <i id="notif-icon-lucide" data-lucide="clock-alert" class="w-8 h-8"></i>
             </div>
-            <h2 id="notif-title" class="text-2xl font-black text-slate-900 mb-2 uppercase tracking-tighter">Peringatan</h2>
+            <h2 id="notif-title" class="text-2xl font-black text-slate-900 mb-2 uppercase">Peringatan</h2>
             <p id="notif-message" class="text-lg text-slate-500 font-medium mb-6">Waktu tersisa!</p>
-            <button id="btn-close-notif" onclick="closeNotification()" class="hidden w-full bg-slate-900 hover:bg-black text-white font-bold py-3 rounded-xl transition-all uppercase tracking-widest text-sm">Tutup</button>
+            
+            <div id="notif-actions" class="flex flex-col space-y-2">
+                <button id="btn-close-notif" onclick="closeNotification()" class="hidden w-full bg-slate-900 hover:bg-black text-white font-bold py-3 rounded-xl transition-all uppercase tracking-widest text-sm">Tutup</button>
+                
+                <div id="time-up-actions" class="hidden grid grid-cols-2 gap-3">
+                    <button onclick="closeNotification()" class="bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold py-3 rounded-xl transition-all uppercase text-sm">Selesai</button>
+                    <button onclick="openContinueModal()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl transition-all uppercase text-sm shadow-lg shadow-blue-200">Lanjutkan</button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -195,8 +202,8 @@
             <p class="text-xs text-slate-500 mb-4">Urutan baris menentukan posisi (1-18). Baris kosong akan mengosongkan kartu meja tersebut.</p>
             <textarea id="import-textarea" rows="10" class="w-full p-4 border-2 border-slate-100 rounded-xl font-mono text-xs focus:outline-none mb-4" placeholder="1 BUDI&#10;2 ANI&#10;&#10;4 DENI"></textarea>
             <div class="flex space-x-3">
-                <button onclick="closeModal('modal-import')" class="flex-1 px-4 py-2 border-2 border-slate-100 rounded-lg font-bold text-slate-400 hover:bg-slate-50 text-xs uppercase">Batal</button>
-                <button onclick="processImport()" class="flex-1 px-4 py-2 bg-indigo-600 text-white rounded-lg font-bold text-xs uppercase shadow-lg shadow-indigo-200">Import Denah</button>
+                <button onclick="closeModal('modal-import')" class="flex-1 px-4 py-2 border-2 border-slate-100 rounded-lg font-bold text-slate-400 hover:bg-slate-50 text-xs uppercase text-sm">Batal</button>
+                <button onclick="processImport()" class="flex-1 px-4 py-2 bg-indigo-600 text-white rounded-lg font-bold text-xs uppercase shadow-lg shadow-indigo-200 text-sm">Import Denah</button>
             </div>
         </div>
     </div>
@@ -204,7 +211,7 @@
     <!-- Modal Tasks -->
     <div id="modal-tasks-config" class="modal-overlay">
         <div class="modal-card w-[450px] mx-4">
-            <h2 class="text-xl font-black text-slate-900 mb-4 uppercase tracking-tight flex items-center">
+            <h2 class="text-xl font-black text-slate-900 mb-4 uppercase flex items-center">
                 <i data-lucide="settings" class="w-5 h-5 mr-2 text-blue-500"></i>
                 Pengaturan Tugas
             </h2>
@@ -226,7 +233,7 @@
             <div id="task-inputs-container" class="max-h-[30vh] overflow-y-auto space-y-2 pr-2 mb-6"></div>
             <div class="flex space-x-3">
                 <button onclick="closeModal('modal-tasks-config')" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-500 font-bold py-3 rounded-xl transition-all uppercase text-xs">Batal</button>
-                <button onclick="saveTaskConfig()" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl transition-all uppercase text-xs shadow-lg shadow-blue-200">Simpan</button>
+                <button onclick="saveTaskConfig()" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl transition-all uppercase text-xs shadow-lg shadow-blue-200 text-sm">Simpan</button>
             </div>
         </div>
     </div>
@@ -234,82 +241,104 @@
     <!-- APP WRAPPER -->
     <div class="flex flex-col h-screen w-full overflow-hidden">
         
-        <!-- SECTION 1: HEADER (Bleeds to edges - top, left, right, Navy Blue) -->
-        <header class="flex justify-between items-center bg-[#0f172a] px-10 py-2 shrink-0 shadow-[0_4px_20px_rgba(0,0,0,0.4)] min-h-[70px] border-b-2 border-[#1e293b]">
-            <div class="header-grid">
-                <!-- Left: Title -->
-                <div class="text-left min-w-0 pr-4">
-                    <h1 class="text-3xl lg:text-5xl font-black tracking-tighter uppercase leading-[0.85] text-blue-400">
-                        UJIAN<br>PRAKTIK
-                    </h1>
+        <!-- SECTION 1: HEADER -->
+        <header class="flex flex-col bg-[#0f172a] shrink-0 shadow-[0_4px_20px_rgba(0,0,0,0.4)] border-b-2 border-[#1e293b]">
+            <div class="flex justify-between items-center px-10 py-1 min-h-[90px]">
+                <div class="header-grid">
+                    <div class="text-left min-w-0 pr-4">
+                        <h1 class="text-2xl lg:text-4xl font-black tracking-tighter uppercase leading-[0.85] text-blue-400">UJIAN<br>PRAKTIK</h1>
+                    </div>
+                    
+                    <div class="text-center px-4">
+                        <div id="exam-timer" class="text-[7.5rem] font-black tabular-nums tracking-tighter leading-none text-white timer-text">00:00:00</div>
+                    </div>
+
+                    <div class="flex flex-col items-end pl-4">
+                        <button id="btn-exam-control" onclick="handleExamControl()" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-black flex items-center space-x-2 transition-all shadow-lg shadow-blue-500/30 whitespace-nowrap">
+                            <i id="control-icon" data-lucide="play" class="w-5 h-5 fill-current"></i>
+                            <span id="control-text" class="text-sm uppercase">Mulai Ujian</span>
+                        </button>
+                    </div>
                 </div>
-                
-                <!-- Center: Timer -->
-                <div class="text-center px-4">
-                    <div id="exam-status-label" class="text-[10px] font-bold text-blue-300 uppercase tracking-[0.3em] mb-0 opacity-80">SISA WAKTU</div>
-                    <div id="exam-timer" class="text-[5.5rem] font-black tabular-nums tracking-tighter leading-none text-white timer-text">00:00:00</div>
+            </div>
+            
+            <!-- SUB-HEADER: Task Settings & Descriptions Area - Shifting left for more space -->
+            <div class="bg-[#1e293b]/50 px-4 py-1 border-t border-slate-700/50 min-h-[32px] flex items-center">
+                <!-- Task Settings Button: Shifted further left with smaller margin -->
+                <div onclick="openTaskConfig()" id="btn-open-tasks" class="flex items-center justify-center bg-slate-900/80 px-2 py-0.5 rounded border border-slate-700 cursor-pointer hover:bg-slate-800 transition-all group shadow-sm mr-3 shrink-0 min-w-[32px]">
+                    <span id="display-num-tasks" class="text-white text-[10px] font-bold text-center">7</span>
                 </div>
 
-                <!-- Right: Controls -->
-                <div class="flex flex-col items-end space-y-2 pl-4">
-                    <button id="btn-exam-control" onclick="handleExamControl()" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-xl font-black flex items-center space-x-2 transition-all shadow-lg shadow-blue-500/30 whitespace-nowrap">
-                        <i id="control-icon" data-lucide="play" class="w-5 h-5 fill-current"></i>
-                        <span id="control-text" class="text-sm uppercase">Mulai Ujian</span>
-                    </button>
-                    
-                    <div class="flex items-center space-x-2 bg-slate-800/50 px-2 py-1 rounded-lg border border-slate-700">
-                        <div onclick="openTaskConfig()" id="btn-open-tasks" class="flex items-center space-x-1 bg-slate-900 px-2 py-1 rounded border border-slate-700 cursor-pointer hover:bg-slate-800 transition-all group shadow-sm">
-                            <i data-lucide="list-checks" class="w-3 h-3 text-slate-400 group-hover:text-blue-400"></i>
-                            <span id="display-num-tasks" class="text-white text-[10px] font-bold w-4 text-center">7</span>
-                            <i data-lucide="chevron-down" class="w-2.5 h-2.5 text-slate-500"></i>
-                        </div>
-                        <div class="w-px h-3 bg-slate-700"></div>
-                        <div class="flex items-center space-x-1">
-                            <i data-lucide="timer" class="w-3 h-3 text-slate-400"></i>
-                            <input type="number" id="input-duration" value="60" min="1" max="999" class="w-10 bg-slate-900 text-white text-[10px] border border-slate-700 rounded py-0.5 px-0.5 focus:outline-none text-center font-bold shadow-sm">
-                            <span class="text-[9px] text-slate-500 font-bold uppercase">Mnt</span>
-                        </div>
-                    </div>
+                <!-- Rincian Tugas: Now has more room to breathe -->
+                <div id="header-task-details" class="flex flex-wrap gap-x-6 gap-y-0.5 text-blue-200 flex-grow">
+                    <span class="text-[10px] text-slate-400 italic font-medium">Belum ada rincian tugas yang disimpan.</span>
                 </div>
             </div>
         </header>
 
-        <!-- SECTION 2: MONITORING GRID (Small margins for focus) -->
-        <div class="flex-grow pt-6 px-4 pb-4 overflow-hidden">
-            <div id="tables-container" class="grid grid-cols-3 gap-x-3 h-full">
+        <!-- SECTION 2: MONITORING GRID -->
+        <div class="flex-grow pt-3 px-2 pb-2 overflow-hidden">
+            <div id="tables-container" class="grid grid-cols-3 gap-x-2 h-full">
                 <div id="col-1" class="flex flex-col h-full"></div>
                 <div id="col-2" class="flex flex-col h-full"></div> 
                 <div id="col-3" class="flex flex-col h-full"></div>
             </div>
         </div>
 
-        <!-- SECTION 3: FOOTER (Bleeds to edges - bottom, left, right) -->
-        <footer class="flex justify-between items-center bg-white px-10 py-3 shrink-0 shadow-[0_-4px_10px_-2px_rgba(0,0,0,0.1)] min-h-[55px] border-t-2 border-slate-300">
-            <div id="footer-task-details" class="flex flex-wrap gap-x-6 gap-y-0.5 max-w-[55%] text-slate-600">
-                <span class="text-[10px] text-slate-400 italic font-medium">Belum ada rincian tugas yang disimpan.</span>
-            </div>
-            <div class="flex space-x-3 shrink-0">
-                <button onclick="openImportModal()" class="text-[11px] font-bold bg-indigo-50 hover:bg-indigo-100 text-indigo-600 px-5 py-2.5 rounded-lg transition-all uppercase flex items-center border border-indigo-200">
-                    <i data-lucide="upload" class="w-3.5 h-3.5 mr-2"></i> Import Nama
+        <!-- SECTION 3: FOOTER -->
+        <footer class="flex justify-between items-center bg-white px-10 py-1.5 shrink-0 shadow-[0_-2px_10px_rgba(0,0,0,0.05)] min-h-[42px] border-t border-slate-300">
+            <div class="text-[9px] font-bold text-slate-400 uppercase tracking-[0.2em]">Panel Monitoring Praktik</div>
+            <div class="flex space-x-2 shrink-0">
+                <button onclick="openImportModal()" class="text-[10px] font-bold bg-indigo-50 hover:bg-indigo-100 text-indigo-600 px-3 py-1.5 rounded-md transition-all uppercase flex items-center border border-indigo-200">
+                    <i data-lucide="upload" class="w-3 h-3 mr-1.5"></i> Import Nama
                 </button>
-                <button onclick="exportData()" class="text-[11px] font-bold bg-green-600 hover:bg-green-700 text-white px-5 py-2.5 rounded-lg transition-all uppercase flex items-center shadow-md">
-                    <i data-lucide="download" class="w-3.5 h-3.5 mr-2"></i> Ekspor CSV
+                <button onclick="exportData()" class="text-[10px] font-bold bg-green-600 hover:bg-green-700 text-white px-3 py-1.5 rounded-md transition-all uppercase flex items-center shadow-sm">
+                    <i data-lucide="download" class="w-3 h-3 mr-1.5"></i> Ekspor CSV
                 </button>
-                <button onclick="requestClearAll()" class="text-[11px] font-bold bg-red-50 hover:bg-red-200 text-red-700 px-5 py-2.5 rounded-lg transition-all uppercase flex items-center border border-red-200">
-                    <i data-lucide="trash-2" class="w-3.5 h-3.5 mr-2"></i> Hapus Daftar
+                <button onclick="requestClearAll()" class="text-[10px] font-bold bg-red-50 hover:bg-red-200 text-red-700 px-3 py-1.5 rounded-md transition-all uppercase flex items-center border border-red-100">
+                    <i data-lucide="trash-2" class="w-3 h-3 mr-1.5"></i> Hapus Daftar
                 </button>
             </div>
         </footer>
     </div>
 
-    <!-- Modals for control flow -->
+    <!-- Modals -->
     <div id="modal-start" class="modal-overlay">
-        <div class="modal-card max-w-xs w-full text-center">
-            <h2 class="text-xl font-bold text-slate-800 mb-4 uppercase">Mulai Ujian?</h2>
-            <button onclick="confirmStart()" class="w-full px-4 py-3 bg-blue-600 text-white rounded-xl font-bold mb-2 text-sm shadow-lg shadow-blue-200 uppercase">Ya, Mulai</button>
+        <div class="modal-card max-w-sm w-full text-center">
+            <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i data-lucide="play" class="w-8 h-8 fill-current"></i>
+            </div>
+            <h2 class="text-xl font-bold text-slate-800 mb-2 uppercase">Mulai Ujian</h2>
+            <p class="text-xs text-slate-500 mb-4">Masukkan durasi waktu dalam menit untuk memulai sesi praktik.</p>
+            <div class="mb-6">
+                <div class="relative max-w-[120px] mx-auto">
+                    <input type="number" id="modal-input-duration" min="1" max="999" placeholder="0" class="w-full bg-slate-50 border-2 border-slate-200 p-4 rounded-2xl text-center text-2xl font-black text-slate-800 focus:border-blue-500 outline-none transition-all">
+                    <span class="absolute -bottom-5 left-0 right-0 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Menit</span>
+                </div>
+            </div>
+            <button onclick="confirmStart()" class="w-full px-4 py-3 bg-blue-600 text-white rounded-xl font-bold mb-2 text-sm shadow-lg shadow-blue-200 uppercase">Konfirmasi & Mulai</button>
             <button onclick="closeModal('modal-start')" class="w-full px-4 py-2 text-slate-400 font-bold text-xs uppercase">Batal</button>
         </div>
     </div>
+
+    <div id="modal-continue" class="modal-overlay">
+        <div class="modal-card max-w-sm w-full text-center border-t-4 border-orange-500">
+            <div class="w-16 h-16 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i data-lucide="clock-plus" class="w-8 h-8"></i>
+            </div>
+            <h2 class="text-xl font-bold text-slate-800 mb-2 uppercase tracking-tighter">Lanjutkan Ujian</h2>
+            <p class="text-xs text-slate-500 mb-4">Tambahkan durasi menit ekstra ke ujian yang sedang berjalan.</p>
+            <div class="mb-6">
+                <div class="relative max-w-[120px] mx-auto">
+                    <input type="number" id="modal-input-extra" min="1" max="999" placeholder="0" class="w-full bg-slate-50 border-2 border-orange-200 p-4 rounded-2xl text-center text-2xl font-black text-slate-800 focus:border-orange-500 outline-none transition-all">
+                    <span class="absolute -bottom-5 left-0 right-0 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Menit Tambahan</span>
+                </div>
+            </div>
+            <button onclick="confirmContinue()" class="w-full px-4 py-3 bg-orange-600 text-white rounded-xl font-bold mb-2 text-sm shadow-lg shadow-orange-200 uppercase">Lanjutkan Sekarang</button>
+            <button onclick="closeModal('modal-continue')" class="w-full px-4 py-2 text-slate-400 font-bold text-xs uppercase">Batal</button>
+        </div>
+    </div>
+
     <div id="modal-reset" class="modal-overlay">
         <div class="modal-card max-w-xs w-full text-center">
             <div class="w-12 h-12 bg-red-100 text-red-600 rounded-full flex items-center justify-center mx-auto mb-4"><i data-lucide="refresh-cw" class="w-6 h-6"></i></div>
@@ -319,6 +348,7 @@
             <button onclick="closeModal('modal-reset')" class="w-full px-4 py-2 text-slate-400 font-bold text-xs uppercase">Batal</button>
         </div>
     </div>
+
     <div id="modal-clear-all" class="modal-overlay">
         <div class="modal-card max-w-xs w-full text-center">
             <h2 class="text-xl font-bold text-red-600 mb-4 uppercase">Hapus Daftar?</h2>
@@ -366,9 +396,15 @@
             elapsedSeconds++;
             document.getElementById('exam-timer').textContent = formatDurationDisplay(elapsedSeconds);
             const remaining = targetSeconds - elapsedSeconds;
+            
             if (remaining === 600 && !notifTenSent) { showNotification("Waktu tersisa 10 menit lagi!", 10); notifTenSent = true; }
             if (remaining === 300 && !notifFiveSent) { showNotification("Waktu tersisa 5 menit lagi!", 10); notifFiveSent = true; }
-            if (elapsedSeconds >= targetSeconds) { clearInterval(timerInterval); isExamFinished = true; showNotification("WAKTU UJIAN TELAH HABIS!", 0, true); }
+            
+            if (elapsedSeconds >= targetSeconds) { 
+                clearInterval(timerInterval); 
+                isExamFinished = true; 
+                showNotification("WAKTU UJIAN TELAH HABIS!", 0, true); 
+            }
         }
 
         function showNotification(msg, duration, isPermanent = false) {
@@ -376,30 +412,73 @@
             const msgEl = document.getElementById('notif-message');
             const titleEl = document.getElementById('notif-title');
             const closeBtn = document.getElementById('btn-close-notif');
+            const timeUpActions = document.getElementById('time-up-actions');
             const iconBox = document.getElementById('notif-icon-box');
+            
             msgEl.textContent = msg;
             overlay.style.display = 'flex';
+            
             if (isPermanent) {
                 titleEl.textContent = "WAKTU HABIS";
                 titleEl.className = "text-2xl font-black text-red-600 mb-2 uppercase";
                 iconBox.className = "w-16 h-16 bg-red-100 text-red-600 rounded-full flex items-center justify-center mx-auto mb-4";
-                closeBtn.classList.remove('hidden');
+                closeBtn.classList.add('hidden');
+                timeUpActions.classList.remove('hidden');
             } else {
                 titleEl.textContent = "PERINGATAN";
                 titleEl.className = "text-2xl font-black text-orange-600 mb-2 uppercase";
                 iconBox.className = "w-16 h-16 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center mx-auto mb-4";
-                closeBtn.classList.add('hidden');
-                setTimeout(() => { if (!isPermanent && overlay.style.display === 'flex') closeNotification(); }, duration * 1000);
+                closeBtn.classList.remove('hidden');
+                timeUpActions.classList.add('hidden');
+                if (duration > 0) {
+                    setTimeout(() => { if (!isPermanent && overlay.style.display === 'flex') closeNotification(); }, duration * 1000);
+                }
             }
+            lucide.createIcons();
         }
 
-        function closeNotification() { document.getElementById('notification-overlay').style.display = 'none'; }
+        function closeNotification() { 
+            document.getElementById('notification-overlay').style.display = 'none'; 
+        }
+
+        function openContinueModal() {
+            closeNotification();
+            document.getElementById('modal-input-extra').value = "";
+            document.getElementById('modal-continue').style.display = 'flex';
+            lucide.createIcons();
+        }
+
+        function confirmContinue() {
+            const extraInput = document.getElementById('modal-input-extra');
+            const extraMinutes = parseInt(extraInput.value);
+            
+            if (!extraMinutes || extraMinutes <= 0) {
+                extraInput.classList.add('border-red-500');
+                return;
+            }
+
+            targetSeconds += (extraMinutes * 60);
+            
+            const remaining = targetSeconds - elapsedSeconds;
+            if (remaining > 600) notifTenSent = false;
+            if (remaining > 300) notifFiveSent = false;
+
+            isExamFinished = false;
+            isExamStarted = true;
+            
+            if (timerInterval) clearInterval(timerInterval);
+            timerInterval = setInterval(updateTimer, 1000);
+            
+            closeModal('modal-continue');
+            renderTable();
+        }
 
         function openTaskConfig() {
             if (isExamStarted) return;
             document.getElementById('modal-tasks-config').style.display = 'flex';
             document.getElementById('config-num-tasks').value = numTasks;
             generateTaskInputs(numTasks);
+            lucide.createIcons();
         }
 
         function generateTaskInputs(count) {
@@ -426,16 +505,16 @@
         }
 
         function renderFooterDetails() {
-            const footerEl = document.getElementById('footer-task-details');
-            footerEl.innerHTML = "";
+            const headerEl = document.getElementById('header-task-details');
+            headerEl.innerHTML = "";
             let hasDetails = false;
             for (let i = 0; i < numTasks; i++) {
                 if (taskDetails[i]) {
                     hasDetails = true;
-                    footerEl.innerHTML += `<div class="flex items-center space-x-1"><span class="text-[9px] font-black text-blue-600 shrink-0">T${i+1}:</span><span class="text-[10px] font-bold text-slate-700 uppercase truncate max-w-[80px]">${taskDetails[i]}</span></div>`;
+                    headerEl.innerHTML += `<div class="flex items-center space-x-1"><span class="text-[9px] font-black text-blue-400 shrink-0">T${i+1}:</span><span class="text-[10px] font-bold text-blue-100/90 uppercase truncate max-w-[120px]">${taskDetails[i]}</span></div>`;
                 }
             }
-            if (!hasDetails) footerEl.innerHTML = `<span class="text-[10px] text-slate-400 italic font-medium">Belum ada rincian tugas yang disimpan.</span>`;
+            if (!hasDetails) headerEl.innerHTML = `<span class="text-[10px] text-slate-400 italic font-medium">Belum ada rincian tugas yang disimpan.</span>`;
         }
 
         function updateStudentData(idx, field, value) {
@@ -546,21 +625,29 @@
         }
 
         function handleExamControl() {
-            if (!isExamStarted) document.getElementById('modal-start').style.display = 'flex';
-            else document.getElementById('modal-reset').style.display = 'flex';
+            if (!isExamStarted) {
+                document.getElementById('modal-input-duration').value = "";
+                document.getElementById('modal-start').style.display = 'flex';
+            } else {
+                document.getElementById('modal-reset').style.display = 'flex';
+            }
             lucide.createIcons();
         }
 
         function confirmStart() {
-            const durInput = document.getElementById('input-duration');
-            targetSeconds = parseInt(durInput.value) * 60;
+            const durInput = document.getElementById('modal-input-duration');
+            const duration = parseInt(durInput.value);
+            if (!duration || duration <= 0) {
+                durInput.classList.add('border-red-500');
+                return;
+            }
+            targetSeconds = duration * 60;
             elapsedSeconds = 0; isExamStarted = true; isExamFinished = false;
             notifTenSent = notifFiveSent = false;
-            document.getElementById('btn-open-tasks').classList.add('opacity-50', 'cursor-not-allowed');
-            durInput.disabled = true;
             document.getElementById('control-text').textContent = "Reset Ujian";
             document.getElementById('btn-exam-control').classList.replace('bg-blue-600', 'bg-red-600');
             document.getElementById('control-icon').setAttribute('data-lucide', 'refresh-cw');
+            if (timerInterval) clearInterval(timerInterval);
             timerInterval = setInterval(updateTimer, 1000);
             closeModal('modal-start'); renderTable(); lucide.createIcons();
         }
@@ -568,13 +655,12 @@
         function confirmReset() {
             if (timerInterval) clearInterval(timerInterval); 
             isExamStarted = false; isExamFinished = false; elapsedSeconds = 0;
-            document.getElementById('btn-open-tasks').classList.remove('opacity-50', 'cursor-not-allowed');
-            document.getElementById('input-duration').disabled = false;
             document.getElementById('control-text').textContent = "Mulai Ujian";
             document.getElementById('btn-exam-control').classList.replace('bg-red-600', 'bg-blue-600');
             document.getElementById('control-icon').setAttribute('data-lucide', 'play');
             students.forEach(s => { s.endTime = null; s.progress = Array(10).fill(null); });
             document.getElementById('exam-timer').textContent = "00:00:00";
+            closeNotification();
             closeModal('modal-reset'); lucide.createIcons(); renderTable();
         }
 
