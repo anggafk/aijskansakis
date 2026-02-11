@@ -11,7 +11,7 @@
         
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #e2e8f0;
+            background-color: #e2e8f0; /* Latar belakang utama */
             height: 100vh;
             margin: 0;
             display: flex;
@@ -182,7 +182,7 @@
             <p id="notif-message" class="text-lg text-slate-500 font-medium mb-6">Waktu tersisa!</p>
             
             <div id="notif-actions" class="flex flex-col space-y-2">
-                <button id="btn-close-notif" onclick="closeNotification()" class="hidden w-full bg-slate-900 hover:bg-black text-white font-bold py-3 rounded-xl transition-all uppercase tracking-widest text-sm">Tutup</button>
+                <button id="btn-close-notif" onclick="closeNotification()" class="hidden w-full bg-slate-900 hover:bg-black text-white font-bold py-3 rounded-xl transition-all uppercase tracking-widest text-sm text-sm">Tutup</button>
                 
                 <div id="time-up-actions" class="hidden grid grid-cols-2 gap-3">
                     <button onclick="closeNotification()" class="bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold py-3 rounded-xl transition-all uppercase text-sm">Selesai</button>
@@ -241,18 +241,21 @@
     <!-- APP WRAPPER -->
     <div class="flex flex-col h-screen w-full overflow-hidden">
         
-        <!-- SECTION 1: HEADER -->
+        <!-- SECTION 1: HEADER (Navy Blue) -->
         <header class="flex flex-col bg-[#0f172a] shrink-0 shadow-[0_4px_20px_rgba(0,0,0,0.4)] border-b-2 border-[#1e293b]">
             <div class="flex justify-between items-center px-10 py-1 min-h-[90px]">
                 <div class="header-grid">
+                    <!-- Left: Title -->
                     <div class="text-left min-w-0 pr-4">
                         <h1 class="text-2xl lg:text-4xl font-black tracking-tighter uppercase leading-[0.85] text-blue-400">UJIAN<br>PRAKTIK</h1>
                     </div>
                     
+                    <!-- Center: Timer -->
                     <div class="text-center px-4">
                         <div id="exam-timer" class="text-[7.5rem] font-black tabular-nums tracking-tighter leading-none text-white timer-text">00:00:00</div>
                     </div>
 
+                    <!-- Right: Controls -->
                     <div class="flex flex-col items-end pl-4">
                         <button id="btn-exam-control" onclick="handleExamControl()" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-black flex items-center space-x-2 transition-all shadow-lg shadow-blue-500/30 whitespace-nowrap">
                             <i id="control-icon" data-lucide="play" class="w-5 h-5 fill-current"></i>
@@ -262,16 +265,16 @@
                 </div>
             </div>
             
-            <!-- SUB-HEADER: Task Settings & Descriptions Area - Shifting left for more space -->
-            <div class="bg-[#1e293b]/50 px-4 py-1 border-t border-slate-700/50 min-h-[32px] flex items-center">
-                <!-- Task Settings Button: Shifted further left with smaller margin -->
-                <div onclick="openTaskConfig()" id="btn-open-tasks" class="flex items-center justify-center bg-slate-900/80 px-2 py-0.5 rounded border border-slate-700 cursor-pointer hover:bg-slate-800 transition-all group shadow-sm mr-3 shrink-0 min-w-[32px]">
-                    <span id="display-num-tasks" class="text-white text-[10px] font-bold text-center">7</span>
+            <!-- SUB-HEADER: Task Settings & Descriptions (Cerah Mendekati Latar Belakang) -->
+            <div class="bg-slate-300 px-4 py-1.5 border-t border-slate-400 min-h-[32px] flex items-center shadow-sm">
+                <!-- Task Settings Button Simplified - Penyesuaian Warna -->
+                <div onclick="openTaskConfig()" id="btn-open-tasks" class="flex items-center justify-center bg-slate-400 hover:bg-slate-500 px-2 py-0.5 rounded border border-slate-500 cursor-pointer transition-all group shadow-sm mr-4 shrink-0 min-w-[32px]">
+                    <span id="display-num-tasks" class="text-slate-900 text-[10px] font-bold text-center">7</span>
                 </div>
 
-                <!-- Rincian Tugas: Now has more room to breathe -->
-                <div id="header-task-details" class="flex flex-wrap gap-x-6 gap-y-0.5 text-blue-200 flex-grow">
-                    <span class="text-[10px] text-slate-400 italic font-medium">Belum ada rincian tugas yang disimpan.</span>
+                <!-- Rincian Tugas (Teks Hitam & Bold) -->
+                <div id="header-task-details" class="flex flex-wrap gap-x-6 gap-y-0.5 text-slate-900 flex-grow font-bold">
+                    <span class="text-[10px] text-slate-600 italic font-bold">Belum ada rincian tugas yang disimpan.</span>
                 </div>
             </div>
         </header>
@@ -300,61 +303,6 @@
                 </button>
             </div>
         </footer>
-    </div>
-
-    <!-- Modals -->
-    <div id="modal-start" class="modal-overlay">
-        <div class="modal-card max-w-sm w-full text-center">
-            <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                <i data-lucide="play" class="w-8 h-8 fill-current"></i>
-            </div>
-            <h2 class="text-xl font-bold text-slate-800 mb-2 uppercase">Mulai Ujian</h2>
-            <p class="text-xs text-slate-500 mb-4">Masukkan durasi waktu dalam menit untuk memulai sesi praktik.</p>
-            <div class="mb-6">
-                <div class="relative max-w-[120px] mx-auto">
-                    <input type="number" id="modal-input-duration" min="1" max="999" placeholder="0" class="w-full bg-slate-50 border-2 border-slate-200 p-4 rounded-2xl text-center text-2xl font-black text-slate-800 focus:border-blue-500 outline-none transition-all">
-                    <span class="absolute -bottom-5 left-0 right-0 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Menit</span>
-                </div>
-            </div>
-            <button onclick="confirmStart()" class="w-full px-4 py-3 bg-blue-600 text-white rounded-xl font-bold mb-2 text-sm shadow-lg shadow-blue-200 uppercase">Konfirmasi & Mulai</button>
-            <button onclick="closeModal('modal-start')" class="w-full px-4 py-2 text-slate-400 font-bold text-xs uppercase">Batal</button>
-        </div>
-    </div>
-
-    <div id="modal-continue" class="modal-overlay">
-        <div class="modal-card max-w-sm w-full text-center border-t-4 border-orange-500">
-            <div class="w-16 h-16 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                <i data-lucide="clock-plus" class="w-8 h-8"></i>
-            </div>
-            <h2 class="text-xl font-bold text-slate-800 mb-2 uppercase tracking-tighter">Lanjutkan Ujian</h2>
-            <p class="text-xs text-slate-500 mb-4">Tambahkan durasi menit ekstra ke ujian yang sedang berjalan.</p>
-            <div class="mb-6">
-                <div class="relative max-w-[120px] mx-auto">
-                    <input type="number" id="modal-input-extra" min="1" max="999" placeholder="0" class="w-full bg-slate-50 border-2 border-orange-200 p-4 rounded-2xl text-center text-2xl font-black text-slate-800 focus:border-orange-500 outline-none transition-all">
-                    <span class="absolute -bottom-5 left-0 right-0 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Menit Tambahan</span>
-                </div>
-            </div>
-            <button onclick="confirmContinue()" class="w-full px-4 py-3 bg-orange-600 text-white rounded-xl font-bold mb-2 text-sm shadow-lg shadow-orange-200 uppercase">Lanjutkan Sekarang</button>
-            <button onclick="closeModal('modal-continue')" class="w-full px-4 py-2 text-slate-400 font-bold text-xs uppercase">Batal</button>
-        </div>
-    </div>
-
-    <div id="modal-reset" class="modal-overlay">
-        <div class="modal-card max-w-xs w-full text-center">
-            <div class="w-12 h-12 bg-red-100 text-red-600 rounded-full flex items-center justify-center mx-auto mb-4"><i data-lucide="refresh-cw" class="w-6 h-6"></i></div>
-            <h2 class="text-xl font-bold text-slate-800 mb-1 uppercase">Reset Ujian?</h2>
-            <p class="text-slate-500 text-xs mb-6">Data progres akan dikosongkan.</p>
-            <button onclick="confirmReset()" class="w-full px-4 py-3 bg-red-600 text-white rounded-xl font-bold mb-2 text-sm shadow-lg shadow-red-200 uppercase">Ya, Reset</button>
-            <button onclick="closeModal('modal-reset')" class="w-full px-4 py-2 text-slate-400 font-bold text-xs uppercase">Batal</button>
-        </div>
-    </div>
-
-    <div id="modal-clear-all" class="modal-overlay">
-        <div class="modal-card max-w-xs w-full text-center">
-            <h2 class="text-xl font-bold text-red-600 mb-4 uppercase">Hapus Daftar?</h2>
-            <button onclick="confirmClearAll()" class="w-full px-4 py-3 bg-red-600 text-white rounded-xl font-bold mb-2 text-sm shadow-lg shadow-red-200 uppercase">Ya, Hapus</button>
-            <button onclick="closeModal('modal-clear-all')" class="w-full px-4 py-2 text-slate-400 font-bold text-xs uppercase">Batal</button>
-        </div>
     </div>
 
     <script>
@@ -511,10 +459,10 @@
             for (let i = 0; i < numTasks; i++) {
                 if (taskDetails[i]) {
                     hasDetails = true;
-                    headerEl.innerHTML += `<div class="flex items-center space-x-1"><span class="text-[9px] font-black text-blue-400 shrink-0">T${i+1}:</span><span class="text-[10px] font-bold text-blue-100/90 uppercase truncate max-w-[120px]">${taskDetails[i]}</span></div>`;
+                    headerEl.innerHTML += `<div class="flex items-center space-x-1"><span class="text-[9px] font-black text-slate-900 shrink-0">T${i+1}:</span><span class="text-[10px] font-bold text-slate-900 uppercase truncate max-w-[120px]">${taskDetails[i]}</span></div>`;
                 }
             }
-            if (!hasDetails) headerEl.innerHTML = `<span class="text-[10px] text-slate-400 italic font-medium">Belum ada rincian tugas yang disimpan.</span>`;
+            if (!hasDetails) headerEl.innerHTML = `<span class="text-[10px] text-slate-600 italic font-bold">Belum ada rincian tugas yang disimpan.</span>`;
         }
 
         function updateStudentData(idx, field, value) {
