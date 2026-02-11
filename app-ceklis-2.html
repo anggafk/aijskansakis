@@ -11,13 +11,22 @@
         
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #e2e8f0; /* Latar belakang utama */
+            background-color: #e2e8f0; 
             height: 100vh;
             margin: 0;
             display: flex;
             flex-direction: column;
             overflow: hidden;
         }
+
+        /* Animasi Getar untuk Input Kosong */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
+        }
+        .shake { animation: shake 0.4s ease-in-out; }
 
         /* Status Tugas - Hasil Klik */
         .status-recorded-success {
@@ -41,12 +50,11 @@
             display: flex;
             flex-direction: column;
             box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-            height: calc((100% / 6) - 0.35rem); 
-            margin-bottom: 0.35rem;
+            height: calc((100% / 6) - 0.25rem); 
+            margin-bottom: 0.25rem;
             transition: all 0.2s;
         }
 
-        /* Gaya untuk Meja Kosong */
         .block-empty {
             background-color: rgba(255, 255, 255, 0.3);
             border: 1px dashed #94a3b8;
@@ -182,7 +190,7 @@
             <p id="notif-message" class="text-lg text-slate-500 font-medium mb-6">Waktu tersisa!</p>
             
             <div id="notif-actions" class="flex flex-col space-y-2">
-                <button id="btn-close-notif" onclick="closeNotification()" class="hidden w-full bg-slate-900 hover:bg-black text-white font-bold py-3 rounded-xl transition-all uppercase tracking-widest text-sm text-sm">Tutup</button>
+                <button id="btn-close-notif" onclick="closeNotification()" class="hidden w-full bg-slate-900 hover:bg-black text-white font-bold py-3 rounded-xl transition-all uppercase tracking-widest text-sm">Tutup</button>
                 
                 <div id="time-up-actions" class="hidden grid grid-cols-2 gap-3">
                     <button onclick="closeNotification()" class="bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold py-3 rounded-xl transition-all uppercase text-sm">Selesai</button>
@@ -245,17 +253,14 @@
         <header class="flex flex-col bg-[#0f172a] shrink-0 shadow-[0_4px_20px_rgba(0,0,0,0.4)] border-b-2 border-[#1e293b]">
             <div class="flex justify-between items-center px-10 py-1 min-h-[90px]">
                 <div class="header-grid">
-                    <!-- Left: Title -->
                     <div class="text-left min-w-0 pr-4">
                         <h1 class="text-2xl lg:text-4xl font-black tracking-tighter uppercase leading-[0.85] text-blue-400">UJIAN<br>PRAKTIK</h1>
                     </div>
                     
-                    <!-- Center: Timer -->
                     <div class="text-center px-4">
                         <div id="exam-timer" class="text-[7.5rem] font-black tabular-nums tracking-tighter leading-none text-white timer-text">00:00:00</div>
                     </div>
 
-                    <!-- Right: Controls -->
                     <div class="flex flex-col items-end pl-4">
                         <button id="btn-exam-control" onclick="handleExamControl()" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-black flex items-center space-x-2 transition-all shadow-lg shadow-blue-500/30 whitespace-nowrap">
                             <i id="control-icon" data-lucide="play" class="w-5 h-5 fill-current"></i>
@@ -265,14 +270,12 @@
                 </div>
             </div>
             
-            <!-- SUB-HEADER: Task Settings & Descriptions (Cerah Mendekati Latar Belakang) -->
+            <!-- SUB-HEADER: Task Settings & Descriptions -->
             <div class="bg-slate-300 px-4 py-1.5 border-t border-slate-400 min-h-[32px] flex items-center shadow-sm">
-                <!-- Task Settings Button Simplified - Penyesuaian Warna -->
                 <div onclick="openTaskConfig()" id="btn-open-tasks" class="flex items-center justify-center bg-slate-400 hover:bg-slate-500 px-2 py-0.5 rounded border border-slate-500 cursor-pointer transition-all group shadow-sm mr-4 shrink-0 min-w-[32px]">
                     <span id="display-num-tasks" class="text-slate-900 text-[10px] font-bold text-center">7</span>
                 </div>
 
-                <!-- Rincian Tugas (Teks Hitam & Bold) -->
                 <div id="header-task-details" class="flex flex-wrap gap-x-6 gap-y-0.5 text-slate-900 flex-grow font-bold">
                     <span class="text-[10px] text-slate-600 italic font-bold">Belum ada rincian tugas yang disimpan.</span>
                 </div>
@@ -303,6 +306,64 @@
                 </button>
             </div>
         </footer>
+    </div>
+
+    <!-- Modal Konfirmasi Mulai -->
+    <div id="modal-start" class="modal-overlay">
+        <div class="modal-card max-w-sm w-full text-center">
+            <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i data-lucide="play" class="w-8 h-8 fill-current"></i>
+            </div>
+            <h2 class="text-xl font-bold text-slate-800 mb-2 uppercase">Mulai Ujian</h2>
+            <p class="text-xs text-slate-500 mb-4">Masukkan durasi waktu dalam menit untuk memulai sesi praktik.</p>
+            <div class="mb-6">
+                <div class="relative max-w-[120px] mx-auto">
+                    <input type="number" id="modal-input-duration" min="1" max="999" placeholder="0" class="w-full bg-slate-50 border-2 border-slate-200 p-4 rounded-2xl text-center text-2xl font-black text-slate-800 focus:border-blue-500 outline-none transition-all">
+                    <span class="absolute -bottom-5 left-0 right-0 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Menit</span>
+                </div>
+            </div>
+            <button onclick="confirmStart()" class="w-full px-4 py-3 bg-blue-600 text-white rounded-xl font-bold mb-2 text-sm shadow-lg shadow-blue-200 uppercase">Konfirmasi & Mulai</button>
+            <button onclick="closeModal('modal-start')" class="w-full px-4 py-2 text-slate-400 font-bold text-xs uppercase">Batal</button>
+        </div>
+    </div>
+
+    <!-- Modal Lanjutkan -->
+    <div id="modal-continue" class="modal-overlay">
+        <div class="modal-card max-w-sm w-full text-center border-t-4 border-orange-500">
+            <div class="w-16 h-16 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i data-lucide="clock-plus" class="w-8 h-8"></i>
+            </div>
+            <h2 class="text-xl font-bold text-slate-800 mb-2 uppercase tracking-tighter">Lanjutkan Ujian</h2>
+            <p class="text-xs text-slate-500 mb-4">Tambahkan durasi menit ekstra ke ujian yang sedang berjalan.</p>
+            <div class="mb-6">
+                <div class="relative max-w-[120px] mx-auto">
+                    <input type="number" id="modal-input-extra" min="1" max="999" placeholder="0" class="w-full bg-slate-50 border-2 border-orange-200 p-4 rounded-2xl text-center text-2xl font-black text-slate-800 focus:border-orange-500 outline-none transition-all">
+                    <span class="absolute -bottom-5 left-0 right-0 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Menit Tambahan</span>
+                </div>
+            </div>
+            <button onclick="confirmContinue()" class="w-full px-4 py-3 bg-orange-600 text-white rounded-xl font-bold mb-2 text-sm shadow-lg shadow-orange-200 uppercase">Lanjutkan Sekarang</button>
+            <button onclick="closeModal('modal-continue')" class="w-full px-4 py-2 text-slate-400 font-bold text-xs uppercase">Batal</button>
+        </div>
+    </div>
+
+    <!-- Modal Reset -->
+    <div id="modal-reset" class="modal-overlay">
+        <div class="modal-card max-w-xs w-full text-center">
+            <div class="w-12 h-12 bg-red-100 text-red-600 rounded-full flex items-center justify-center mx-auto mb-4"><i data-lucide="refresh-cw" class="w-6 h-6"></i></div>
+            <h2 class="text-xl font-bold text-slate-800 mb-1 uppercase">Reset Ujian?</h2>
+            <p class="text-slate-500 text-xs mb-6">Data progres akan dikosongkan.</p>
+            <button onclick="confirmReset()" class="w-full px-4 py-3 bg-red-600 text-white rounded-xl font-bold mb-2 text-sm shadow-lg shadow-red-200 uppercase">Ya, Reset</button>
+            <button onclick="closeModal('modal-reset')" class="w-full px-4 py-2 text-slate-400 font-bold text-xs uppercase">Batal</button>
+        </div>
+    </div>
+
+    <!-- Modal Clear All -->
+    <div id="modal-clear-all" class="modal-overlay">
+        <div class="modal-card max-w-xs w-full text-center">
+            <h2 class="text-xl font-bold text-red-600 mb-4 uppercase">Hapus Daftar?</h2>
+            <button onclick="confirmClearAll()" class="w-full px-4 py-3 bg-red-600 text-white rounded-xl font-bold mb-2 text-sm shadow-lg shadow-red-200 uppercase">Ya, Hapus</button>
+            <button onclick="closeModal('modal-clear-all')" class="w-full px-4 py-2 text-slate-400 font-bold text-xs uppercase">Batal</button>
+        </div>
     </div>
 
     <script>
@@ -401,7 +462,8 @@
             const extraMinutes = parseInt(extraInput.value);
             
             if (!extraMinutes || extraMinutes <= 0) {
-                extraInput.classList.add('border-red-500');
+                extraInput.classList.add('border-red-500', 'shake');
+                setTimeout(() => extraInput.classList.remove('shake'), 400);
                 return;
             }
 
@@ -586,14 +648,17 @@
             const durInput = document.getElementById('modal-input-duration');
             const duration = parseInt(durInput.value);
             if (!duration || duration <= 0) {
-                durInput.classList.add('border-red-500');
+                durInput.classList.add('border-red-500', 'shake');
+                setTimeout(() => durInput.classList.remove('shake'), 400);
                 return;
             }
             targetSeconds = duration * 60;
             elapsedSeconds = 0; isExamStarted = true; isExamFinished = false;
             notifTenSent = notifFiveSent = false;
             document.getElementById('control-text').textContent = "Reset Ujian";
-            document.getElementById('btn-exam-control').classList.replace('bg-blue-600', 'bg-red-600');
+            const btn = document.getElementById('btn-exam-control');
+            btn.classList.remove('bg-blue-600');
+            btn.classList.add('bg-red-600');
             document.getElementById('control-icon').setAttribute('data-lucide', 'refresh-cw');
             if (timerInterval) clearInterval(timerInterval);
             timerInterval = setInterval(updateTimer, 1000);
@@ -604,7 +669,9 @@
             if (timerInterval) clearInterval(timerInterval); 
             isExamStarted = false; isExamFinished = false; elapsedSeconds = 0;
             document.getElementById('control-text').textContent = "Mulai Ujian";
-            document.getElementById('btn-exam-control').classList.replace('bg-red-600', 'bg-blue-600');
+            const btn = document.getElementById('btn-exam-control');
+            btn.classList.remove('bg-red-600');
+            btn.classList.add('bg-blue-600');
             document.getElementById('control-icon').setAttribute('data-lucide', 'play');
             students.forEach(s => { s.endTime = null; s.progress = Array(10).fill(null); });
             document.getElementById('exam-timer').textContent = "00:00:00";
