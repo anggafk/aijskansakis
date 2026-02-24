@@ -220,3 +220,51 @@ Sehingga konfigurasi routing statis untuk router A adalah sebagai berikut:
     Keterangan: Router A akan dihubungkan ke Jaringan 30.30.30.0/24
                 melewati port dengan alamat IP 20.20.20.2
         </code></pre>
+
+        <h2>3. Konfigurasi Routing Dinamis (OSPF)</h2>
+        <p>a. <b>Routing</b> &#8594; <b>OSPF</b>.</p>
+        <p>b. Buka menu <b>Instance</b></p>
+        <p class="paragraf-indent">Atur sesuai ketentuan berikut:<br></p>
+            <p style="text-indent: 20px;">&#9679; <b>Router ID</b>: <b><font color="darkorange">[IP Identitas Router]</font></b><br></p>
+            <p style="text-indent: 35px;">*) Dalam sebuah jaringan yang terhubung satu dengan yang lain,</p>
+            <p style="text-indent: 55px;">Router ID harus berbeda di masing-masing router.</b><br></p>
+            <p style="text-indent: 20px;">&#9679; <b>Redistribute Default Route</b>: <b>If installed (as type 1)</b><br></p>
+            <p style="text-indent: 35px;">*) Khusus untuk router yang terhubung langsung dengan internet,</b></p>
+            <p style="text-indent: 55px;">untuk Router yang lain tidak diubah (Never).</b><br></p>
+        <p>c. Buka menu <b>Network</b> klik tombol <b>+</b></p>
+        <p class="paragraf-indent">Atur sesuai ketentuan berikut:<br></p>
+        <p style="text-indent: 20px;">&#9679; <b>Network</b>: <b><font color="darkorange">[IP Network]</font></b><br>
+        <p style="text-indent: 35px;">*) Konfigurasi ini diulang sesuai port yang digunakan<br></p>
+        <p style="text-indent: 55px;">Diisi IP Network port yang terhubung langsung dengan router yang dikonfigurasi</p>
+        
+                <h3>Contoh Routing Dinamis (OSPF)</h3>
+        <img src="images/routing-statis-1.png" alt="Topologi Routing Statis">
+
+        <pre><code>
+Sehingga konfigurasi routing OSPF untuk masing-masing router adalah sebagai berikut:
+
+<b>Router A</b>
+<b>1.  Instances:</b>
+    Router ID: 1.1.1.1
+    Redistribute Default Route: If installed (as type 1)
+<b>2.  Networks</b>
+    &#9679; Network: 20.20.20.0/24
+    &#9679; Network: 40.40.40.0/24
+
+<b>Router B</b>
+<b>1.  Instances:</b>
+    Router ID: 2.2.2.2
+    Redistribute Default Route: Never
+<b>2.  Networks</b>
+    &#9679; Network: 20.20.20.0/24
+    &#9679; Network: 30.30.30.0/24
+    &#9679; Network: 50.50.50.0/24
+
+<b>Router C</b>
+<b>1.  Instances:</b>
+    Router ID: 3.3.3.3
+    Redistribute Default Route: Never
+<b>2.  Networks</b>
+    &#9679; Network: 30.30.30.0/24
+    &#9679; Network: 60.60.60.0/24
+</code></pre>
