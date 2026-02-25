@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materi: Subnetting VLSM</title>
+    <link rel="icon" href="images/favicon.png" type="image/png"> <style>
+        /* Palet Warna Biru Navy Muda (konsisten dengan halaman utama) */
+        :root {
+            --dark-blue-navy: #2C3E50;
+            --light-blue-navy: #34495E;
+            --accent-blue: #3498DB;
+            --text-color: #ECF0F1;
+            --dark-text-color: #2C3E50;
+            --background-light: #ECF0F1;
+            --border-color: #BDC3C7;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-light);
+            color: var(--dark-text-color);
+        }
+        header {
+            background-color: var(--dark-blue-navy);
+            color: var(--text-color);
+            padding: 1.5em 0;
+            text-align: center;
+        }
+        nav {
+            background-color: var(--light-blue-navy);
+            overflow: hidden;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        nav a {
+            display: inline-block;
+            color: var(--text-color);
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        nav a:hover {
+            background-color: var(--accent-blue);
+            color: white;
+        }
+        .content-wrapper {
+            padding: 20px;
+            max-width: 960px;
+            margin: auto;
+            background-color: white;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            margin-top: 25px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+        }
+        .content-wrapper h1 {
+            color: var(--dark-blue-navy);
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent-blue);
+        }
+        .content-wrapper h2 {
+            color: var(--light-blue-navy);
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .content-wrapper h3 {
+            color: var(--dark-blue-navy);
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+        .back-button {
+            background-color: var(--light-blue-navy); /* Warna tombol kembali */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 20px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        .back-button:hover {
+            background-color: #2980B9; /* Sedikit lebih gelap saat hover */
+        }
+        .paragraf-indent {
+            padding-left: 20px; /* Indentasi sebesar 50 piksel */
+            margin-top: 0;
+        }
+        .border-hijau {
+            border: 1px solid green;   /* Garis hijau tipis */
+            padding: 5px;              /* Sedikit padding */
+            background-color: #e0ffe0; /* Warna latar belakang ringan untuk melihat efek */
+        }
+        .border-biru {
+            border: 1px solid var(--dark-blue-navy);   /* Garis hijau tipis */
+            padding: 5px;              /* Sedikit padding */
+            background-color: #e0f4ff; /* Warna latar belakang ringan untuk melihat efek */
+        }
+        .bordered-text {
+            border: 2px solid;
+            padding: 5px;
+        }
+        p {
+            line-height: 1.6;
+            margin-bottom: 10px;
+            margin-top: 10px;
+        }
+        ul, ol {
+            margin-bottom: 15px;
+            padding-left: 25px;
+        }
+        pre {
+            background-color: #f4f4f4;
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto; /* Untuk kode yang panjang */
+            margin-bottom: 20px;
+        }
+        code {
+            font-family: Consolas, monospace;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table, th, td {
+            border: 1px solid var(--border-color);
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: var(--background-light);
+            color: var(--dark-blue-navy);
+        }
+
+        footer {
+            background-color: var(--dark-blue-navy);
+            color: var(--text-color);
+            text-align: center;
+            padding: 25px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+        footer p {
+            margin: 5px 0;
+        }
+        footer a {
+            color: var(--accent-blue);
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+        
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Portal Pembelajaran<br>Teknik Komputer dan Jaringan</h1>
+    </header>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="materi.html">Materi</a>
+        <a href="praktik.html">Praktik</a>
+        <a href="nilai.html">Nilai</a>
+        <a href="tugas.html">Tugas</a>
+        <a href="aplikasi.html">Aplikasi</a>
+        <a href="ujian.html">Ujian</a>
+    </nav>
+
+    <div class="content-wrapper">
+        <a href="materi.html" class="back-button">← Kembali ke Daftar Materi</a>
+
+        <h1>Subnetting</h1>
+        <p>Subnetting merupakan pemecahan sebuah Jaringan / Network menjadi 2 atau lebih Subnetwork yang lebih kecil. Dengan subnetting akan menciptakan beberapa network tambahan, tetapi mengurangi jumlah maksimum host yang ada dalam tiap network tersebut.</p>
+        <p>Contoh perbedaan pengelolaan jaringan dengan dan tanpa subnetting. Terdapat 4 buah Lab dengan masing-masing Lab terdapat 25 Host.<br></p>
+        <img src="images/ip-tanpa-subnetting.png" alt="Tampilan Awal Winbox">
+        <p>Jika alamat IP tidak dipecah menjadi lebih kecil maka masing-masing Lab harus menggunakan alamat Jaringan/Network yang berbeda.<br>
+        Lab 1: 192.168.10.0/24<br>
+        Lab 2: 192.168.11.0/24<br>
+        Lab 3: 192.168 12.0/24<br>
+        Lab 4: 192.168.13.0/24<br>
+        Masing masing Jaringan/Network mempunyai banyak sisa IP yang tidak dipakai</p>
+        <img src="images/ip-subnetting.png" alt="Tampilan Awal Winbox">
+        <p>Jika alamat IP dipecah menjadi lebih kecil maka masing-masing Lab akan menggunakan Jaringan/Network yang sama tetapi menjadi subnetwork yang lebih kecil.<br>
+        Lab 1: 192.168.10.0/27<br>
+        Lab 2: 192.168.10.32/27<br>
+        Lab 3: 192.168 10.64/27<br>
+        Lab 4: 192.168.10.96/27<br>
+        Lab 2 s.d. 4 bisa menggunakan sisa alamat IP yang tidak dipakai di Lab 1.</p>
+        
+        <h2>A. CIDR (Classless Inter-Domain Routing)</h2>
+        <p>CIDR Subnetting digunakan untuk membagi alamat IP menjadi subnetwork yang lebih kecil dimana antara satu subnetwork dengan subnetwork yang lain besarnya sama.</p>
+        
+        <h2>B. VLSM (Variable Length Subnet Mask)</h2>
+        <p>VLSM Subnetting digunakan untuk membagi alamat IP menjadi subnetwork yang lebih kecil dimana antara satu subnetwork dengan subnetwork yang lain besarnya bisa berbeda.</p>
+
+        Sebelum melakukan pemecahan alamat IP menggunakan VLSM, buat tabel subnetting dengan format seperti berikut:
+
+        <center><h3>Tabel Subnetting</h3></center>
+        <table border="1" width="50%">
+        <thead>
+            <tr >
+                <th width="50px" >Prefix</th>
+                <th>Subnetmask<br>Desimal</th>
+                <th>Subnetmask<br>Biner</th>
+                <th>Total IP /<br>Blok Subnet</th>
+                <th>Banyak host<br>tiap subnet</th>
+                <th>Banyak subnet</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td ><code>/24</code></td>
+                <td><code></code></td>
+                <td><code></code></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td ><code>/25</code></td>
+                <td><code></code></td>
+                <td><code></code></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td ><code>/26</code></td>
+                <td><code></code></td>
+                <td><code></code></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td ><code>/27</code></td>
+                <td><code></code></td>
+                <td><code></code></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td ><code>/28</code></td>
+                <td><code></code></td>
+                <td><code></code></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td ><code>/29</code></td>
+                <td><code></code></td>
+                <td><code></code></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td ><code>/30</code></td>
+                <td><code></code></td>
+                <td><code></code></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+    
+    Langkah-langkah pemecahan alamat IP menggunakan metode VLSM<br><br>
+    <b>Langkah 1</b>: <br>
+    Mengurutkan data kebutuhan host dari yang Terbesar ke Terkecil.<br><br>
+
+    <b>Langkah 2</b>: <br>
+    Menentukan prefix dan Blok Subnet/Total IP yang digunakan untuk masing-masing ruang.<br>
+    Langsung ke kolom Banyak host tiap subnet sebagai panguan.<br>
+    Pilih prefix yang memiliki sisa host paling sedikit.<br><br>
+
+    <b>Langkah 3</b>: <br>
+    Menentukan alamat network atau subnet untuk masing-masing ruang.<br>
+    Alamat Network dimulai dengan xx.xx.xx.0, untuk subnet selanjutnya didapat dengan menambahkan Blok Subnet/Total IP yang sudah ditentukan sebelumnya<br><br>
+
+    <b>Langkah 4</b>: <br>
+    Menentukan alamat broadcast dan host untuk masing-masing ruang.<br>
+    Alamat Broadcast = Alamat Network + Total IP - 1<br>
+    Alamat Host Pertama = Alamaat Network + 1<br>
+    Alamat Host Terakhir = Alamat Broadcast -1<br><br>
+
+    <h3>Contoh Soal</h3>
+    <p>Sebuah sekolah mendapatkan alamat IP 192.168.100.1/24 dari ISP. Alamat itu akan digunakan untuk ruang-ruang dengan kebutuhan host sebagai berikut:<br>
+    R. Guru: 8 Host<br>
+    R. Server: 3 Host<br>
+    R. Lab 1: 18 Host<br>
+    R. Lab 2: 45 Host<br>
+    R. Lab 3: 28 Host<br>
+    Tentukan alamat IP masing-masing ruang menggunakan metode subnetting VLSM!</p>
