@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materi: Konfigurasi Wireless</title>
+    <link rel="icon" href="images/favicon.png" type="image/png"> <style>
+        /* Palet Warna Biru Navy Muda (konsisten dengan halaman utama) */
+       :root {
+            --dark-blue-navy: #2C3E50;
+            --light-blue-navy: #34495E;
+            --accent-blue: #3498DB;
+            --text-color: #ECF0F1;
+            --dark-text-color: #2C3E50;
+            --background-light: #ECF0F1;
+            --border-color: #BDC3C7;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-light);
+            color: var(--dark-text-color);
+        }
+        header {
+            background-color: var(--dark-blue-navy);
+            color: var(--text-color);
+            padding: 1.5em 0;
+            text-align: center;
+        }
+        nav {
+            background-color: var(--light-blue-navy);
+            overflow: hidden;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        nav a {
+            display: inline-block;
+            color: var(--text-color);
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        nav a:hover {
+            background-color: var(--accent-blue);
+            color: white;
+        }
+        .content-wrapper {
+            padding: 20px;
+            max-width: 960px;
+            margin: auto;
+            background-color: white;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            margin-top: 25px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+        }
+        .content-wrapper h1 {
+            color: var(--dark-blue-navy);
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent-blue);
+        }
+        .content-wrapper h2 {
+            color: var(--light-blue-navy);
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .content-wrapper h3 {
+            color: var(--dark-blue-navy);
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+        .back-button {
+            background-color: var(--light-blue-navy); /* Warna tombol kembali */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 20px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        .back-button:hover {
+            background-color: #2980B9; /* Sedikit lebih gelap saat hover */
+        }
+        .paragraf-indent {
+            padding-left: 20px; /* Indentasi sebesar 50 piksel */
+            margin-top: 0;
+        }
+        p {
+            line-height: 1.6;
+            margin-bottom: 3px;
+            margin-top: 3px;
+        }
+        ul, ol {
+            margin-bottom: 15px;
+            padding-left: 25px;
+        }
+        pre {
+            background-color: #f4f4f4;
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto; /* Untuk kode yang panjang */
+            margin-bottom: 20px;
+        }
+        code {
+            font-family: Consolas, monospace;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table, th, td {
+            border: 1px solid var(--border-color);
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: var(--background-light);
+            color: var(--dark-blue-navy);
+        }
+
+        footer {
+            background-color: var(--dark-blue-navy);
+            color: var(--text-color);
+            text-align: center;
+            padding: 25px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+        footer p {
+            margin: 5px 0;
+        }
+        footer a {
+            color: var(--accent-blue);
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Portal Pembelajaran<br>Teknik Komputer dan Jaringan</h1>
+    </header>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="materi.html">Materi</a>
+        <a href="praktik.html">Praktik</a>
+        <a href="nilai.html">Nilai</a>
+        <a href="tugas.html">Tugas</a>
+        <a href="aplikasi.html">Aplikasi</a>
+        <a href="ujian.html">Ujian</a>
+    </nav>
+
+    <div class="content-wrapper">
+        <a href="materi.html" class="back-button">← Kembali ke Daftar Materi</a>
+
+        <h1>Firewall Filter</h1>
+        <h2>A. Pengertian</h2>
+        <p>Firewall Filter adalah sistem penyaring lalu lintas data yang bertugas sebagai penentu apakah sebuah paket data boleh lewat atau harus dihentikan. Filter adalah "pintu gerbang" yang memastikan hanya data yang diinginkan dan aman saja yang bisa masuk atau keluar dari jaringan.</p>
+        <p>Fungsi utama Filter:</p>
+        <p><b>a. Keamanan (Security)</b></p>
+        <p class="paragraf-indent">Melindungi router dan jaringan lokal dari serangan luar, seperti percobaan hacking, brute force, atau virus/malware.</p>
+        <p><b>b. Pengendalian Akses (Access Control)</b></p>
+        <p class="paragraf-indent">Mengatur siapa saja yang boleh mengakses layanan tertentu.</p>
+        <p><b>c. Optimasi Jaringan</b></p>
+        <p class="paragraf-indent">Melindungi router dan jaringan lokal dari serangan luar, seperti percobaan hacking, brute force, atau virus/malware.</p>
+
+        <h2>B. Konfigurasi Filter</h2>
+        <p>a. <b>IP</b> &#8594; <b>Firewall</b> &#8594; <b>Filter Rules</b>.</p>
+        <p>b. Klik tombol <b>+</b> untuk menambah Filter.</p>
+        <p>c. Atur parameter sesuai kebutuhan:</p>
+        <p class="paragraf-indent">
+            *<i>lihat poin C</i>
+        </p>
+        <p>d. Klik tombol <b>Apply</b> &#8594; <b>OK</b>.</p><br>
+
+        <h2>C. Penjelasan Parameter</h2>
+        <h3>1. Chain</h3>
+        <p>Chain adalah arah lalu lintas data. Chain yang dibagi menjadi 3 chain utama.</p>
+        <p><b>a. Input</b>: Menangani paket yang <font color="darkorange"><b>menuju ke router</b></font>.</p>
+        <p><b>b. Output</b>: Menangani paket yang <font color="darkorange"><b>keluar dari router</b></font>.</p>
+        <p><b>c. Forward</b>: Menangani paket yang <font color="darkorange"><b>melewati router</b></font>.</p>
+
+        <h3>2. Action</h3>
+        <p>Menentukan keputusan yang diambil oleh router terhadap paket  tersebut.</p>
+        <p><b>a. Accept</b></p>
+        <p class="paragraf-indent">
+            Paket diizinkan lewat. Router berhenti memeriksa aturan lain untuk paket yang sama.
+        </p></p>
+
+        <p><b>b. Drop</b></p>
+        <p class="paragraf-indent">
+            Paket ditolak tanpa pesan. Pengirim tidak tahu apakah paketnya sampai atau tidak.
+        </p>
+        
+        <p><b>c. Reject</b></p>
+        <p class="paragraf-indent">
+            Paket ditolak, tapi router mengirimkan pesan balik kepada pengirim.
+        </p>
+
+        <p><b>d. Log</b></p>
+        <p class="paragraf-indent">
+            Router akan mencatat informasi paket ke dalam menu System > Log.
+        </p>
+
+        <p><b>e. Add Source to Address List</b></p>
+        <p class="paragraf-indent">
+            IP pengirim paket akan dimasukkan ke dalam daftar IP di tab Address Lists.
+        </p>
+
+        <p><b>f. Add Destination to Address List</b></p>
+        <p class="paragraf-indent">
+            IP tujuan paket akan dimasukkan ke dalam daftar IP di tab Address Lists.
+        </p>
+
+        <h3>3. Parameter (Kondisi)</h3>
+        <p>Kriteria spesifik yang digunakan oleh router untuk mengidentifikasi paket. Parameter diisikan sesuai dengan kebutuhan.</p>
+        <p style="font-size: 20px;"><b><i><u>Asal & Tujuan</b></u></i></p>        
+        <p><b>a. Src. Address</b></p>
+        <p class="paragraf-indent">
+            Alamat IP asal paket.
+        </p></p>
+
+        <p><b>b. Dst. Address</b></p>
+        <p class="paragraf-indent">
+            Alamat IP tujuan paket.
+        </p>
+        <i><p>*) Format pengisian Src. & Dst. Address:</p>
+        <p style="text-indent: 20px;"><b>IP Tunggal.</b> Contoh: <font color="darkorange"><b></b>192.168.10.1</b></font></p>
+        <p style="text-indent: 50px;">Digunakan untuk satu perangkat spesifik</p>
+        <p style="text-indent: 20px;"><b>IP Network.</b> Contoh: <font color="darkorange"><b></b>192.168.10.0/24</b></font></p>
+        <p style="text-indent: 50px;">Digunakan untuk semua perangkat dalam satu jaringan.</p>
+        <p style="text-indent: 20px;"><b>Rentang IP.</b> Contoh: <font color="darkorange"><b></b>192.168.10.11-192.168.10.20</b></font></p>
+        <p style="text-indent: 50px;">Digunakan untuk perangkat dengan IP yang berurutan.</p></i>
+        <p><b>c. In. Interface</b></p>
+        <p class="paragraf-indent">
+            Port/interface tempat masuk paket.
+        </p>
+        <p><b>d. Out. Interface</b></p>
+        <p class="paragraf-indent">
+            Port/interface tempat keluar paket.
+        </p>
+        <p style="font-size: 20px;"><b><i><u>Protocol & Port</b></u></i></p>   
+        <p><b>e. Protocol</b></p>
+        <p style="text-indent: 20px;"><b>ICMP:</b> Cek koneksi (ping, traceroute)</p>
+        <p style="text-indent: 20px;"><b>TCP:</b> Web browsing, Email, Transfer File</p>
+        <p style="text-indent: 20px;"><b>UDP:</b> Game Online, Streaming, Voice Call</p>
+        <p><b>f. Dst. Port</b></p>
+        <p style="text-indent: 20px;"><b>21:</b> ftp</p>
+        <p style="text-indent: 20px;"><b>22:</b> ssh</p>
+        <p style="text-indent: 20px;"><b>23:</b> telnet</p>
+        <p style="text-indent: 20px;"><b>53:</b> dns</p>
+        <p style="text-indent: 20px;"><b>67 & 68:</b> dhcp</p>
+        <p style="text-indent: 20px;"><b>80:</b> http</p>
+        <p style="text-indent: 20px;"><b>443:</b> https</p><br>
+        
+        <p><b>g. Content</b></p>
+        <p class="paragraf-indent">
+            Berfungsi sebagai "Penyaring Kata kunci". Jika sebuah paket data mengandung kata yang kita tentukan (seperti nama situs atau jenis file), maka router akan menangkap paket tersebut.
+        </p>
+        <p><b>h. Time</b></p>
+        <p class="paragraf-indent">
+            Berfungsi untuk mengatur masa aktif sebuah aturan (rule) berdasarkan jadwal waktu dan hari yang telah ditentukan secara spesifik.
+        </p>
+
+        <h3>4. Lain-lain</h3>
+        <p><b>a. Comment (Catatan/Keterangan)</b></p>
+        <p class="paragraf-indent">
+            Digunakan untuk memberikan label atau keterangan pada sebuah aturan.<br>
+            Membantu mengenali  sebuah aturan tanpa harus melihat satu per satu (Contoh: "Blokir Youtube").<br>
+            Memudahkan kolaborasi antar admin dalam satu tim.<br>
+        </p>
+        <p><b>b. Simbol Negasi / <font color="darkorange">!</font></b></p>
+        <p class="paragraf-indent">
+            Kotak yang berada di sebelah kiri parameter.<br>
+            Berfungsi sebagai operator "Bukan" atau "Kecuali" terhadap parameter yang ditentukan.<br>
+            Contoh: Src. Address: ! 192.168.1.1. Artinya asal paket selain 192.168.1.1<br>
+        </p>
+
+        <p><b>c. enable <font color="darkorange">&#10004</font> dan disable <font color="darkorange">&#10008</font></b></p>
+        <p class="paragraf-indent">
+            Mengaktifkan atau menonaktifkan sebuah aturan tanpa harus menghapusnya.<br>
+            Bisa digunakan untuk mencari tahu apakah aturan tersebut yang menyebabkan gangguan koneksi.<br>
+        </p>
+
+        <p><b>d. Urutan (<font color="darkorange">#</font> / index)</b></p>
+        <p class="paragraf-indent">
+            Menentukan urutan router dalam menjalankan Aturan / Rule.<br>
+        </p>
