@@ -15,6 +15,7 @@
             --background-light: #F4F7F6;
             --border-color: #DCDDE1;
             --white: #FFFFFF;
+            --orange-host: #E67E22;
         }
 
         body {
@@ -216,7 +217,7 @@
         .host-count { 
             font-size: 3.2em; 
             font-weight: 900; 
-            color: #e67e22; 
+            color: var(--orange-host); 
             line-height: 1;
             margin: 5px 0;
         }
@@ -288,15 +289,50 @@
             font-style: italic;
         }
 
+        /* Responsive Settings for Mobile */
         @media (max-width: 768px) {
             .selection-container { grid-template-columns: 1fr; }
-            .host-grid { grid-template-columns: repeat(2, 1fr); }
+            
+            /* IP Card Vertical Stacking for Mobile */
+            .ip-card {
+                flex-direction: column;
+                text-align: center;
+                padding: 20px 15px;
+            }
+            .ip-label {
+                font-size: 1em;
+                margin-bottom: 5px;
+            }
+            .ip-value {
+                font-size: 1.8em;
+            }
+
+            /* Host Grid 2-2-2 for Mobile */
+            .host-grid { 
+                grid-template-columns: repeat(2, 1fr); 
+                gap: 10px;
+            }
+            .host-card {
+                min-height: 160px;
+                padding: 20px 10px;
+            }
+            .lab-name {
+                font-size: 1.1em;
+            }
+            .host-count {
+                font-size: 3em;
+            }
+            .host-suffix {
+                font-size: 0.4em;
+                margin-top: 2px;
+            }
+
             .bg-number { font-size: 6rem; left: 10px; }
-            .host-count { font-size: 2.8em; }
         }
 
         @media (max-width: 480px) {
-            .host-grid { grid-template-columns: 1fr; }
+            /* Full stack if screen is very small */
+            /* .host-grid { grid-template-columns: 1fr; } */
         }
     </style>
 </head>
@@ -307,13 +343,13 @@
     </header>
 
     <nav>
-        <a href="#">Home</a>
-        <a href="#">Materi</a>
-        <a href="#">Praktik</a>
-        <a href="#">Nilai</a>
-        <a href="#">Tugas</a>
-        <a href="#">Aplikasi</a>
-        <a href="#">Ujian</a>
+        <a href="index.html">Home</a>
+        <a href="materi.html">Materi</a>
+        <a href="praktik.html">Praktik</a>
+        <a href="nilai.html">Nilai</a>
+        <a href="tugas.html">Tugas</a>
+        <a href="aplikasi.html">Aplikasi</a>
+        <a href="ujian.html">Ujian</a>
     </nav>
 
     <div class="content-wrapper">
@@ -341,24 +377,17 @@
 
         <div id="task-section" class="task-section">
             <div class="instructions-box" id="main-instructions-box">
-                <!-- State 1: Awal -->
                 <div id="msg-initial" class="state-msg" style="display: block;">
                     <p>Pilih <b>Kelas</b> dan <b>Nama</b> terlebih dahulu untuk melihat tugas.</p>
                 </div>
-
-                <!-- State 2: Sebelum Jadwal -->
                 <div id="msg-before" class="state-msg">
                     <p style="font-size: 1.2em; color: #e67e22; font-weight: bold;">⚠️ Jadwal Belum Dimulai</p>
                     <p id="before-text">Soal hanya bisa dibuka sesuai jadwal kelas masing-masing.</p>
                 </div>
-
-                <!-- State 3: Setelah Jadwal -->
                 <div id="msg-after" class="state-msg">
                     <p style="font-size: 1.2em; color: #c0392b; font-weight: bold;">🛑 Tugas Berakhir</p>
                     <p>Waktu pengerjaan tugas untuk kelas ini sudah selesai.</p>
                 </div>
-
-                <!-- State 4: Sesuai Jadwal -->
                 <div id="msg-active" class="state-msg">
                     <h4 style="text-align: left;">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
@@ -375,7 +404,6 @@
                 </div>
             </div>
 
-            <!-- Area Konten Utama -->
             <div id="task-content-area">
                 <div class="student-badge">
                     <div class="bg-number" id="display-bg-number">00</div>
@@ -424,7 +452,6 @@
 
         // ==========================================
         // 2. DATA TERENKRIPSI (BASE64)
-        // (i: IP, h: Hosts)
         // ==========================================
         const dataSiswaEnc = {
             "TJKT1": [
