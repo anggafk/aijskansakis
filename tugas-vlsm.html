@@ -175,7 +175,6 @@
             gap: 15px;
             margin-bottom: 30px;
             box-shadow: 0 4px 15px rgba(52, 152, 219, 0.1);
-            position: relative;
         }
         .ip-label { font-weight: 700; color: var(--accent-blue); font-size: 0.9em; text-transform: uppercase; }
         .ip-value { font-family: 'Courier New', Courier, monospace; font-size: 1.5em; font-weight: bold; color: var(--dark-blue-navy); }
@@ -342,44 +341,32 @@
 
         <div id="task-section" class="task-section">
             <div class="instructions-box" id="main-instructions-box">
-                <!-- State 1: Awal -->
                 <div id="msg-initial" class="state-msg" style="display: block;">
                     <p>Pilih <b>Kelas</b> dan <b>Nama</b> terlebih dahulu untuk melihat tugas.</p>
                 </div>
-
-                <!-- State 2: Sebelum Jadwal -->
                 <div id="msg-before" class="state-msg">
                     <p style="font-size: 1.2em; color: #e67e22; font-weight: bold;">⚠️ Jadwal Belum Dimulai</p>
                     <p id="before-text">Soal hanya bisa dibuka sesuai jadwal kelas masing-masing.</p>
                 </div>
-
-                <!-- State 3: Setelah Jadwal -->
                 <div id="msg-after" class="state-msg">
                     <p style="font-size: 1.2em; color: #c0392b; font-weight: bold;">🛑 Tugas Berakhir</p>
                     <p>Waktu pengerjaan tugas untuk kelas ini sudah selesai.</p>
                 </div>
-
-                <!-- State 4: Sesuai Jadwal -->
                 <div id="msg-active" class="state-msg">
                     <h4 style="text-align: left;">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
                         Instruksi Pengerjaan
                     </h4>
                     <ol class="list-ins" style="text-align: left;">
-                        <li>Hitung alamat IP menggunakan metode VLSM berdasarkan kebutuhan host di bawah.</li>
-                        <li>Tentukan <strong>IP Network, IP Host (Range), dan IP Broadcast</strong> untuk setiap ruangan.</li>
-                        <li><strong>Gunakan kertas folio bergaris</strong> untuk menuliskan hasil pengerjaan.</li>
-                        <li>Halaman depan <strong>untuk menulis tahapan dan hasilnya</strong>, sedangkan halaman belakang untuk coretan proses perhitungan (buram).</li>
-                        <li>Pastikan <strong>Nama dan Nomor Presensi</strong> sudah tertulis jelas di pojok kanan atas kertas folio.</li>
-                        <li>Jawab pertanyaan pada <strong>Form Soal</strong> di bagian bawah berdasarkan hasil perhitungan masing-masing.</li>
-                        <li>Serahkan lembar folio ke <strong>Mbak Desi Romdani</strong> di Kantor TKJ.</li>
-                        <li>Pastikan lembaran folio sudah urut berdasarkan nomor presensi (dari terkecil ke terbesar).</li>
+                        <li>Kerjakan tugas di <strong>Kertas Folio Bergaris</strong>. Halaman depan untuk menulis tahapan dan hasilnya, sedangkan halaman belakang digunakan sebagai buram untuk coretan proses perhitungan. Pastikan <strong>Nama, Nomor Presensi dan Kelas</strong> sudah tertulis jelas di halaman depan.</li>
+                        <li>Hitung alamat IP menggunakan metode VLSM berdasarkan kebutuhan host di bawah. Tentukan <strong>IP Network, IP Host (Range), dan IP Broadcast</strong> untuk setiap ruangan.</li>
+                        <li>Setelah mendapatkan alamat IP untuk masing-masing ruang, buka form melalui link di bagian bawah lalu jawab pertanyaan pada <strong>Form tersebut</strong>. Jawaban diambil berdasarkan hasil perhitungan masing-masing.</li>
+                        <li>Serahkan Tugas ke <strong>Mbak Desi Romdani</strong> di Kantor TKJ. Pastikan lembaran folio sudah urut berdasarkan nomor presensi (dari terkecil ke terbesar).</li>
                         <li>Batas akhir pengisian form dan pengumpulan fisik adalah pukul <strong>12:00 WIB</strong>. <span class="late-notice">(Keterlambatan akan dikenakan sanksi berupa nilai maksimal hanya 80)</span>.</li>
                     </ol>
                 </div>
             </div>
 
-            <!-- Area Konten Utama -->
             <div id="task-content-area">
                 <div class="student-badge">
                     <div class="bg-number" id="display-bg-number">00</div>
@@ -472,7 +459,7 @@
                 {no: 4, n: "ALIFA HEPY FEBRIANA", d: "eyJpIjoiMjA4LjExNC4xNDMuMC8yNCIsImgiOls4LDMwLDUzLDksNDYsMjNdfQ=="},
                 {no: 5, n: "ALMIRA PUTRIANA ARIFIAH", d: "eyJpIjoiMTI1LjE3MS4xMjIuMC8yNCIsImgiOls3LDQsMTgsMjAsMTQsNThdfQ=="},
                 {no: 6, n: "ALYA NUR ROHIDAH", d: "eyJpIjoiMTcwLjExNi4xMDkuMC8yNCIsImgiOls1LDE3LDQ4LDEwLDM5LDEzXX0="},
-                {no: 7, n: "AMALIA CITRA OKTAVIA", d: "eyJpIjoiMTQwLjE1Mi4xMTEuMC8yNCIsImgiOls2MiwxNCwyOSw1NCw1LDExXX0="},
+                {no: 7, n: "AMALIA CITOKTAVIA", d: "eyJpIjoiMTQwLjE1Mi4xMTEuMC8yNCIsImgiOls2MiwxNCwyOSw1NCw1LDExXX0="},
                 {no: 8, n: "ANASTASYA INDAH PRATIWI", d: "eyJpIjoiMTg1LjEyMS4xNDIuMC8yNCIsImgiOls5LDEzLDIzLDU0LDIyLDQxXX0="},
                 {no: 9, n: "AULIA PUTRI RAHMAWATI", d: "eyJpIjoiMTg3LjEwNy4xOTYuMC8yNCIsImgiOls0LDEyLDM0LDEzLDIwLDE3XX0="},
                 {no: 10, n: "CHOIRUN NISA AYU SOLEHAH", d: "eyJpIjoiMTk1LjEzNi4xNjEuMC8yNCIsImgiOlszLDU3LDE0LDE5LDksMTVdfQ=="},
