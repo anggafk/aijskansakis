@@ -16,6 +16,7 @@
             --border-color: #DCDDE1;
             --white: #FFFFFF;
             --orange-host: #E67E22;
+            --danger-red: #C0392B;
         }
 
         body {
@@ -163,14 +164,6 @@
             line-height: 1;
         }
 
-        .profile-icon-bg {
-            position: absolute; 
-            right: -15px; 
-            bottom: -15px; 
-            opacity: 0.1;
-            z-index: 1;
-        }
-        
         .ip-card {
             background: #fff;
             border: 2px solid var(--accent-blue);
@@ -182,6 +175,7 @@
             gap: 15px;
             margin-bottom: 30px;
             box-shadow: 0 4px 15px rgba(52, 152, 219, 0.1);
+            position: relative;
         }
         .ip-label { font-weight: 700; color: var(--accent-blue); font-size: 0.9em; text-transform: uppercase; }
         .ip-value { font-family: 'Courier New', Courier, monospace; font-size: 1.5em; font-weight: bold; color: var(--dark-blue-navy); }
@@ -195,8 +189,8 @@
         .host-card {
             background: #fff;
             border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 15px; 
+            border-radius: 15px;
+            padding: 20px 15px; 
             transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
@@ -204,31 +198,33 @@
             text-align: center;
             justify-content: center;
             min-height: 130px; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
         }
+        .host-card:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
         
         .lab-name { 
-            font-weight: 700; 
+            font-weight: 800; 
             color: var(--dark-blue-navy); 
-            margin-bottom: 2px; 
-            font-size: 1.3em;
+            margin-bottom: 5px; 
+            font-size: 1.2em;
             text-transform: uppercase;
         }
 
         .host-count { 
-            font-size: 3.2em; 
+            font-size: 3.5em; 
             font-weight: 900; 
             color: var(--orange-host); 
             line-height: 1;
-            margin: 5px 0;
+            margin: 2px 0;
         }
         .host-suffix { 
             font-size: 0.3em; 
             color: #7f8c8d; 
-            font-weight: 700;
+            font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 2px;
             display: block;
-            margin-top: -3px;
+            margin-top: -5px;
         }
 
         .instructions-box {
@@ -244,8 +240,10 @@
             box-sizing: border-box;
         }
         .instructions-box h4 { margin: 0 0 10px; color: #856404; display: flex; align-items: center; gap: 10px; }
-        .instructions-box .list-ins { margin: 0; padding-left: 20px; font-size: 0.9em; line-height: 1.5; color: #5d4037; }
+        .instructions-box .list-ins { margin: 0; padding-left: 20px; font-size: 0.9em; line-height: 1.6; color: #5d4037; }
         
+        .late-notice { color: var(--danger-red); font-weight: bold; }
+
         .state-msg {
             color: #856404;
             font-size: 1em;
@@ -261,12 +259,14 @@
         .form-cta-container {
             margin-top: 40px;
             text-align: center;
-            padding: 20px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 15px;
         }
         .form-btn {
             background-color: var(--accent-blue);
             color: white;
-            padding: 14px 28px;
+            padding: 14px 32px;
             border: none;
             border-radius: 8px;
             text-decoration: none;
@@ -276,63 +276,28 @@
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
             cursor: pointer;
+            margin-bottom: 15px;
         }
-        .form-btn:hover {
-            background-color: #2980B9;
-            transform: translateY(-2px);
-        }
+        .form-btn:hover { background-color: #2980B9; transform: translateY(-2px); }
+        
         .form-note {
             display: block;
-            margin-top: 12px;
+            padding: 10px;
+            background: #eef2f7;
+            border-radius: 8px;
             font-size: 0.85em;
-            color: #7f8c8d;
+            color: #5d6d7e;
             font-style: italic;
         }
 
-        /* Responsive Settings for Mobile */
         @media (max-width: 768px) {
             .selection-container { grid-template-columns: 1fr; }
-            
-            /* IP Card Vertical Stacking for Mobile */
-            .ip-card {
-                flex-direction: column;
-                text-align: center;
-                padding: 20px 15px;
-            }
-            .ip-label {
-                font-size: 1em;
-                margin-bottom: 5px;
-            }
-            .ip-value {
-                font-size: 1.8em;
-            }
-
-            /* Host Grid 2-2-2 for Mobile */
-            .host-grid { 
-                grid-template-columns: repeat(2, 1fr); 
-                gap: 10px;
-            }
-            .host-card {
-                min-height: 160px;
-                padding: 20px 10px;
-            }
-            .lab-name {
-                font-size: 1.1em;
-            }
-            .host-count {
-                font-size: 3em;
-            }
-            .host-suffix {
-                font-size: 0.4em;
-                margin-top: 2px;
-            }
-
-            .bg-number { font-size: 6rem; left: 10px; }
-        }
-
-        @media (max-width: 480px) {
-            /* Full stack if screen is very small */
-            /* .host-grid { grid-template-columns: 1fr; } */
+            .ip-card { flex-direction: column; text-align: center; padding: 20px 15px; }
+            .ip-label { font-size: 1em; margin-bottom: 5px; }
+            .ip-value { font-size: 1.8em; }
+            .host-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+            .host-card { min-height: 150px; }
+            .host-count { font-size: 3em; }
         }
     </style>
 </head>
@@ -377,17 +342,24 @@
 
         <div id="task-section" class="task-section">
             <div class="instructions-box" id="main-instructions-box">
+                <!-- State 1: Awal -->
                 <div id="msg-initial" class="state-msg" style="display: block;">
                     <p>Pilih <b>Kelas</b> dan <b>Nama</b> terlebih dahulu untuk melihat tugas.</p>
                 </div>
+
+                <!-- State 2: Sebelum Jadwal -->
                 <div id="msg-before" class="state-msg">
                     <p style="font-size: 1.2em; color: #e67e22; font-weight: bold;">⚠️ Jadwal Belum Dimulai</p>
                     <p id="before-text">Soal hanya bisa dibuka sesuai jadwal kelas masing-masing.</p>
                 </div>
+
+                <!-- State 3: Setelah Jadwal -->
                 <div id="msg-after" class="state-msg">
                     <p style="font-size: 1.2em; color: #c0392b; font-weight: bold;">🛑 Tugas Berakhir</p>
                     <p>Waktu pengerjaan tugas untuk kelas ini sudah selesai.</p>
                 </div>
+
+                <!-- State 4: Sesuai Jadwal -->
                 <div id="msg-active" class="state-msg">
                     <h4 style="text-align: left;">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
@@ -396,26 +368,27 @@
                     <ol class="list-ins" style="text-align: left;">
                         <li>Hitung alamat IP menggunakan metode VLSM berdasarkan kebutuhan host di bawah.</li>
                         <li>Tentukan <strong>IP Network, IP Host (Range), dan IP Broadcast</strong> untuk setiap ruangan.</li>
-                        <li>Wajib menuliskan <strong>proses pengerjaan</strong> secara lengkap di kertas folio bergaris. (Halaman belakang gunakan sebagai buram untuk menuliskan proses perhitungan).</li>
-                        <li>Buka form dibagian bawah, jawab pertanyaan berdasarkan hasil perhitungan masing-masing.</li>
-                        <li>Hasil perhitungan IP dikumpulkan ke <strong>Mbak Desi Romdani</strong> di Kantor TKJ, diurutkan mulai dari nomor presensi kecil.</li>
-                        <li>Pengisian form dan pengumpulan tugas paling lambat pukul <strong>12:00 WIB</strong>. (Setelah pukul 12:00 WIB nilai maksimal hanya 80).</li>
+                        <li><strong>Gunakan kertas folio bergaris</strong> untuk menuliskan hasil pengerjaan.</li>
+                        <li>Halaman depan <strong>untuk menulis tahapan dan hasilnya</strong>, sedangkan halaman belakang untuk coretan proses perhitungan (buram).</li>
+                        <li>Pastikan <strong>Nama dan Nomor Presensi</strong> sudah tertulis jelas di pojok kanan atas kertas folio.</li>
+                        <li>Jawab pertanyaan pada <strong>Form Soal</strong> di bagian bawah berdasarkan hasil perhitungan masing-masing.</li>
+                        <li>Serahkan lembar folio ke <strong>Mbak Desi Romdani</strong> di Kantor TKJ.</li>
+                        <li>Pastikan lembaran folio sudah urut berdasarkan nomor presensi (dari terkecil ke terbesar).</li>
+                        <li>Batas akhir pengisian form dan pengumpulan fisik adalah pukul <strong>12:00 WIB</strong>. <span class="late-notice">(Keterlambatan akan dikenakan sanksi berupa nilai maksimal hanya 80)</span>.</li>
                     </ol>
                 </div>
             </div>
 
+            <!-- Area Konten Utama -->
             <div id="task-content-area">
                 <div class="student-badge">
                     <div class="bg-number" id="display-bg-number">00</div>
                     <p id="display-kelas">KELAS --</p>
                     <h2 id="display-nama">-- BELUM DIPILIH --</h2>
-                    <div class="profile-icon-bg">
-                        <svg width="150" height="150" viewBox="0 0 24 24" fill="currentColor"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                    </div>
                 </div>
 
                 <div class="ip-card">
-                    <div class="ip-label">Alamat IP Utama</div>
+                    <div class="ip-label">Alamat IP</div>
                     <div class="ip-value" id="ip-utama">192.168.x.x /24</div>
                 </div>
 
@@ -432,7 +405,10 @@
                     <button class="form-btn" onclick="window.open('https://forms.gle/qzD5Y9erxhaWASSs9', '_blank')">
                         Buka Form Soal
                     </button>
-                    <span class="form-note">Login terlebih dahulu menggunakan gmail. Hanya bisa mengisi form satu kali saja.</span>
+                    <span class="form-note">
+                        <strong>PENTING:</strong> Login terlebih dahulu menggunakan Gmail. 
+                        Hanya bisa mengisi form satu kali saja.
+                    </span>
                 </div>
             </div>
         </div>
@@ -558,12 +534,12 @@
                 {no: 30, n: "SYAFIRA SEPTIANA", d: "eyJpIjoiMTgyLjE5OC4xNTQuMC8yNCIsImgiOlsyOCw0NCw0MSw0LDEwLDEyXX0="},
                 {no: 31, n: "VERA DWI YULIANA", d: "eyJpIjoiMTk1LjE0NC4xNTUuMC8yNCIsImgiOls5LDYsNDgsMTUsMjAsN119"},
                 {no: 32, n: "WAHYU DESTIKA SARI", d: "eyJpIjoiMTg0LjEwOC4xNDcuMC8yNCIsImgiOlsyOSw0OSwxNCwzMiw2LDEyXX0="},
-                {no: 33, n: "ZAHRA ANANDA PANSA", d: "eyJpIjoiMTA5LjE3OS4xNzcuMC8yNCIsImgiOlsyMywzNSw0LDE0LDksMjVdfQ=="}
+                {no: 33, n: "ZAHRA ANANDA PANSA", d: "eyJpIjoiMTE2LjE4MC4xOTkuMC8yNCIsImgiOlsyMywzNSw0LDE0LDksMjVdfQ=="}
             ]
         };
 
         // ==========================================
-        // 3. FUNGSI UTAMA (LOGIKA JADWAL & VALIDASI)
+        // 3. FUNGSI UTAMA
         // ==========================================
         
         function setInsState(stateId, data = null) {
@@ -673,7 +649,6 @@
             displayBgNumber.textContent = (siswaObj.no < 10 ? '0' + siswaObj.no : siswaObj.no);
             
             try {
-                // Proses Dekripsi Base64 ke JSON
                 const decData = JSON.parse(atob(siswaObj.d));
                 ipUtama.textContent = decData.i;
                 for (let i = 0; i < 6; i++) {
