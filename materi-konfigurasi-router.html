@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Konfigurasi Dasar Router — Portal Belajar</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="materi">
+
+<div id="site-header"></div>
+
+<div class="article-header">
+  <a href="materi.html" class="btn-back">← Kembali ke Daftar Materi</a>
+  <h1>Konfigurasi Dasar Router</h1>
+</div>
+
+<div class="article-content">
+
+  <div class="callout info">💡 Setiap bagian juga disertai <strong>Mode CLI</strong> sebagai alternatif dari GUI (Winbox). Pada perintah CLI: teks <span style="color:#5b9dff; font-weight:600;">biru</span> adalah perintah tetap (hafalkan), sedangkan teks <span style="color:#111;">putih/hitam</span> adalah bagian yang perlu diubah sesuai kebutuhan.</div>
+
+  <h2>1. Reset Konfigurasi MikroTik</h2>
+  <p>Menghapus semua konfigurasi Router MikroTik dan mengembalikan ke pengaturan awal.</p>
+  <ol class="langkah">
+    <li><div class="step-n">a</div><div class="step-body"><strong>System</strong> → <strong>Reset Configuration</strong>.</div></li>
+    <li><div class="step-n">b</div><div class="step-body">Beri tanda ✔ pada <strong>No Default Configuration</strong>.</div></li>
+    <li><div class="step-n">c</div><div class="step-body">Klik tombol <strong>Reset Configuration</strong> → <strong>Yes</strong>.</div></li>
+    <li><div class="step-n">d</div><div class="step-body">Tunggu beberapa saat dan koneksi dengan Router akan terputus. Kemudian ulangi proses menghubungkan Router dari awal.</div></li>
+  </ol>
+
+  <div class="cli-block">
+    <span class="cli-label">Mode CLI</span>
+    <pre><span class="cli-cmd">/system reset-configuration</span> <span class="cli-cmd">no-defaults=</span><span class="cli-var">yes</span></pre>
+  </div>
+
+  <h2>2. Konfigurasi Hostname</h2>
+  <p>Merubah nama Router MikroTik.</p>
+  <ol class="langkah">
+    <li><div class="step-n">a</div><div class="step-body"><strong>System</strong> → <strong>Identity</strong>.</div></li>
+    <li><div class="step-n">b</div><div class="step-body">Isikan <strong>Nama Router</strong> pada kotak Identity.</div></li>
+    <li><div class="step-n">c</div><div class="step-body">Klik tombol <strong>Apply</strong> → <strong>OK</strong>.</div></li>
+  </ol>
+
+  <div class="cli-block">
+    <span class="cli-label">Mode CLI</span>
+    <pre><span class="cli-cmd">/system identity set name=</span><span class="cli-var">Router-TKJ</span></pre>
+  </div>
+
+  <h2>3. Konfigurasi Alamat IP</h2>
+  <ol class="langkah">
+    <li><div class="step-n">a</div><div class="step-body"><strong>IP</strong> → <strong>Addresses</strong>.</div></li>
+    <li><div class="step-n">b</div><div class="step-body">Klik tombol <strong>+</strong> untuk menambah alamat IP.</div></li>
+    <li><div class="step-n">c</div><div class="step-body">
+      Isikan sesuai ketentuan berikut:<br>
+      IP Address: <code>[Alamat IP]</code><br>
+      Network: <code>[Alamat Network]</code><br>
+      Interface: <code>[Port yang dipakai]</code>
+    </div></li>
+    <li><div class="step-n">d</div><div class="step-body">Klik tombol <strong>Apply</strong> → <strong>OK</strong>.</div></li>
+  </ol>
+  <pre>Contoh Alamat IP:
+Address   : 192.168.10.1/24
+Network   : 192.168.10.0
+Interface : ether1</pre>
+
+  <div class="cli-block">
+    <span class="cli-label">Mode CLI</span>
+    <pre><span class="cli-cmd">/ip address add address=</span><span class="cli-var">192.168.10.1/24</span> <span class="cli-cmd">interface=</span><span class="cli-var">ether1</span></pre>
+  </div>
+
+  <h2>4. Konfigurasi IP DNS</h2>
+  <ol class="langkah">
+    <li><div class="step-n">a</div><div class="step-body"><strong>IP</strong> → <strong>DNS</strong>.</div></li>
+    <li><div class="step-n">b</div><div class="step-body">Isikan IP DNS Primer di kotak <strong>Servers</strong>.</div></li>
+    <li><div class="step-n">c</div><div class="step-body">Gunakan tombol segitiga di bagian kanan untuk menambah dan menghapus IP DNS.</div></li>
+    <li><div class="step-n">d</div><div class="step-body">Beri tanda ✔ pada opsi <strong>Allow Remote Request</strong>.</div></li>
+    <li><div class="step-n">e</div><div class="step-body">Klik tombol <strong>Apply</strong> → <strong>OK</strong>.</div></li>
+  </ol>
+  <div class="callout info">💡 Opsi <strong>Allow Remote Request</strong> digunakan untuk menyimpan permintaan DNS dan membuat Router MikroTik sebagai DNS Server.</div>
+  <pre>Contoh IP DNS yang bisa digunakan:
+Google DNS     : 8.8.8.8
+                 8.8.4.4
+Cloudflare DNS : 1.1.1.1
+                 1.0.0.1</pre>
+
+  <div class="cli-block">
+    <span class="cli-label">Mode CLI</span>
+    <pre><span class="cli-cmd">/ip dns set servers=</span><span class="cli-var">8.8.8.8,8.8.4.4</span> <span class="cli-cmd">allow-remote-requests=</span><span class="cli-var">yes</span></pre>
+  </div>
+
+  <h2>5. Konfigurasi NAT</h2>
+  <ol class="langkah">
+    <li><div class="step-n">a</div><div class="step-body"><strong>IP</strong> → <strong>Firewall</strong> → <strong>NAT</strong>.</div></li>
+    <li><div class="step-n">b</div><div class="step-body">Klik tombol <strong>+</strong> untuk menambah NAT.</div></li>
+    <li><div class="step-n">c</div><div class="step-body">
+      Atur sesuai ketentuan berikut:<br>
+      Tab General — Chain: <code>srcnat</code>, Out. Interface: <code>[port yang digunakan]</code><br>
+      Tab Action — Action: <code>masquerade</code>
+    </div></li>
+    <li><div class="step-n">d</div><div class="step-body">Klik tombol <strong>Apply</strong> → <strong>OK</strong>.</div></li>
+  </ol>
+  <div class="callout info">💡 Konfigurasi ini diulang sesuai jumlah port yang digunakan.</div>
+
+  <div class="cli-block">
+    <span class="cli-label">Mode CLI</span>
+    <pre><span class="cli-cmd">/ip firewall nat add chain=</span><span class="cli-var">srcnat</span> <span class="cli-cmd">out-interface=</span><span class="cli-var">ether1</span> <span class="cli-cmd">action=</span><span class="cli-var">masquerade</span></pre>
+  </div>
+
+  <h2>6. Konfigurasi Gateway</h2>
+  <ol class="langkah">
+    <li><div class="step-n">a</div><div class="step-body"><strong>IP</strong> → <strong>Routes</strong>.</div></li>
+    <li><div class="step-n">b</div><div class="step-body">Klik tombol <strong>+</strong> untuk menambah IP Gateway.</div></li>
+    <li><div class="step-n">c</div><div class="step-body">Isikan IP gateway di kotak <strong>Gateway</strong>.</div></li>
+    <li><div class="step-n">d</div><div class="step-body">Klik tombol <strong>Apply</strong> → <strong>OK</strong>.</div></li>
+  </ol>
+  <pre>Contoh IP Gateway:
+Gateway : 192.168.10.254</pre>
+
+  <div class="cli-block">
+    <span class="cli-label">Mode CLI</span>
+    <pre><span class="cli-cmd">/ip route add gateway=</span><span class="cli-var">192.168.10.254</span></pre>
+  </div>
+
+  <h2>7. Pengujian Koneksi Jaringan</h2>
+  <ol class="langkah">
+    <li><div class="step-n">a</div><div class="step-body">Buka <strong>New Terminal</strong>.</div></li>
+    <li><div class="step-n">b</div><div class="step-body">Uji koneksi jaringan menggunakan perintah ping dengan format: <code>ping [alamat tujuan]</code>.</div></li>
+    <li><div class="step-n">c</div><div class="step-body">Tekan Enter.</div></li>
+  </ol>
+
+  <div class="cli-block">
+    <span class="cli-label">Mode CLI</span>
+    <pre><span class="cli-comment"># Pengujian ke alamat web</span>
+<span class="cli-cmd">ping</span> <span class="cli-var">google.com</span>
+
+<span class="cli-comment"># Pengujian ke perangkat jaringan (PC, Router, dll)</span>
+<span class="cli-cmd">ping</span> <span class="cli-var">192.168.10.1</span></pre>
+  </div>
+
+</div>
+
+<div id="site-footer"></div>
+
+<script src="assets/components.js"></script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alamat IP — Portal Belajar</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="materi">
+
+<div id="site-header"></div>
+
+<div class="article-header">
+  <a href="materi.html" class="btn-back">← Kembali ke Daftar Materi</a>
+  <h1>Alamat IP (versi 4)</h1>
+</div>
+
+<div class="article-content">
+
+  <h2>1. Kelas Alamat IP</h2>
+  <p>Ada lima kelas utama alamat IP, yaitu Kelas A, B, C, D, dan E. Namun, hanya Kelas A, B, dan C yang umum digunakan untuk pengalamatan perangkat dalam jaringan. Kelas D digunakan untuk IP multicasting dan kelas E dicadangkan untuk eksperimen.</p>
+  <p>Penentuan kelas alamat IP dilihat dari <strong>nilai oktet pertama</strong> sebuah alamat IP.</p>
+
+  <table>
+    <thead>
+      <tr><th>Kelas</th><th>Rentang Oktet Pertama</th><th>Keterangan</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>A</td><td>0 s.d. 127</td><td>IP 0 dan 127 dicadangkan</td></tr>
+      <tr><td>B</td><td>128 s.d. 191</td><td>—</td></tr>
+      <tr><td>C</td><td>192 s.d. 223</td><td>—</td></tr>
+      <tr><td>D</td><td>224 s.d. 239</td><td>Digunakan untuk IP Multicasting</td></tr>
+      <tr><td>E</td><td>240 s.d. 255</td><td>Dicadangkan untuk eksperimen</td></tr>
+    </tbody>
+  </table>
+
+  <h2>2. Prefix Length dan Subnet Mask</h2>
+  <p><strong>Prefix length</strong> adalah bagian dari alamat IP yang menunjukkan jaringan tempat suatu perangkat berada. Prefix menunjukkan banyaknya binary 1 secara berurutan dimulai dari bit pertama. Prefix digunakan untuk menentukan subnet mask dari alamat IP.</p>
+  <p><strong>Subnet mask</strong> digunakan untuk membedakan network ID dengan host ID, menunjukkan letak suatu host, apakah berada di jaringan lokal atau jaringan luar.</p>
+  <div class="callout info">
+    💡 Bit-bit subnet mask yang didefinisikan:<br>
+    Semua bit yang digunakan oleh Network ID bernilai <strong>1</strong>.<br>
+    Semua bit yang digunakan oleh Host ID bernilai <strong>0</strong>.
+  </div>
+
+  <h3>Subnet Mask Bawaan dari Kelas IP</h3>
+  <table>
+    <thead>
+      <tr><th>Kelas IP</th><th>Subnet Mask Biner</th><th>Subnet Mask</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>A</code></td><td><code>11111111.00000000.00000000.00000000</code></td><td><code>255.0.0.0</code></td></tr>
+      <tr><td><code>B</code></td><td><code>11111111.11111111.00000000.00000000</code></td><td><code>255.255.0.0</code></td></tr>
+      <tr><td><code>C</code></td><td><code>11111111.11111111.11111111.00000000</code></td><td><code>255.255.255.0</code></td></tr>
+    </tbody>
+  </table>
+
+  <h2>3. Alamat Network dan Host</h2>
+  <p>Setiap alamat IP terdiri dari 2 bagian, Alamat Network dan Alamat Host.</p>
+  <p><strong>Alamat Network (Network ID)</strong> merupakan bagian dari alamat IP yang mengidentifikasi jaringan tertentu di mana sebuah perangkat berada. Semua perangkat jaringan harus mempunyai alamat network yang sama untuk bisa saling terhubung.</p>
+  <p><strong>Alamat Host (Host ID)</strong> merupakan bagian dari alamat IP yang mengidentifikasi perangkat spesifik secara individu. Dalam jaringan yang sama, tidak boleh ada 2 atau lebih alamat host yang sama.</p>
+
+  <pre>Kelas A
+Net ID . Host ID . Host ID . Host ID
+
+Kelas B
+Net ID . Net ID . Host ID . Host ID
+
+Kelas C
+Net ID . Net ID . Net ID . Host ID</pre>
+
+  <h2>Penulisan Alamat IP</h2>
+  <p>Penulisan IP address umumnya adalah dengan <code>192.168.1.2</code>. Namun adakalanya ditulis dengan <code>192.168.1.2/24</code>.</p>
+  <p>Artinya adalah IP address <code>192.168.1.2</code> dengan subnet mask <code>255.255.255.0</code>. Angka <code>/24</code> berarti bahwa 24 bit pertama subnet mask merupakan bilangan 1.</p>
+  <pre>Subnetmask biner  = 11111111.11111111.11111111.00000000
+Subnetmask desimal = 255.255.255.0</pre>
+
+</div>
+
+<div id="site-footer"></div>
+
+<script src="assets/components.js"></script>
+</body>
+</html>

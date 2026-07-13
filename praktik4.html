@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Praktik 4 — Portal Belajar</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="praktik">
+
+<div id="site-header"></div>
+
+<div class="article-header">
+  <a href="praktik.html" class="btn-back">← Kembali ke Daftar Praktik</a>
+  <h1>Praktik 4</h1>
+</div>
+
+<div class="article-content">
+
+  <h2>Topologi</h2>
+  <img src="images/topologi-praktik-4.png" alt="Topologi Praktik 4">
+
+  <h2>Tugas</h2>
+  <p>Susun perangkat sesuai dengan topologi dan konfigurasikan Router MikroTik yang berfungsi sebagai Gateway Internet, Hotspot, kemudian internet tersebut di-share ke client melalui jalur kabel dan wireless secara DHCP.</p>
+  <p>Dengan opsi konfigurasi sebagai berikut:</p>
+
+  <h3>Konfigurasi Dasar Router</h3>
+  <ol class="langkah">
+    <li><div class="step-n">1</div><div class="step-body">Hostname: <code>KELAS-NAMA</code></div></li>
+    <li><div class="step-n">2</div><div class="step-body">DNS: <code>1.1.1.1</code></div></li>
+  </ol>
+
+  <h3>Ether1 — Interface yang terhubung dengan jaringan internet</h3>
+  <ol class="langkah">
+    <li><div class="step-n">3</div><div class="step-body">IP Address: <code>192.168.120.NO/24</code></div></li>
+    <li><div class="step-n">4</div><div class="step-body">Gateway: <code>192.168.120.254</code></div></li>
+  </ol>
+
+  <h3>Ether2 — Interface yang terhubung dengan client melalui kabel (Wired)</h3>
+  <ol class="langkah">
+    <li><div class="step-n">5</div><div class="step-body">IP Address: <code>192.168.100.204/28</code></div></li>
+    <li><div class="step-n">6</div><div class="step-body">Lama Waktu DHCP: 20 Menit</div></li>
+  </ol>
+
+  <h3>Wlan1 — Interface yang terhubung dengan client tanpa melalui kabel (Wireless)</h3>
+  <ol class="langkah">
+    <li><div class="step-n">7</div><div class="step-body">IP Address: <code>192.168.100.130/27</code></div></li>
+    <li><div class="step-n">8</div><div class="step-body">SSID: <code>WIFI@NAMA</code></div></li>
+    <li><div class="step-n">9</div><div class="step-body">Alamat Login Hotspot: <code>skansakis.net</code></div></li>
+    <li><div class="step-n">10</div><div class="step-body">Lama Waktu DHCP: 5 Menit</div></li>
+    <li><div class="step-n">11</div><div class="step-body">Buat 2 Profil User dengan bandwidth 10 Mbps dan 5 Mbps</div></li>
+    <li><div class="step-n">12</div><div class="step-body">Buat 2 User untuk masing-masing profil</div></li>
+    <li><div class="step-n">13</div><div class="step-body">Atur 1 buah perangkat wireless agar tidak bisa terhubung ke hotspot</div></li>
+    <li><div class="step-n">14</div><div class="step-body">Atur 1 buah perangkat wireless agar bisa terhubung tanpa login ke hotspot</div></li>
+    <li><div class="step-n">15</div><div class="step-body">Website mikrotik.com bisa dibuka tanpa harus login terlebih dahulu</div></li>
+  </ol>
+
+</div>
+
+<div id="site-footer"></div>
+
+<script src="assets/components.js"></script>
+</body>
+</html>

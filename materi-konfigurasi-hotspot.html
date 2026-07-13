@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Konfigurasi Hotspot — Portal Belajar</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="materi">
+
+<div id="site-header"></div>
+
+<div class="article-header">
+  <a href="materi.html" class="btn-back">← Kembali ke Daftar Materi</a>
+  <h1>Konfigurasi Hotspot</h1>
+</div>
+
+<div class="article-content">
+
+  <div class="callout info">💡 Setiap bagian juga disertai <strong>Mode CLI</strong> sebagai alternatif dari GUI (Winbox). Pada perintah CLI: teks <span style="color:#5b9dff; font-weight:600;">biru</span> adalah perintah tetap (hafalkan), sedangkan teks <span style="color:#111;">putih/hitam</span> adalah bagian yang perlu diubah sesuai kebutuhan.</div>
+
+  <h2>1. Membuat Hotspot</h2>
+  <ol class="langkah">
+    <li><div class="step-n">a</div><div class="step-body">Buka <strong>IP</strong> → <strong>Hotspot</strong> → <strong>Servers</strong>. Menu ini menampilkan daftar Hotspot yang sedang berjalan dan interface yang digunakan.</div></li>
+    <li><div class="step-n">b</div><div class="step-body">Klik tombol <strong>Hotspot Setup</strong>.</div></li>
+    <li><div class="step-n">c</div><div class="step-body">
+      Atur sesuai ketentuan berikut:<br>
+      Interface: <code>[Port yang dipakai]</code><br>
+      Local Address: <code>[IP Gateway]</code><br>
+      Address Pool: <code>[Rentang IP DHCP]</code><br>
+      Certificate: <code>None</code><br>
+      SMTP Server: <code>0.0.0.0</code><br>
+      DNS Server: <code>[IP DNS]</code><br>
+      DNS Name: <code>[Alamat Login Hotspot]</code><br>
+      Hotspot User: <code>[user hotspot]</code>
+    </div></li>
+  </ol>
+  <div class="callout info">💡 Pengisian <strong>DNS Name</strong> disesuaikan dengan format alamat web: <code>[Nama Domain].[top level domain]</code>. Contoh: <code>skansakis.net</code>, <code>tkj.skansakis</code>, <code>login.hotspot</code>.</div>
+
+  <div class="cli-block">
+    <span class="cli-label">Mode CLI</span>
+    <pre><span class="cli-cmd">/ip hotspot add name=</span><span class="cli-var">hotspot1</span> <span class="cli-cmd">interface=</span><span class="cli-var">ether2</span> <span class="cli-cmd">address-pool=</span><span class="cli-var">rentang_dhcp</span>
+<span class="cli-cmd">/ip hotspot profile set default dns-name=</span><span class="cli-var">login.hotspot</span></pre>
+  </div>
+
+  <h2>2. Konfigurasi Server Profiles</h2>
+  <p>Konfigurasi sistem hotspot, misalnya merubah alamat login, tampilan login, dan metode login. Langkah berikut mengatur agar user tidak tersimpan di satu perangkat.</p>
+  <ol class="langkah">
+    <li><div class="step-n">a</div><div class="step-body">Buka <strong>IP</strong> → <strong>Hotspot</strong> → <strong>Server Profiles</strong>.</div></li>
+    <li><div class="step-n">b</div><div class="step-body">Klik 2x pada hotspot yang sudah dibuat.</div></li>
+    <li><div class="step-n">c</div><div class="step-body">Pilih tab <strong>Login</strong>, lalu hapus tanda ✔ pada <strong>Cookie</strong>.</div></li>
+    <li><div class="step-n">d</div><div class="step-body">Klik tombol <strong>Apply</strong> → <strong>OK</strong>.</div></li>
+  </ol>
+
+  <div class="cli-block">
+    <span class="cli-label">Mode CLI</span>
+    <pre><span class="cli-cmd">/ip hotspot profile set default use-cookie=</span><span class="cli-var">no</span></pre>
+  </div>
+
+  <h2>3. Konfigurasi Profil User</h2>
+  <p>Mengatur batasan dan mengelompokkan beberapa user.</p>
+  <ol class="langkah">
+    <li><div class="step-n">a</div><div class="step-body">Buka <strong>IP</strong> → <strong>Hotspot</strong> → <strong>User Profiles</strong>.</div></li>
+    <li><div class="step-n">b</div><div class="step-body">Klik tombol <strong>+</strong> untuk membuat profil baru.</div></li>
+    <li><div class="step-n">c</div><div class="step-body">
+      Atur sesuai ketentuan berikut:<br>
+      Name: <code>[Nama Profil]</code><br>
+      Session timeout: <code>[Batas waktu user untuk login dalam satu sesi]</code><br>
+      Shared user: <code>[Banyak pengguna yang bisa login bersamaan]</code><br>
+      Rate Limit: <code>[bandwidth]</code>
+    </div></li>
+    <li><div class="step-n">d</div><div class="step-body">Klik tombol <strong>Apply</strong> → <strong>OK</strong>.</div></li>
+  </ol>
+  <div class="callout info">💡 Rate Limit dibagi menjadi 2, <strong>rx</strong> (penerimaan/download) dan <strong>tx</strong> (pengiriman/upload), dipisahkan dengan garis miring. Contoh: <code>1M/1K</code> — <strong>M</strong> untuk Mbps, <strong>K</strong> untuk Kbps. Artinya kecepatan download 1 Mbps dan upload 1 Kbps.</div>
+
+  <div class="cli-block">
+    <span class="cli-label">Mode CLI</span>
+    <pre><span class="cli-cmd">/ip hotspot user profile add name=</span><span class="cli-var">siswa</span> <span class="cli-cmd">session-timeout=</span><span class="cli-var">01:00:00</span> <span class="cli-cmd">shared-users=</span><span class="cli-var">1</span> <span class="cli-cmd">rate-limit=</span><span class="cli-var">1M/1M</span></pre>
+  </div>
+
+  <h2>4. Konfigurasi User</h2>
+  <p>Berisi daftar semua akun atau user hotspot.</p>
+  <ol class="langkah">
+    <li><div class="step-n">a</div><div class="step-body">Buka <strong>IP</strong> → <strong>Hotspot</strong> → <strong>Users</strong>.</div></li>
+    <li><div class="step-n">b</div><div class="step-body">Klik tombol <strong>+</strong> untuk membuat user baru.</div></li>
+    <li><div class="step-n">c</div><div class="step-body">
+      Tab General:<br>
+      Servers: <code>[Hotspot yang digunakan]</code><br>
+      Name: <code>[Nama User]</code><br>
+      Password: <code>[Kata Sandi]</code><br>
+      Profile: <code>[Profil User yang digunakan]</code>
+    </div></li>
+    <li><div class="step-n">d</div><div class="step-body">
+      Tab Limits:<br>
+      Limit uptime: <code>[Batas waktu user bisa digunakan]</code><br>
+      Limit bytes in: <code>[Batas kuota download]</code><br>
+      Limit bytes out: <code>[Batas kuota upload]</code><br>
+      Limit bytes total: <code>[Batas kuota download & upload]</code>
+    </div></li>
+    <li><div class="step-n">e</div><div class="step-body">Klik tombol <strong>Apply</strong> → <strong>OK</strong>.</div></li>
+  </ol>
+
+  <div class="cli-block">
+    <span class="cli-label">Mode CLI</span>
+    <pre><span class="cli-cmd">/ip hotspot user add server=</span><span class="cli-var">hotspot1</span> <span class="cli-cmd">name=</span><span class="cli-var">siswa01</span> <span class="cli-cmd">password=</span><span class="cli-var">12345</span> <span class="cli-cmd">profile=</span><span class="cli-var">siswa</span></pre>
+  </div>
+
+  <h2>5. Menu Lain</h2>
+  <ol class="langkah">
+    <li><div class="step-n">a</div><div class="step-body"><strong>Active</strong>: memantau user yang sedang digunakan.</div></li>
+    <li><div class="step-n">b</div><div class="step-body"><strong>Hosts</strong>: memantau perangkat yang terhubung dengan jaringan wireless, baik yang sudah maupun belum login.</div></li>
+    <li><div class="step-n">c</div><div class="step-body"><strong>IP Binding</strong>: membuat pengecualian dari perangkat yang terhubung dengan hotspot.</div></li>
+    <li><div class="step-n">d</div><div class="step-body"><strong>Walled Garden</strong>: membuat pengecualian untuk situs atau aplikasi yang bisa diakses tanpa login hotspot.</div></li>
+  </ol>
+
+</div>
+
+<div id="site-footer"></div>
+
+<script src="assets/components.js"></script>
+</body>
+</html>

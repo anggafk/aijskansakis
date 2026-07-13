@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alamat Jaringan Komputer — Portal Belajar</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="materi">
+
+<div id="site-header"></div>
+
+<div class="article-header">
+  <a href="materi.html" class="btn-back">← Kembali ke Daftar Materi</a>
+  <h1>Alamat Jaringan Komputer</h1>
+</div>
+
+<div class="article-content">
+
+  <h2>1. MAC Address (Media Access Control Address)</h2>
+  <p>Merupakan <strong>alamat fisik/hardware</strong> dari suatu perangkat jaringan yang disematkan oleh produsen saat perangkat tersebut dibuat.</p>
+  <p>MAC Address <strong>bersifat unik dan tidak bisa diubah</strong>, terdapat pada network interface / NIC / LAN Card. Tidak ada perangkat yang memiliki MAC Address yang sama.</p>
+  <p><strong>Format penulisan</strong> mempunyai panjang 48-Bit, terdiri dari 12 digit heksadesimal (0–9 dan A–F) dipisahkan oleh titik dua (:) atau tanda hubung (-), dan terdiri dari 2 bagian.</p>
+  <pre>Contoh: 6C:88:14:BA:69:A0  atau  6C-88-14-BA-69-A0
+
+6C:88:14  → Organizationally Unique Identified (OUI)
+BA:69:A0  → Unique Address Assigned by Vendor (UAA)</pre>
+
+  <h2>2. IP Address (Internet Protocol Address)</h2>
+  <p>Merupakan <strong>alamat logis/software</strong> yang digunakan untuk pengalamatan suatu host agar bisa terhubung ke jaringan komputer yang menggunakan Protokol Internet untuk komunikasi.</p>
+  <p>IP Address <strong>bisa berubah</strong> setiap kali terhubung ke jaringan yang berbeda, atau bahkan di jaringan yang sama jika menggunakan DHCP yang memberikan alamat IP sementara. Ada juga IP statis yang ditetapkan secara permanen.</p>
+  <p>Terdapat 2 jenis IP address, yaitu IP versi 4 dan IP versi 6.</p>
+
+  <h3>IP versi 4</h3>
+  <p>Terdiri dari bilangan biner sepanjang <strong>32 bit</strong>. Dibagi menjadi <strong>4 oktet</strong> sepanjang <strong>8 bit</strong> dan dipisahkan dengan <strong>tanda titik</strong>. 8 bit bilangan biner tersebut lalu dikonversi menjadi bilangan desimal.</p>
+  <pre>Contoh IP versi 4:
+192.168.10.1
+172.16.20.100
+215.172.75.213</pre>
+
+  <h3>IP versi 6</h3>
+  <p>Terdiri dari bilangan biner sepanjang <strong>128 bit</strong>. Dibagi menjadi <strong>8 kelompok</strong> sepanjang <strong>16 bit</strong> dan dipisahkan dengan <strong>tanda titik dua</strong>. 16 bit bilangan biner tersebut lalu dikonversi menjadi 4 digit bilangan heksadesimal.</p>
+  <pre>Contoh IP versi 6:
+2001:0DB8:85A3:0000:0000:8A2E:0370:7334</pre>
+
+</div>
+
+<div id="site-footer"></div>
+
+<script src="assets/components.js"></script>
+</body>
+</html>

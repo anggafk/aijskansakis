@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Judul Materi — Portal Belajar</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<!-- data-page menandai menu mana yang aktif di nav: beranda / materi / praktik / nilai / tugas -->
+<body data-page="materi">
+
+<!-- Header & Nav dirender otomatis oleh assets/components.js, tidak perlu diedit di sini -->
+<div id="site-header"></div>
+
+<div class="article-header">
+  <a href="materi.html" class="btn-back">← Kembali ke Daftar Materi</a>
+  <h1>Judul Materi Baru</h1>
+</div>
+
+<!-- ============================================================
+     ISI MATERI — hanya bagian di bawah ini yang perlu diedit
+     untuk membuat halaman materi baru.
+     ============================================================ -->
+<div class="article-content">
+
+  <p>Paragraf pembuka / penjelasan singkat tentang topik materi.</p>
+
+  <h2>A. Judul Sub-bagian</h2>
+  <p>Penjelasan sub-bagian.</p>
+
+  <h3>1. Judul Langkah-langkah</h3>
+  <ol class="langkah">
+    <li><div class="step-n">a</div><div class="step-body"><strong>Langkah</strong> pertama.</div></li>
+    <li><div class="step-n">b</div><div class="step-body">Langkah kedua.</div></li>
+  </ol>
+  <pre>Contoh:
+Isi contoh di sini</pre>
+
+  <div class="cli-block">
+    <span class="cli-label">Mode CLI</span>
+    <pre>perintah cli contoh di sini</pre>
+  </div>
+
+  <div class="callout info">💡 Catatan tambahan / tips.</div>
+
+</div>
+<!-- ============================================================
+     akhir bagian ISI MATERI
+     ============================================================ -->
+
+<div id="site-footer"></div>
+
+<script src="assets/components.js"></script>
+</body>
+</html>

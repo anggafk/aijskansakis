@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pemecahan Alamat IP (Subnetting) — Portal Belajar</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="materi">
+
+<div id="site-header"></div>
+
+<div class="article-header">
+  <a href="materi.html" class="btn-back">← Kembali ke Daftar Materi</a>
+  <h1>Pemecahan Alamat IP (Subnetting)</h1>
+</div>
+
+<div class="article-content">
+
+  <p>Subnetting adalah proses membagi satu jaringan besar (network) menjadi beberapa jaringan kecil (subnetwork atau subnet). Salah satu tujuannya adalah efisiensi alamat IP, agar alamat IP yang tidak digunakan tidak terbuang percuma.</p>
+  <p>Dalam kelompok alamat IP ada 2 buah IP yang mempunyai sifat khusus, yaitu:</p>
+  <p><strong>IP Network</strong>: Alamat IP yang merupakan identitas dari kelompok IP. Merupakan alamat IP terkecil dari sebuah jaringan.</p>
+  <p><strong>IP Broadcast</strong>: Alamat IP yang digunakan untuk memanggil semua IP dalam suatu kelompok. Merupakan alamat IP terbesar dari sebuah jaringan.</p>
+
+  <h2>A. Prefix yang Bisa Digunakan Masing-masing Kelas IP</h2>
+  <table>
+    <thead>
+      <tr><th>Kelas IP</th><th>Default Prefix</th><th>Default Subnetmask</th><th>Prefix yang Bisa Digunakan</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>A</td><td><code>/8</code></td><td><code>255.0.0.0</code></td><td><code>/8 s.d. /30</code></td></tr>
+      <tr><td>B</td><td><code>/16</code></td><td><code>255.255.0.0</code></td><td><code>/16 s.d. /30</code></td></tr>
+      <tr><td>C</td><td><code>/24</code></td><td><code>255.255.255.0</code></td><td><code>/24 s.d. /30</code></td></tr>
+    </tbody>
+  </table>
+  <div class="callout info">💡 Kelas yang lebih besar bisa menggunakan prefix kelas yang lebih kecil.</div>
+
+  <h2>B. Menentukan Subnetmask, IP Network, IP Broadcast dan IP Host (Kelas C)</h2>
+
+  <h3>1. Menghitung Blok Subnet dan Subnetmask</h3>
+
+  <p><strong>a. Cara Pertama — Menghitung Subnetmask</strong></p>
+  <p>Ubah prefix menjadi subnetmask biner, lalu konversikan menjadi desimal.</p>
+  <pre>Contoh: 192.168.10.150/26
+Subnetmask biner = 11111111.11111111.11111111.11000000
+                    (26 bit pertama merupakan bilangan 1, bit tersisa merupakan bilangan 0)
+Dikonversi menjadi bilangan desimal:
+Subnetmask = 255.255.255.192</pre>
+
+  <p><strong>Menghitung Blok Subnet</strong></p>
+  <pre>Blok Subnet = 256 - Oktet ke-4 Subnetmask
+
+Contoh: 192.168.10.150/26
+Blok subnet = 256 - 192
+Blok Subnet = 64</pre>
+
+  <p><strong>b. Cara Kedua — Menghitung Blok Subnet</strong></p>
+  <pre>Blok Subnet = 2^(32 - prefix)
+
+Contoh: 192.168.10.150/26
+Blok subnet = 2^(32 - 26)
+            = 2^6
+Blok Subnet = 64</pre>
+
+  <p><strong>Menghitung Subnetmask</strong></p>
+  <pre>Subnetmask = 255.255.255.(256 - Blok Subnet)
+
+Contoh: 192.168.10.150/26
+Subnetmask = 255.255.255.(256 - 64)
+Subnetmask = 255.255.255.192</pre>
+
+  <h3>2. Menghitung IP Network</h3>
+  <p>Oktet ke-1 sampai oktet ke-3 tidak diubah, oktet ke-4 mengikuti perhitungan berikut:</p>
+  <pre>Nilai Oktet ke-4 / Blok Subnet, lalu:
+Angka Sebelum Koma x Blok Subnet
+
+Contoh: 192.168.10.150/26
+150 / 64 = 2,343
+2 x 64   = 128
+
+IP Network = 192.168.10.128</pre>
+
+  <h3>3. Menghitung IP Broadcast</h3>
+  <pre>Nilai Oktet ke-4 IP Network + Blok Subnet - 1
+
+Contoh: 192.168.10.150/26
+128 + 64 - 1 = 191
+
+IP Broadcast = 192.168.10.191</pre>
+
+  <h3>4. Menghitung IP Host</h3>
+  <p>IP Host adalah alamat IP yang bisa digunakan untuk konfigurasi perangkat jaringan — merupakan alamat IP yang berada di antara IP Network dan IP Broadcast.</p>
+  <pre>IP Network              IP Broadcast
+192.168.10.128          192.168.10.191
+           +1                      -1
+192.168.10.129  sampai  192.168.10.190
+
+IP Host = 192.168.10.129 - 192.168.10.190</pre>
+
+  <div class="callout info">
+    💡 Hasil akhir perhitungan alamat IP di atas:<br>
+    Alamat IP&nbsp;&nbsp;&nbsp;&nbsp;: <code>192.168.10.150/26</code><br>
+    Subnetmask&nbsp;&nbsp;: <code>255.255.255.192</code><br>
+    Blok Subnet&nbsp;: <code>64</code><br>
+    IP Network&nbsp;&nbsp;: <code>192.168.10.128</code><br>
+    IP Broadcast: <code>192.168.10.191</code><br>
+    IP Host&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <code>192.168.10.129 - 192.168.10.190</code>
+  </div>
+
+</div>
+
+<div id="site-footer"></div>
+
+<script src="assets/components.js"></script>
+</body>
+</html>

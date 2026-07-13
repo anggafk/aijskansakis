@@ -1,0 +1,264 @@
+/* ============================================================
+   style.css — Gaya bersama untuk seluruh halaman Portal Belajar
+   Cukup diedit SATU kali di sini, otomatis berlaku ke semua materi.
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  background-color: #fafafa;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    #f7f7f9 0px, #fbfbfc 18px, #ffffff 28px, #fafafa 52px,
+    #f6f6f8 54px, #f9f9fb 68px, #ffffff 90px, #fafbfc 118px,
+    #f5f6f8 120px, #f8f9fb 130px, #fdfdfe 155px, #ffffff 180px,
+    #f9f9fb 210px, #f6f6f9 212px, #f8f9fb 228px, #fefefe 260px,
+    #fafbfc 295px, #f6f7f9 297px, #f9f9fb 315px, #ffffff 350px,
+    #f7f7f9 368px
+  );
+  color: #111; font-size: 15px; line-height: 1.7;
+}
+
+/* SITE HEADER */
+.site-header { background: #002D72; padding: 18px 40px 0; }
+.site-header .inner { max-width: 860px; margin: 0 auto; padding-left: 40px; }
+.site-header .brand {
+  display: inline-block; font-size: 20px; font-weight: 600;
+  color: #fff; text-decoration: none; letter-spacing: -.01em; margin-bottom: 14px;
+}
+
+/* NAV */
+nav {
+  background: #002D72; border-top: 1px solid rgba(255,255,255,0.15);
+  position: sticky; top: 0; z-index: 100;
+}
+.nav-inner { max-width: 860px; margin: 0 auto; display: flex; padding-left: 40px; }
+.nav-links { display: flex; list-style: none; }
+.nav-links a {
+  display: block; padding: 0 20px 0 0; height: 44px; line-height: 44px;
+  font-size: 14px; color: rgba(255,255,255,0.7); text-decoration: none;
+  border-bottom: 2px solid transparent; transition: color .15s, border-color .15s;
+}
+.nav-links a:hover { color: #fff; }
+.nav-links a.active { color: #fff; font-weight: 500; border-bottom-color: #fff; }
+
+/* ARTICLE HEADER */
+.article-header { max-width: 860px; margin: 0 auto; padding: 32px 40px; border-bottom: 1px solid #e8e8e8; }
+.btn-back {
+  display: inline-block; padding: 8px 16px; border: 1px solid #ddd; border-radius: 5px;
+  font-size: 13.5px; font-weight: 500; color: #111; text-decoration: none; background: #fff;
+  margin-bottom: 20px; transition: background .15s, border-color .15s;
+}
+.btn-back:hover { background: #f5f5f5; border-color: #bbb; }
+.article-header h1 { font-size: 26px; font-weight: 600; letter-spacing: -.02em; line-height: 1.25; }
+
+/* CONTENT */
+.article-content { max-width: 860px; margin: 0 auto; padding: 36px 40px 80px; }
+.article-content p { margin-bottom: 14px; color: #333; }
+.article-content h2 {
+  font-size: 17px; font-weight: 600; margin-top: 40px; margin-bottom: 14px;
+  padding-top: 20px; border-top: 1px solid #f0f0f0; color: #111;
+}
+.article-content h2:first-child { margin-top: 0; border-top: none; padding-top: 0; }
+.article-content h3 { font-size: 15px; font-weight: 600; margin-top: 28px; margin-bottom: 12px; color: #222; }
+
+.langkah { list-style: none; margin: 0 0 16px; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.langkah li { display: flex; gap: 12px; align-items: flex-start; font-size: 14px; color: #333; line-height: 1.6; }
+.langkah li .step-n {
+  flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%;
+  background: #002D72; color: #fff; font-size: 11px; font-weight: 600;
+  display: flex; align-items: center; justify-content: center; margin-top: 2px;
+}
+.langkah li .step-body { flex: 1; }
+
+strong { color: #111; font-weight: 600; }
+
+code {
+  font-family: 'DM Mono', monospace; font-size: 13px;
+  background: #f0f3ff; color: #2244aa; padding: 2px 6px; border-radius: 4px;
+}
+pre {
+  background: #f8f8f8; border: 1px solid #e8e8e8; border-radius: 6px;
+  padding: 16px 18px; overflow-x: auto; margin: 12px 0 16px;
+  font-family: 'DM Mono', monospace; font-size: 13px; line-height: 1.65; color: #333;
+}
+
+.article-content img {
+  max-width: 100%; height: auto; display: block;
+  border: 1px solid #e8e8e8; border-radius: 6px; margin: 4px 0 16px;
+}
+.article-content figure { margin: 4px 0 16px; }
+.article-content figcaption { font-size: 12.5px; color: #888; margin-top: 6px; }
+
+.callout { border-left: 3px solid #ddd; padding: 12px 16px; margin: 12px 0 16px; border-radius: 0 5px 5px 0; font-size: 14px; color: #444; }
+.callout.info { border-left-color: #002D72; background: #f0f4ff; }
+
+/* CLI BLOCK */
+.cli-block { margin: 4px 0 16px; }
+.cli-label {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 600; letter-spacing: .04em;
+  text-transform: uppercase; color: #fff; background: #002D72; padding: 5px 10px; border-radius: 5px 5px 0 0;
+}
+.cli-label::before { content: "›_"; font-weight: 700; }
+.cli-block pre { margin-top: 0; border-top-left-radius: 0; background: #10151f; border-color: #10151f; color: #d8ffdc; }
+.cli-block pre .cli-prompt { color: #7fd0ff; }
+.cli-block pre .cli-comment { color: #7a8598; }
+.cli-block pre .cli-cmd { color: #5b9dff; font-weight: 600; }
+.cli-block pre .cli-var { color: #ffffff; font-weight: 500; }
+
+/* RUMUS BOX & HIGHLIGHT WARNA (untuk materi perhitungan IP/subnetting) */
+.rumus-box {
+  display: inline-block; border: 2px solid #111; border-radius: 6px;
+  padding: 10px 16px; margin: 4px 0 16px; font-size: 14.5px; font-weight: 600;
+  background: #fff; font-family: 'DM Mono', monospace;
+}
+.hl-orange { color: #c9711a; font-weight: 700; }
+.hl-red    { color: #d64545; font-weight: 700; }
+.hl-blue   { color: #2d6cdf; font-weight: 700; }
+.hl-teal   { color: #1a9e96; font-weight: 700; }
+.hl-green  { color: #1f8a3d; font-weight: 700; }
+.hl-pink   { color: #c23b8a; font-weight: 700; }
+.hl-purple { color: #7b4fd6; font-weight: 700; }
+
+.article-content table {
+  width: 100%; border-collapse: collapse; margin: 4px 0 20px; font-size: 13.5px;
+}
+.article-content th, .article-content td {
+  border: 1px solid #e8e8e8; padding: 8px 12px; text-align: left; vertical-align: top;
+}
+.article-content th { background: #f5f7fb; font-weight: 600; color: #111; }
+.article-content td code, .article-content th code { white-space: nowrap; }
+
+.nilai-kelas { margin-bottom: 8px; }
+.nilai-tahun {
+  font-size: 13px; font-weight: 500; color: #888; margin-bottom: 28px;
+}
+.nilai-kelas-title {
+  font-size: 19px; font-weight: 600; color: #002D72;
+  margin-top: 32px; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 2px solid #002D72;
+}
+.nilai-kelas-title:first-of-type { margin-top: 0; }
+.nilai-semester { margin-bottom: 22px; }
+.nilai-semester-title { font-size: 14px; font-weight: 600; color: #444; margin-bottom: 10px; }
+.nilai-links { display: flex; flex-wrap: wrap; gap: 10px; }
+.nilai-links a, .nilai-links span {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 16px; border: 1px solid #e8e8e8; border-radius: 6px;
+  font-size: 13.5px; font-weight: 500; text-decoration: none; color: #111;
+  background: #fff; transition: border-color .15s, box-shadow .15s;
+}
+.nilai-links a:hover { border-color: #002D72; box-shadow: 0 4px 14px rgba(0,45,114,0.1); }
+.nilai-links span.disabled { color: #bbb; background: #fafafa; }
+
+/* HOME — HERO */
+.hero { max-width: 860px; margin: 0 auto; padding: 48px 40px 8px; }
+.hero-eyebrow {
+  font-size: 12.5px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+  color: #002D72; margin-bottom: 10px;
+}
+.hero h1 { font-size: 30px; font-weight: 600; letter-spacing: -.02em; line-height: 1.25; margin-bottom: 10px; }
+.hero p { font-size: 15px; color: #555; max-width: 640px; }
+
+/* HOME — TUJUAN PEMBELAJARAN */
+.tujuan { max-width: 860px; margin: 0 auto; padding: 32px 40px 8px; }
+.tujuan h2 {
+  font-size: 17px; font-weight: 600; margin-bottom: 16px;
+  padding-top: 24px; border-top: 1px solid #f0f0f0; color: #111;
+}
+.tujuan ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.tujuan li { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; color: #333; line-height: 1.6; }
+.tujuan li::before {
+  content: "✓"; flex-shrink: 0; width: 20px; height: 20px; border-radius: 50%;
+  background: #f0f4ff; color: #002D72; font-size: 11px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center; margin-top: 2px;
+}
+
+/* HOME — WHATSAPP GROUP CARD */
+.qr-wrap { max-width: 860px; margin: 0 auto; padding: 32px 40px 8px; }
+.qr-card {
+  display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
+  padding: 24px; border: 1px solid #e8e8e8; border-radius: 10px; background: #fafbfc;
+}
+.qr-card img { width: 110px; height: 110px; border-radius: 8px; border: 1px solid #e8e8e8; flex-shrink: 0; }
+.qr-card-body h2 { font-size: 16px; font-weight: 600; margin-bottom: 6px; }
+.qr-card-body p { font-size: 13.5px; color: #666; margin-bottom: 14px; }
+.btn-join {
+  display: inline-block; padding: 9px 18px; border-radius: 6px;
+  background: #25D366; color: #fff; text-decoration: none;
+  font-size: 13.5px; font-weight: 600; transition: filter .15s;
+}
+.btn-join:hover { filter: brightness(0.94); }
+
+@media (max-width: 600px) {
+  .qr-card { flex-direction: column; align-items: flex-start; }
+}
+
+/* MATERI LIST */
+.materi-section { margin-top: 36px; }
+.materi-section:first-child { margin-top: 0; }
+.materi-section-title {
+  font-size: 15px; font-weight: 600; color: #002D72;
+  text-transform: uppercase; letter-spacing: .03em;
+  margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid #e8e8e8;
+}
+.materi-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 12px;
+}
+.materi-card {
+  display: flex; flex-direction: column; justify-content: space-between; gap: 14px;
+  padding: 16px 18px; border: 1px solid #e8e8e8; border-radius: 8px;
+  background: #fff; text-decoration: none; color: inherit;
+  transition: border-color .15s, box-shadow .15s, transform .15s;
+}
+.materi-card:hover { border-color: #002D72; box-shadow: 0 4px 14px rgba(0,45,114,0.1); transform: translateY(-1px); }
+.materi-card-title { font-size: 14.5px; font-weight: 600; color: #111; line-height: 1.4; }
+.materi-card-footer { display: flex; align-items: center; justify-content: space-between; }
+.materi-card-link { font-size: 12.5px; font-weight: 500; color: #002D72; }
+.materi-card:hover .materi-card-link { text-decoration: underline; }
+.badge-new {
+  display: inline-block; font-size: 10.5px; font-weight: 700; letter-spacing: .03em;
+  color: #fff; background: #d64545; padding: 2px 7px; border-radius: 4px;
+  text-transform: uppercase; align-self: flex-start;
+}
+.badge-soon {
+  display: inline-block; font-size: 10.5px; font-weight: 700; letter-spacing: .03em;
+  color: #888; background: #f0f0f0; padding: 2px 7px; border-radius: 4px;
+  text-transform: uppercase; align-self: flex-start;
+}
+.materi-card.disabled { opacity: .55; pointer-events: none; cursor: default; }
+
+/* RESOURCE LINKS (dokumen eksternal: jobsheet, spreadsheet, dll) */
+.resource-grid { display: flex; flex-wrap: wrap; gap: 10px; margin: 4px 0 24px; }
+.resource-card {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 16px; border: 1px solid #e8e8e8; border-radius: 8px;
+  background: #fff; text-decoration: none; color: #111;
+  font-size: 14px; font-weight: 500;
+  transition: border-color .15s, box-shadow .15s;
+}
+.resource-card:hover { border-color: #002D72; box-shadow: 0 4px 14px rgba(0,45,114,0.1); }
+.resource-card svg { flex-shrink: 0; color: #002D72; }
+
+/* FOOTER */
+.divider { border: none; border-top: 1px solid #e8e8e8; max-width: 860px; margin: 0 auto; }
+footer { max-width: 860px; margin: 0 auto; padding: 28px 40px 48px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+.footer-name { font-size: 13px; font-weight: 500; color: #aaa; }
+.footer-links { display: flex; gap: 4px; }
+.footer-links a {
+  display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 6px;
+  color: #aaa; text-decoration: none; transition: color .15s, background .15s;
+}
+.footer-links a:hover { color: #002D72; background: rgba(0,45,114,0.07); }
+
+@media (max-width: 600px) {
+  .site-header { padding: 14px 16px 0; }
+  .site-header .inner { padding-left: 16px; }
+  .nav-inner { padding-left: 16px; }
+  .hero, .tujuan, .qr-wrap, footer { padding-left: 20px; padding-right: 20px; }
+  .divider { margin-left: 20px; margin-right: 20px; }
+  .hero h1 { font-size: 22px; }
+  .nav-links a { padding: 0 10px 0 0; font-size: 13px; }
+}

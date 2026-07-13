@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Konfigurasi IP di Windows — Portal Belajar</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="materi">
+
+<div id="site-header"></div>
+
+<div class="article-header">
+  <a href="materi.html" class="btn-back">← Kembali ke Daftar Materi</a>
+  <h1>Konfigurasi IP di Windows</h1>
+</div>
+
+<div class="article-content">
+
+  <ol class="langkah">
+    <li><div class="step-n">1</div><div class="step-body">Klik simbol pencarian 🔍 di taskbar Windows.</div></li>
+    <li><div class="step-n">2</div><div class="step-body">Ketik <strong>Control Panel</strong> lalu klik <strong>Open</strong>.</div></li>
+    <li><div class="step-n">3</div><div class="step-body">Klik <strong>Network and Internet</strong> → <strong>Network and Sharing Center</strong> → <strong>Change adapter settings</strong>.</div></li>
+  </ol>
+
+  <h2>Melihat Informasi Konfigurasi Alamat IP</h2>
+  <ol class="langkah">
+    <li><div class="step-n">1</div><div class="step-body">Klik kanan <strong>Ethernet</strong> → <strong>Status</strong> → <strong>Details...</strong></div></li>
+  </ol>
+  <img src="images/ip-details.png" alt="Tampilan rincian alamat IP">
+
+  <h2>Merubah Konfigurasi Alamat IP</h2>
+  <ol class="langkah">
+    <li><div class="step-n">1</div><div class="step-body">Klik kanan <strong>Ethernet</strong> → <strong>Properties</strong>.</div></li>
+    <li><div class="step-n">2</div><div class="step-body">Klik 2x pada <strong>Internet Protocol Version 4 (TCP/IPv4)</strong>.</div></li>
+    <li><div class="step-n">3</div><div class="step-body">Terdapat masing-masing 2 pilihan konfigurasi IP address & DNS Server (lihat penjelasan di bawah).</div></li>
+  </ol>
+  <div class="callout info">
+    💡 <strong>Obtain an IP Address Automatically</strong>: mengatur alamat IP secara otomatis.<br>
+    <strong>Use the following IP address</strong>: mengatur alamat IP secara manual — isikan IP Address, Subnet mask & Default gateway.<br><br>
+    <strong>Obtain DNS Server Address Automatically</strong>: mengatur alamat DNS Server secara otomatis.<br>
+    <strong>Use the following DNS Server addresses</strong>: mengatur alamat DNS Server secara manual — isikan Preferred DNS Server & Alternate DNS Server.
+  </div>
+
+  <h2>Pengujian Koneksi Jaringan</h2>
+  <ol class="langkah">
+    <li><div class="step-n">1</div><div class="step-body">Klik simbol pencarian 🔍 di taskbar Windows.</div></li>
+    <li><div class="step-n">2</div><div class="step-body">Ketik <strong>CMD</strong> atau <strong>Command Prompt</strong> lalu klik <strong>Open</strong>.</div></li>
+    <li><div class="step-n">3</div><div class="step-body">Uji koneksi jaringan menggunakan perintah ping dengan format: <code>ping [alamat tujuan]</code>.</div></li>
+    <li><div class="step-n">4</div><div class="step-body">Tekan Enter.</div></li>
+  </ol>
+
+  <div class="callout info">💡 Pada perintah CLI: teks <span style="color:#5b9dff; font-weight:600;">biru</span> adalah perintah tetap (hafalkan), sedangkan teks <span style="color:#111;">putih/hitam</span> adalah bagian yang perlu diubah sesuai kebutuhan.</div>
+
+  <div class="cli-block">
+    <span class="cli-label">Command Prompt</span>
+    <pre><span class="cli-comment"># Pengujian ke alamat web</span>
+<span class="cli-cmd">ping</span> <span class="cli-var">google.com</span>
+
+<span class="cli-comment"># Pengujian ke perangkat jaringan (PC, Router, dll)</span>
+<span class="cli-cmd">ping</span> <span class="cli-var">192.168.10.1</span></pre>
+  </div>
+
+</div>
+
+<div id="site-footer"></div>
+
+<script src="assets/components.js"></script>
+</body>
+</html>

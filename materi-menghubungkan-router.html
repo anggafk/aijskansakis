@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menghubungkan Router — Portal Pembelajaran TKJ</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="materi">
+
+<div id="site-header"></div>
+
+<div class="article-header">
+  <a href="materi.html" class="btn-back">← Kembali ke Daftar Materi</a>
+  <h1>Cara Akses Router MikroTik menggunakan Winbox</h1>
+</div>
+
+<div class="article-content">
+
+  <h2>1. Cara akses Router MikroTik dengan menggunakan Winbox</h2>
+
+  <img src="https://anggafk.github.io/aijskansakis/images/winbox-1.png" alt="Tampilan Awal Winbox" style="max-width:100%; border:1px solid #e8e8e8; border-radius:6px; margin-bottom:16px;">
+
+  <ol class="langkah">
+    <li><div class="step-n">1</div><div class="step-body">Hubungkan Router MikroTik dengan PC dengan menggunakan kabel UTP.</div></li>
+    <li><div class="step-n">2</div><div class="step-body">Pastikan lampu port LAN di PC dan Router menyala.</div></li>
+    <li><div class="step-n">3</div><div class="step-body">Ubah pengaturan alamat IP di PC menjadi <strong>Otomatis</strong>.</div></li>
+    <li><div class="step-n">4</div><div class="step-body">Buka aplikasi <strong>Winbox</strong> di PC.</div></li>
+    <li><div class="step-n">5</div><div class="step-body">Terdapat dua pilihan tab di Winbox, Managed dan Neighbor, pilih Tab <strong>Neighbor</strong>. Tab Managed berisi informasi router yang sudah disimpan sebelumnya, sedangkan Neighbor berisi informasi Router yang terhubung langsung dengan PC.</div></li>
+    <li><div class="step-n">6</div><div class="step-body">Perhatikan tabel, pastikan muncul informasi Router di tabel (klik Refresh jika belum muncul).</div></li>
+    <li><div class="step-n">7</div><div class="step-body">Klik nomor <strong>MAC Address</strong> di tabel, pastikan MAC Address di Connect to sama dengan MAC Address Router.</div></li>
+    <li><div class="step-n">8</div><div class="step-body">Isikan username di kotak login, dan password di kotak password. Setelah itu klik <strong>Connect</strong>.</div></li>
+  </ol>
+
+  <div class="callout info">💡 Jika router belum muncul di tabel:<br>a. Klik tombol Refresh.<br>b. Cek sambungan kabel dari Router ke PC.<br>c. Cek pengaturan alamat IP di PC.</div>
+
+  <div class="callout info">💡 Username dan Password bawaan Router MikroTik adalah:<br>Username: <strong>admin</strong><br>Password: <strong>tanpa password (kosong)</strong></div>
+
+</div>
+
+<div id="site-footer"></div>
+
+<script src="assets/components.js"></script>
+</body>
+</html>

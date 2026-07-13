@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Konfigurasi DHCP — Portal Belajar</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="materi">
+
+<div id="site-header"></div>
+
+<div class="article-header">
+  <a href="materi.html" class="btn-back">← Kembali ke Daftar Materi</a>
+  <h1>Dynamic Host Configuration Protocol (DHCP)</h1>
+</div>
+
+<div class="article-content">
+
+  <p>Layanan yang memungkinkan perangkat dapat memberikan, meminta, dan menyalurkan alamat IP secara otomatis pada host dalam sebuah jaringan. DHCP juga mampu mendistribusikan informasi IP Address, subnet mask, IP gateway, IP DNS, dan informasi lain sesuai pengaturan yang ditentukan.</p>
+
+  <h2>A. Konfigurasi DHCP Server</h2>
+  <p>DHCP Server adalah perangkat (dalam hal ini Router MikroTik) yang bertugas memberikan alamat IP secara otomatis kepada client yang terhubung ke jaringan. Konfigurasi DHCP Server terdiri dari tiga bagian utama: menentukan informasi jaringan, menentukan rentang IP yang akan dibagikan, dan mengaktifkan DHCP Server pada port yang diinginkan.</p>
+
+  <h3>1. Menambahkan IP Gateway, IP Network & IP DNS</h3>
+  <ol class="langkah">
+    <li><div class="step-n">a</div><div class="step-body"><strong>IP</strong> → <strong>DHCP Server</strong> → <strong>Network</strong>.</div></li>
+    <li><div class="step-n">b</div><div class="step-body">Klik tombol <strong>+</strong>.</div></li>
+    <li><div class="step-n">c</div><div class="step-body">
+      Atur sesuai ketentuan berikut:<br>
+      Address: <code>[IP Network]/[Prefix]</code><br>
+      Gateway: <code>[IP Gateway]</code><br>
+      DNS: <code>[IP DNS]</code>
+    </div></li>
+    <li><div class="step-n">d</div><div class="step-body">Klik tombol <strong>Apply</strong> → <strong>OK</strong>.</div></li>
+  </ol>
+  <pre>Contoh:
+Address : 192.168.10.0/24  (IP Network/Prefix)
+Gateway : 192.168.10.1
+DNS     : 1.1.1.1</pre>
+
+  <div class="cli-block">
+    <span class="cli-label">Mode CLI</span>
+    <pre>/ip dhcp-server network add address=192.168.10.0/24 gateway=192.168.10.1 dns-server=1.1.1.1</pre>
+  </div>
+
+  <h3>2. Menambahkan Rentang IP</h3>
+  <ol class="langkah">
+    <li><div class="step-n">a</div><div class="step-body"><strong>IP</strong> → <strong>Pool</strong>.</div></li>
+    <li><div class="step-n">b</div><div class="step-body">Klik tombol <strong>+</strong>.</div></li>
+    <li><div class="step-n">c</div><div class="step-body">
+      Atur sesuai ketentuan berikut:<br>
+      Name: <code>[Nama Rentang IP]</code><br>
+      Addresses: <code>[Rentang IP]</code>
+    </div></li>
+    <li><div class="step-n">d</div><div class="step-body">Klik tombol <strong>Apply</strong> → <strong>OK</strong>.</div></li>
+  </ol>
+  <pre>Contoh:
+Name      : rentang_dhcp
+Addresses : 192.168.10.11-192.168.10.30</pre>
+  <div class="callout info">💡 Rentang IP yang dimasukkan adalah alamat IP yang akan dibagikan ke perangkat client.</div>
+
+  <div class="cli-block">
+    <span class="cli-label">Mode CLI</span>
+    <pre>/ip pool add name=rentang_dhcp ranges=192.168.10.11-192.168.10.30</pre>
+  </div>
+
+  <h3>3. Membuat DHCP Server</h3>
+  <ol class="langkah">
+    <li><div class="step-n">a</div><div class="step-body"><strong>IP</strong> → <strong>DHCP Server</strong> → <strong>DHCP</strong>.</div></li>
+    <li><div class="step-n">b</div><div class="step-body">Klik tombol <strong>+</strong>.</div></li>
+    <li><div class="step-n">c</div><div class="step-body">
+      Atur sesuai ketentuan berikut:<br>
+      Name: <code>[Nama DHCP Server]</code><br>
+      Interface: <code>[Port yang dipakai]</code><br>
+      Lease Time: <code>[Lama Waktu DHCP]</code><br>
+      Address Pool: <code>[Nama Rentang IP]</code>
+    </div></li>
+    <li><div class="step-n">d</div><div class="step-body">Klik tombol <strong>Apply</strong> → <strong>OK</strong>.</div></li>
+  </ol>
+  <pre>Contoh:
+Name         : dhcp_lab_tkj
+Interface    : ether2
+Lease Time   : 00:20:00
+Address Pool : rentang_dhcp</pre>
+  <div class="callout info">💡 <strong>Lease Time</strong> adalah durasi Router meminjamkan alamat IP ke client. Jika perangkat masih terhubung ke jaringan saat waktu habis, lease time akan diperbarui secara otomatis. Jika perangkat sudah tidak terhubung, alamat IP tersebut bisa digunakan oleh perangkat lain. Format penulisan: <code>HH:MM:SS</code>. Contoh <code>00:20:00</code> berarti 20 menit.</div>
+
+  <div class="cli-block">
+    <span class="cli-label">Mode CLI</span>
+    <pre>/ip dhcp-server add name=dhcp_lab_tkj interface=ether2 lease-time=00:20:00 address-pool=rentang_dhcp disabled=no</pre>
+  </div>
+
+  <h2>B. DHCP Client</h2>
+  <p>DHCP Client digunakan ketika Router MikroTik bertindak sebagai penerima alamat IP dari perangkat lain (misalnya dari modem ISP). Dengan DHCP Client, Router tidak perlu dikonfigurasi IP secara manual pada port yang terhubung ke ISP — Router akan meminta IP secara otomatis.</p>
+
+  <h3>1. Menambahkan DHCP Client</h3>
+  <ol class="langkah">
+    <li><div class="step-n">a</div><div class="step-body"><strong>IP</strong> → <strong>DHCP Client</strong>.</div></li>
+    <li><div class="step-n">b</div><div class="step-body">Klik tombol <strong>+</strong>.</div></li>
+    <li><div class="step-n">c</div><div class="step-body">
+      Atur sesuai ketentuan berikut:<br>
+      Interface: <code>[Port yang terhubung ke ISP/modem]</code><br>
+      Use Peer DNS: <code>yes</code> (agar DNS dari ISP digunakan otomatis)<br>
+      Use Peer NTP: <code>yes</code><br>
+      Add Default Route: <code>yes</code> (agar gateway otomatis ditambahkan)
+    </div></li>
+    <li><div class="step-n">d</div><div class="step-body">Klik tombol <strong>Apply</strong> → <strong>OK</strong>.</div></li>
+  </ol>
+  <pre>Contoh:
+Interface       : ether1
+Use Peer DNS    : yes
+Add Default Route: yes</pre>
+  <div class="callout info">💡 Setelah DHCP Client aktif, Router akan mendapatkan IP, gateway, dan DNS secara otomatis dari ISP. Status <strong>bound</strong> menandakan IP sudah berhasil diperoleh.</div>
+
+  <div class="cli-block">
+    <span class="cli-label">Mode CLI</span>
+    <pre>/ip dhcp-client add interface=ether1 use-peer-dns=yes use-peer-ntp=yes add-default-route=yes disabled=no
+
+Cek status:
+/ip dhcp-client print</pre>
+  </div>
+
+  <h2>C. DHCP Relay</h2>
+  <p>DHCP Relay digunakan ketika DHCP Server dan client berada di jaringan yang berbeda (berbeda subnet). Karena paket DHCP tidak bisa melewati router secara langsung, DHCP Relay bertugas meneruskan permintaan IP dari client ke DHCP Server yang berada di jaringan lain.</p>
+
+  <h3>1. Menambahkan DHCP Relay</h3>
+  <ol class="langkah">
+    <li><div class="step-n">a</div><div class="step-body"><strong>IP</strong> → <strong>DHCP Relay</strong>.</div></li>
+    <li><div class="step-n">b</div><div class="step-body">Klik tombol <strong>+</strong>.</div></li>
+    <li><div class="step-n">c</div><div class="step-body">
+      Atur sesuai ketentuan berikut:<br>
+      Name: <code>[Nama Relay]</code><br>
+      Interface: <code>[Port yang terhubung ke jaringan client]</code><br>
+      DHCP Server: <code>[IP Asal DHCP Server]</code><br>
+      Local Address: <code>[IP Router pada interface tersebut]</code>
+    </div></li>
+    <li><div class="step-n">d</div><div class="step-body">Klik tombol <strong>Apply</strong> → <strong>OK</strong>.</div></li>
+  </ol>
+  <pre>Contoh:
+Name        : relay_vlan10
+Interface   : ether3
+DHCP Server : 10.0.0.1
+Local Address: 192.168.10.1</pre>
+  <div class="callout info">💡 DHCP Relay hanya meneruskan permintaan — DHCP Server tetap berada di perangkat lain. Pastikan DHCP Server sudah dikonfigurasi dengan network yang sesuai untuk subnet client.</div>
+
+  <div class="cli-block">
+    <span class="cli-label">Mode CLI</span>
+    <pre>/ip dhcp-relay add name=relay_vlan10 interface=ether3 dhcp-server=10.0.0.1 local-address=192.168.10.1 disabled=no</pre>
+  </div>
+
+</div>
+
+<div id="site-footer"></div>
+
+<script src="assets/components.js"></script>
+</body>
+</html>

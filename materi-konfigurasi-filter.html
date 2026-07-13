@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Firewall Filter — Portal Belajar</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="materi">
+
+<div id="site-header"></div>
+
+<div class="article-header">
+  <a href="materi.html" class="btn-back">← Kembali ke Daftar Materi</a>
+  <h1>Firewall Filter</h1>
+</div>
+
+<div class="article-content">
+
+  <div class="callout info">💡 Bagian ini juga disertai <strong>Mode CLI</strong> sebagai alternatif dari GUI (Winbox). Pada perintah CLI: teks <span style="color:#5b9dff; font-weight:600;">biru</span> adalah perintah tetap (hafalkan), sedangkan teks <span style="color:#111;">putih/hitam</span> adalah bagian yang perlu diubah sesuai kebutuhan.</div>
+
+  <h2>A. Pengertian</h2>
+  <p>Firewall Filter adalah sistem penyaring lalu lintas data yang bertugas menentukan apakah sebuah paket data boleh lewat atau harus dihentikan. Filter berperan sebagai "pintu gerbang" yang memastikan hanya data yang diinginkan dan aman saja yang bisa masuk atau keluar dari jaringan.</p>
+
+  <h3>Fungsi Utama Filter</h3>
+  <p><strong>a. Keamanan (Security)</strong> — Melindungi router dan jaringan lokal dari serangan luar, seperti percobaan hacking, brute force, atau virus/malware.</p>
+  <p><strong>b. Pengendalian Akses (Access Control)</strong> — Mengatur siapa saja yang boleh mengakses layanan tertentu.</p>
+  <p><strong>c. Optimasi Jaringan</strong> — Membantu menjaga performa jaringan dengan menyaring lalu lintas data yang tidak diperlukan.</p>
+
+  <h2>B. Konfigurasi Filter</h2>
+  <ol class="langkah">
+    <li><div class="step-n">a</div><div class="step-body"><strong>IP</strong> → <strong>Firewall</strong> → <strong>Filter Rules</strong>.</div></li>
+    <li><div class="step-n">b</div><div class="step-body">Klik tombol <strong>+</strong> untuk menambah Filter.</div></li>
+    <li><div class="step-n">c</div><div class="step-body">Atur parameter sesuai kebutuhan (lihat penjelasan parameter di bagian C).</div></li>
+    <li><div class="step-n">d</div><div class="step-body">Klik tombol <strong>Apply</strong> → <strong>OK</strong>.</div></li>
+  </ol>
+
+  <div class="cli-block">
+    <span class="cli-label">Mode CLI — Contoh: Blokir Ping dari Luar</span>
+    <pre><span class="cli-cmd">/ip firewall filter add chain=</span><span class="cli-var">input</span> <span class="cli-cmd">protocol=</span><span class="cli-var">icmp</span> <span class="cli-cmd">in-interface=</span><span class="cli-var">ether1</span> <span class="cli-cmd">action=</span><span class="cli-var">drop</span></pre>
+  </div>
+
+  <div class="cli-block">
+    <span class="cli-label">Mode CLI — Contoh: Blokir Situs Tertentu</span>
+    <pre><span class="cli-cmd">/ip firewall filter add chain=</span><span class="cli-var">forward</span> <span class="cli-cmd">content=</span><span class="cli-var">youtube.com</span> <span class="cli-cmd">action=</span><span class="cli-var">drop</span></pre>
+  </div>
+
+  <h2>C. Penjelasan Parameter</h2>
+
+  <h3>1. Chain</h3>
+  <p>Chain adalah arah lalu lintas data, dibagi menjadi 3 chain utama:</p>
+  <p><strong>a. Input</strong> — Menangani paket yang menuju ke router.</p>
+  <p><strong>b. Output</strong> — Menangani paket yang keluar dari router.</p>
+  <p><strong>c. Forward</strong> — Menangani paket yang melewati router.</p>
+
+  <h3>2. Action</h3>
+  <p>Menentukan keputusan yang diambil oleh router terhadap paket tersebut.</p>
+  <p><strong>a. Accept</strong> — Paket diizinkan lewat. Router berhenti memeriksa aturan lain untuk paket yang sama.</p>
+  <p><strong>b. Drop</strong> — Paket ditolak tanpa pesan. Pengirim tidak tahu apakah paketnya sampai atau tidak.</p>
+  <p><strong>c. Reject</strong> — Paket ditolak, tapi router mengirimkan pesan balik kepada pengirim.</p>
+  <p><strong>d. Log</strong> — Router mencatat informasi paket ke dalam menu System &gt; Log.</p>
+  <p><strong>e. Add Source to Address List</strong> — IP pengirim paket dimasukkan ke dalam daftar IP di tab Address Lists.</p>
+  <p><strong>f. Add Destination to Address List</strong> — IP tujuan paket dimasukkan ke dalam daftar IP di tab Address Lists.</p>
+
+  <h3>3. Parameter (Kondisi)</h3>
+  <p>Kriteria spesifik yang digunakan router untuk mengidentifikasi paket, diisikan sesuai kebutuhan.</p>
+
+  <p><strong>Asal &amp; Tujuan</strong></p>
+  <p><strong>a. Src. Address</strong> — Alamat IP asal paket.</p>
+  <p><strong>b. Dst. Address</strong> — Alamat IP tujuan paket.</p>
+  <div class="callout info">
+    💡 Format pengisian Src. &amp; Dst. Address:<br>
+    <strong>IP Tunggal</strong>, contoh <code>192.168.10.1</code> — untuk satu perangkat spesifik.<br>
+    <strong>IP Network</strong>, contoh <code>192.168.10.0/24</code> — untuk semua perangkat dalam satu jaringan.<br>
+    <strong>Rentang IP</strong>, contoh <code>192.168.10.11-192.168.10.20</code> — untuk perangkat dengan IP berurutan.
+  </div>
+  <p><strong>c. In. Interface</strong> — Port/interface tempat masuk paket.</p>
+  <p><strong>d. Out. Interface</strong> — Port/interface tempat keluar paket.</p>
+
+  <p><strong>Protocol &amp; Port</strong></p>
+  <p><strong>e. Protocol</strong></p>
+  <pre>ICMP : Cek koneksi (ping, traceroute)
+TCP  : Web browsing, Email, Transfer File
+UDP  : Game Online, Streaming, Voice Call</pre>
+  <p><strong>f. Dst. Port</strong></p>
+  <pre>21      : ftp
+22      : ssh
+23      : telnet
+53      : dns
+67 & 68 : dhcp
+80      : http
+443     : https</pre>
+  <p><strong>g. Content</strong> — Berfungsi sebagai "penyaring kata kunci". Jika sebuah paket data mengandung kata yang ditentukan (seperti nama situs atau jenis file), router akan menangkap paket tersebut.</p>
+  <p><strong>h. Time</strong> — Berfungsi untuk mengatur masa aktif sebuah aturan (rule) berdasarkan jadwal waktu dan hari yang telah ditentukan.</p>
+
+  <h3>4. Lain-lain</h3>
+  <p><strong>a. Comment (Catatan/Keterangan)</strong> — Digunakan untuk memberi label atau keterangan pada sebuah aturan, membantu mengenali aturan tanpa harus melihat satu per satu (contoh: "Blokir Youtube"), serta memudahkan kolaborasi antar admin dalam satu tim.</p>
+  <p><strong>b. Simbol Negasi (!)</strong> — Kotak di sebelah kiri parameter, berfungsi sebagai operator "Bukan" atau "Kecuali" terhadap parameter yang ditentukan. Contoh: Src. Address: <code>! 192.168.1.1</code> artinya paket berasal dari perangkat dengan IP selain 192.168.1.1.</p>
+  <p><strong>c. Enable (✔) dan Disable (✘)</strong> — Mengaktifkan atau menonaktifkan sebuah aturan tanpa harus menghapusnya. Bisa digunakan untuk mencari tahu apakah aturan tersebut yang menyebabkan gangguan koneksi.</p>
+  <p><strong>d. Urutan (# / index)</strong> — Menentukan urutan router dalam menjalankan aturan/rule.</p>
+
+</div>
+
+<div id="site-footer"></div>
+
+<script src="assets/components.js"></script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Konfigurasi Wireless — Portal Belajar</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="materi">
+
+<div id="site-header"></div>
+
+<div class="article-header">
+  <a href="materi.html" class="btn-back">← Kembali ke Daftar Materi</a>
+  <h1>Konfigurasi Wireless</h1>
+</div>
+
+<div class="article-content">
+
+  <div class="callout info">💡 Setiap bagian juga disertai <strong>Mode CLI</strong> sebagai alternatif dari GUI (Winbox). Pada perintah CLI: teks <span style="color:#5b9dff; font-weight:600;">biru</span> adalah perintah tetap (hafalkan), sedangkan teks <span style="color:#111;">putih/hitam</span> adalah bagian yang perlu diubah sesuai kebutuhan.</div>
+
+  <h2>1. Mengaktifkan Interface Wireless</h2>
+  <p>Interface wireless di MikroTik bernama <code>wlan</code>. Interface ini tidak otomatis aktif secara langsung — akan berwarna abu-abu sebagai tanda bahwa interface belum aktif.</p>
+  <ol class="langkah">
+    <li><div class="step-n">a</div><div class="step-body">Buka menu <strong>Wireless</strong> → <strong>Interfaces</strong>.</div></li>
+    <li><div class="step-n">b</div><div class="step-body">Pilih interface <code>wlan</code> dan aktifkan dengan menekan tombol ✔.</div></li>
+  </ol>
+
+  <div class="cli-block">
+    <span class="cli-label">Mode CLI</span>
+    <pre><span class="cli-cmd">/interface wireless enable</span> <span class="cli-var">wlan1</span></pre>
+  </div>
+
+  <h2>2. Konfigurasi wlan</h2>
+  <ol class="langkah">
+    <li><div class="step-n">a</div><div class="step-body">Klik 2x pada <strong>wlan</strong>.</div></li>
+    <li><div class="step-n">b</div><div class="step-body">Pilih Tab <strong>Wireless</strong>.</div></li>
+    <li><div class="step-n">c</div><div class="step-body">
+      Isikan sesuai ketentuan berikut:<br>
+      Mode: <code>[Mode Wireless]</code><br>
+      SSID: <code>[Nama Jaringan Wireless]</code>
+    </div></li>
+    <li><div class="step-n">d</div><div class="step-body">Klik tombol <strong>Apply</strong> → <strong>OK</strong>.</div></li>
+  </ol>
+  <div class="callout info">
+    💡 Pilihan mode wireless:<br>
+    Sebagai Pemancar: <strong>AP Bridge</strong><br>
+    Sebagai Penerima: <strong>Station</strong>
+  </div>
+
+  <div class="cli-block">
+    <span class="cli-label">Mode CLI</span>
+    <pre><span class="cli-cmd">/interface wireless set wlan1 mode=</span><span class="cli-var">ap-bridge</span> <span class="cli-cmd">ssid=</span><span class="cli-var">Wifi-TKJ</span></pre>
+  </div>
+
+  <h2>3. Konfigurasi Keamanan</h2>
+  <ol class="langkah">
+    <li><div class="step-n">a</div><div class="step-body">Buka menu <strong>Wireless</strong>.</div></li>
+    <li><div class="step-n">b</div><div class="step-body">Pilih Tab <strong>Security Profiles</strong>.</div></li>
+    <li><div class="step-n">c</div><div class="step-body">Klik tombol <strong>+</strong> untuk membuat password.</div></li>
+    <li><div class="step-n">d</div><div class="step-body">
+      Isikan sesuai ketentuan berikut:<br>
+      Name: <code>[Nama Profil]</code><br>
+      Mode: <code>dynamic keys</code><br>
+      Authentication Types: <code>WPA2 PSK</code><br>
+      WPA Pre Shared Key: <code>[Password]</code>
+    </div></li>
+    <li><div class="step-n">e</div><div class="step-body">Klik tombol <strong>Apply</strong> → <strong>OK</strong>.</div></li>
+    <li><div class="step-n">f</div><div class="step-body">Masuk kembali ke pengaturan <strong>wlan</strong> pada langkah sebelumnya.</div></li>
+    <li><div class="step-n">g</div><div class="step-body">Di parameter <strong>Security Profile</strong>, pilih nama profil yang sudah dibuat.</div></li>
+    <li><div class="step-n">h</div><div class="step-body">Klik tombol <strong>Apply</strong> → <strong>OK</strong>.</div></li>
+  </ol>
+
+  <div class="cli-block">
+    <span class="cli-label">Mode CLI</span>
+    <pre><span class="cli-cmd">/interface wireless security-profiles add name=</span><span class="cli-var">profil-wifi</span> <span class="cli-cmd">mode=</span><span class="cli-var">dynamic-keys</span> <span class="cli-cmd">authentication-types=</span><span class="cli-var">wpa2-psk</span> <span class="cli-cmd">wpa2-pre-shared-key=</span><span class="cli-var">password123</span>
+<span class="cli-cmd">/interface wireless set wlan1 security-profile=</span><span class="cli-var">profil-wifi</span></pre>
+  </div>
+
+</div>
+
+<div id="site-footer"></div>
+
+<script src="assets/components.js"></script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Konfigurasi Routing — Portal Belajar</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="materi">
+
+<div id="site-header"></div>
+
+<div class="article-header">
+  <a href="materi.html" class="btn-back">← Kembali ke Daftar Materi</a>
+  <h1>Konfigurasi Routing</h1>
+</div>
+
+<div class="article-content">
+
+  <div class="callout info">💡 Setiap bagian juga disertai <strong>Mode CLI</strong> sebagai alternatif dari GUI (Winbox). Pada perintah CLI: teks <span style="color:#5b9dff; font-weight:600;">biru</span> adalah perintah tetap (hafalkan), sedangkan teks <span style="color:#111;">putih/hitam</span> adalah bagian yang perlu diubah sesuai kebutuhan.</div>
+
+  <h2>1. Pengertian</h2>
+  <p>Routing adalah proses dimana suatu router me-forward pesan dari satu jaringan ke jaringan lain yang dituju. Routing dibagi menjadi 2, yaitu Routing Statis dan Routing Dinamis.</p>
+  <p><strong>Routing Statis (Static Routing)</strong> adalah routing yang untuk terhubung ke jaringan lain harus dikonfigurasikan secara manual. Administrator jaringan harus mengkonfigurasikan semua alamat jaringan yang akan dituju, serta memasukkan atau menghapus rute statis jika terjadi perubahan topologi.</p>
+  <p><strong>Routing Dinamis (Dynamic Routing)</strong> adalah routing yang mampu membuat tabel routing secara otomatis berdasarkan lalu lintas jaringan dan router yang terhubung. Administrator jaringan hanya perlu mengkonfigurasikan jaringan yang terhubung langsung dengan sebuah router; perubahan di router lain akan otomatis menambahkan alamat jaringan di tabel routing.</p>
+
+  <h2>2. Konfigurasi Routing Statis</h2>
+  <ol class="langkah">
+    <li><div class="step-n">a</div><div class="step-body"><strong>IP</strong> → <strong>Routes</strong>.</div></li>
+    <li><div class="step-n">b</div><div class="step-body">Klik tombol <strong>+</strong>.</div></li>
+    <li><div class="step-n">c</div><div class="step-body">
+      Atur sesuai ketentuan berikut:<br>
+      Dst. Address: <code>[IP Network Tujuan]</code><br>
+      Gateway: <code>[IP Gateway]</code>
+    </div></li>
+    <li><div class="step-n">d</div><div class="step-body">Klik tombol <strong>Apply</strong> → <strong>OK</strong>.</div></li>
+  </ol>
+
+  <div class="cli-block">
+    <span class="cli-label">Mode CLI</span>
+    <pre><span class="cli-cmd">/ip route add dst-address=</span><span class="cli-var">50.50.50.0/24</span> <span class="cli-cmd">gateway=</span><span class="cli-var">20.20.20.2</span></pre>
+  </div>
+
+  <h3>Contoh Routing Statis</h3>
+  <img src="images/routing-statis-1.png" alt="Topologi Routing Statis">
+  <pre>Router A terhubung langsung dengan 3 alamat network: 10.10.10.0/24, 20.20.20.0/24, dan 40.40.40.0/24.
+Jaringan yang tidak terhubung langsung dengan Router A membutuhkan pengaturan routing statis
+untuk masing-masing jaringan.
+
+Konfigurasi routing statis untuk Router A:
+
+1. Dst. Address : 50.50.50.0/24
+   Gateway      : 20.20.20.2
+   Keterangan   : Router A dihubungkan ke jaringan 50.50.50.0/24
+                  melewati port dengan alamat IP 20.20.20.2
+
+2. Dst. Address : 60.60.60.0/24
+   Gateway      : 20.20.20.2
+   Keterangan   : Router A dihubungkan ke jaringan 60.60.60.0/24
+                  melewati port dengan alamat IP 20.20.20.2
+
+3. Dst. Address : 30.30.30.0/24
+   Gateway      : 20.20.20.2
+   Keterangan   : Router A dihubungkan ke jaringan 30.30.30.0/24
+                  melewati port dengan alamat IP 20.20.20.2</pre>
+
+  <div class="cli-block">
+    <span class="cli-label">Mode CLI — Router A</span>
+    <pre><span class="cli-cmd">/ip route add dst-address=</span><span class="cli-var">50.50.50.0/24</span> <span class="cli-cmd">gateway=</span><span class="cli-var">20.20.20.2</span>
+<span class="cli-cmd">/ip route add dst-address=</span><span class="cli-var">60.60.60.0/24</span> <span class="cli-cmd">gateway=</span><span class="cli-var">20.20.20.2</span>
+<span class="cli-cmd">/ip route add dst-address=</span><span class="cli-var">30.30.30.0/24</span> <span class="cli-cmd">gateway=</span><span class="cli-var">20.20.20.2</span></pre>
+  </div>
+
+  <h2>3. Konfigurasi Routing Dinamis (OSPF)</h2>
+  <ol class="langkah">
+    <li><div class="step-n">a</div><div class="step-body"><strong>Routing</strong> → <strong>OSPF</strong>.</div></li>
+    <li><div class="step-n">b</div><div class="step-body">
+      Buka menu <strong>Instance</strong>, atur sesuai ketentuan berikut:<br>
+      Router ID: <code>[IP Identitas Router]</code><br>
+      Redistribute Default Route: <code>If installed (as type 1)</code>
+    </div></li>
+    <li><div class="step-n">c</div><div class="step-body">
+      Buka menu <strong>Network</strong>, klik tombol <strong>+</strong>, lalu atur:<br>
+      Network: <code>[IP Network]</code>
+    </div></li>
+  </ol>
+  <div class="callout info">💡 Router ID harus berbeda di masing-masing router yang terhubung dalam satu jaringan.</div>
+  <div class="callout info">💡 Pengaturan <strong>Redistribute Default Route</strong> khusus diisi untuk router yang terhubung langsung dengan internet; untuk router lain biarkan tetap <code>Never</code>.</div>
+  <div class="callout info">💡 Langkah <strong>Network</strong> diulang sesuai jumlah port yang digunakan — diisi dengan IP Network dari port yang terhubung langsung dengan router yang dikonfigurasi.</div>
+
+  <div class="cli-block">
+    <span class="cli-label">Mode CLI</span>
+    <pre><span class="cli-cmd">/routing ospf instance set default router-id=</span><span class="cli-var">1.1.1.1</span> <span class="cli-cmd">redistribute-default=</span><span class="cli-var">as-type-1</span>
+<span class="cli-cmd">/routing ospf network add network=</span><span class="cli-var">20.20.20.0/24</span> <span class="cli-cmd">area=</span><span class="cli-var">backbone</span></pre>
+  </div>
+
+  <h3>Contoh Routing Dinamis (OSPF)</h3>
+  <img src="images/routing-statis-1.png" alt="Topologi Routing OSPF">
+  <pre>Konfigurasi routing OSPF untuk masing-masing router:
+
+Router A
+1. Instance
+   Router ID: 1.1.1.1
+   Redistribute Default Route: If installed (as type 1)
+2. Network
+   • Network: 20.20.20.0/24
+   • Network: 40.40.40.0/24
+
+Router B
+1. Instance
+   Router ID: 2.2.2.2
+   Redistribute Default Route: Never
+2. Network
+   • Network: 20.20.20.0/24
+   • Network: 30.30.30.0/24
+   • Network: 50.50.50.0/24
+
+Router C
+1. Instance
+   Router ID: 3.3.3.3
+   Redistribute Default Route: Never
+2. Network
+   • Network: 30.30.30.0/24
+   • Network: 60.60.60.0/24</pre>
+
+  <div class="cli-block">
+    <span class="cli-label">Mode CLI — Router A</span>
+    <pre><span class="cli-cmd">/routing ospf instance set default router-id=</span><span class="cli-var">1.1.1.1</span> <span class="cli-cmd">redistribute-default=</span><span class="cli-var">as-type-1</span>
+<span class="cli-cmd">/routing ospf network add network=</span><span class="cli-var">20.20.20.0/24</span> <span class="cli-cmd">area=</span><span class="cli-var">backbone</span>
+<span class="cli-cmd">/routing ospf network add network=</span><span class="cli-var">40.40.40.0/24</span> <span class="cli-cmd">area=</span><span class="cli-var">backbone</span></pre>
+  </div>
+
+  <div class="cli-block">
+    <span class="cli-label">Mode CLI — Router B</span>
+    <pre><span class="cli-cmd">/routing ospf instance set default router-id=</span><span class="cli-var">2.2.2.2</span>
+<span class="cli-cmd">/routing ospf network add network=</span><span class="cli-var">20.20.20.0/24</span> <span class="cli-cmd">area=</span><span class="cli-var">backbone</span>
+<span class="cli-cmd">/routing ospf network add network=</span><span class="cli-var">30.30.30.0/24</span> <span class="cli-cmd">area=</span><span class="cli-var">backbone</span>
+<span class="cli-cmd">/routing ospf network add network=</span><span class="cli-var">50.50.50.0/24</span> <span class="cli-cmd">area=</span><span class="cli-var">backbone</span></pre>
+  </div>
+
+  <div class="cli-block">
+    <span class="cli-label">Mode CLI — Router C</span>
+    <pre><span class="cli-cmd">/routing ospf instance set default router-id=</span><span class="cli-var">3.3.3.3</span>
+<span class="cli-cmd">/routing ospf network add network=</span><span class="cli-var">30.30.30.0/24</span> <span class="cli-cmd">area=</span><span class="cli-var">backbone</span>
+<span class="cli-cmd">/routing ospf network add network=</span><span class="cli-var">60.60.60.0/24</span> <span class="cli-cmd">area=</span><span class="cli-var">backbone</span></pre>
+  </div>
+
+</div>
+
+<div id="site-footer"></div>
+
+<script src="assets/components.js"></script>
+</body>
+</html>

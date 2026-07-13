@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Subnetting VLSM — Portal Belajar</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="materi">
+
+<div id="site-header"></div>
+
+<div class="article-header">
+  <a href="materi.html" class="btn-back">← Kembali ke Daftar Materi</a>
+  <h1>Subnetting</h1>
+</div>
+
+<div class="article-content">
+
+  <p>Subnetting merupakan pemecahan sebuah Jaringan/Network menjadi 2 atau lebih Subnetwork yang lebih kecil. Dengan subnetting akan tercipta beberapa network tambahan, tetapi mengurangi jumlah maksimum host yang ada dalam tiap network tersebut.</p>
+
+  <p>Contoh perbedaan pengelolaan jaringan dengan dan tanpa subnetting. Terdapat 4 buah Lab dengan masing-masing Lab terdapat 25 Host.</p>
+
+  <img src="images/ip-tanpa-subnetting.png" alt="Pembagian IP Tanpa Subnetting">
+
+  <p>Jika alamat IP tidak dipecah menjadi lebih kecil, maka masing-masing Lab harus menggunakan alamat Jaringan/Network yang berbeda:</p>
+  <pre>Lab 1: 192.168.10.0/24
+Lab 2: 192.168.11.0/24
+Lab 3: 192.168.12.0/24
+Lab 4: 192.168.13.0/24</pre>
+  <p>Masing-masing Jaringan/Network mempunyai banyak sisa IP yang tidak dipakai.</p>
+
+  <img src="images/ip-subnetting.png" alt="Pembagian IP Dengan Subnetting">
+
+  <p>Jika alamat IP dipecah menjadi lebih kecil, maka masing-masing Lab akan menggunakan Jaringan/Network yang sama tetapi menjadi subnetwork yang lebih kecil:</p>
+  <pre>Lab 1: 192.168.10.0/27
+Lab 2: 192.168.10.32/27
+Lab 3: 192.168.10.64/27
+Lab 4: 192.168.10.96/27</pre>
+  <p>Lab 2 s.d. 4 bisa menggunakan sisa alamat IP yang tidak dipakai di Lab 1.</p>
+
+  <h2>A. CIDR (Classless Inter-Domain Routing)</h2>
+  <p>CIDR Subnetting digunakan untuk membagi alamat IP menjadi subnetwork yang lebih kecil, di mana antara satu subnetwork dengan subnetwork yang lain besarnya <strong>sama</strong>.</p>
+
+  <h2>B. VLSM (Variable Length Subnet Mask)</h2>
+  <p>VLSM Subnetting digunakan untuk membagi alamat IP menjadi subnetwork yang lebih kecil, di mana antara satu subnetwork dengan subnetwork yang lain besarnya <strong>bisa berbeda</strong>.</p>
+
+  <p>Sebelum melakukan pemecahan alamat IP menggunakan VLSM, buat tabel subnetting dengan format seperti berikut:</p>
+
+  <h3>Tabel Subnetting</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Prefix</th><th>Subnetmask Desimal</th><th>Subnetmask Biner</th>
+        <th>Total IP / Blok Subnet</th><th>Banyak Host Tiap Subnet</th><th>Banyak Subnet</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><code>/24</code></td><td><code>255.255.255.0</code></td><td><code>11111111.11111111.11111111.00000000</code></td><td>256</td><td>254</td><td>1</td></tr>
+      <tr><td><code>/25</code></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td><code>/26</code></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td><code>/27</code></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td><code>/28</code></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td><code>/29</code></td><td></td><td></td><td></td><td></td><td></td></tr>
+      <tr><td><code>/30</code></td><td></td><td></td><td></td><td></td><td></td></tr>
+    </tbody>
+  </table>
+
+  <p>Langkah-langkah pemecahan alamat IP menggunakan metode VLSM:</p>
+
+  <ol class="langkah">
+    <li><div class="step-n">1</div><div class="step-body">Mengurutkan data kebutuhan host dari yang <strong>Terbesar</strong> ke <strong>Terkecil</strong>.</div></li>
+    <li><div class="step-n">2</div><div class="step-body">Menentukan prefix dan Blok Subnet/Total IP yang digunakan untuk masing-masing ruang. Lihat langsung kolom <strong>Banyak host tiap subnet</strong> sebagai panduan, dan pilih prefix yang memiliki sisa host paling sedikit.</div></li>
+    <li><div class="step-n">3</div><div class="step-body">Menentukan alamat network atau subnet untuk masing-masing ruang. Alamat Network dimulai dengan <code>xx.xx.xx.0</code>, untuk subnet selanjutnya didapat dengan menambahkan <strong>Blok Subnet/Total IP</strong> yang sudah ditentukan sebelumnya.</div></li>
+    <li><div class="step-n">4</div><div class="step-body">
+      Menentukan alamat broadcast dan host untuk masing-masing ruang:<br>
+      Alamat Broadcast = Alamat Network + Total IP − 1<br>
+      Alamat Host Pertama = Alamat Network + 1<br>
+      Alamat Host Terakhir = Alamat Broadcast − 1
+    </div></li>
+  </ol>
+
+</div>
+
+<div id="site-footer"></div>
+
+<script src="assets/components.js"></script>
+</body>
+</html>
