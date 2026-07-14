@@ -39,7 +39,8 @@
   <p><strong>Prefix length</strong> adalah bagian dari alamat IP yang menunjukkan jaringan tempat suatu perangkat berada. Prefix menunjukkan banyaknya binary 1 secara berurutan dimulai dari bit pertama. Prefix digunakan untuk menentukan subnet mask dari alamat IP.</p>
   <p><strong>Subnet mask</strong> digunakan untuk membedakan network ID dengan host ID, menunjukkan letak suatu host, apakah berada di jaringan lokal atau jaringan luar.</p>
   <div class="callout info">
-    💡 Bit-bit subnet mask yang didefinisikan:<br>
+    💡<br>
+    Bit-bit subnet mask yang didefinisikan:<br>
     Semua bit yang digunakan oleh Network ID bernilai <strong>1</strong>.<br>
     Semua bit yang digunakan oleh Host ID bernilai <strong>0</strong>.
   </div>
@@ -56,19 +57,26 @@
     </tbody>
   </table>
 
+  <div class="callout info">
+    💡<br>
+    Alamat IP Kelas A bisa menggunakan Subnetmask kelas A, B & C<br>
+    Alamat IP Kelas B bisa menggunakan Subnetmask kelas B & C.<br>
+    Alamat IP Kelas C bisa menggunakan Subnetmask kelas C.<br>
+  </div>
+
   <h2>3. Alamat Network dan Host</h2>
   <p>Setiap alamat IP terdiri dari 2 bagian, Alamat Network dan Alamat Host.</p>
   <p><strong>Alamat Network (Network ID)</strong> merupakan bagian dari alamat IP yang mengidentifikasi jaringan tertentu di mana sebuah perangkat berada. Semua perangkat jaringan harus mempunyai alamat network yang sama untuk bisa saling terhubung.</p>
   <p><strong>Alamat Host (Host ID)</strong> merupakan bagian dari alamat IP yang mengidentifikasi perangkat spesifik secara individu. Dalam jaringan yang sama, tidak boleh ada 2 atau lebih alamat host yang sama.</p>
 
-  <pre>Kelas A
-Net ID . Host ID . Host ID . Host ID
+  <pre><strong>Kelas A</strong>
+<span class="term-netid">Net ID </span> . <span class="term-hostid">Host ID</span> . <span class="term-hostid">Host ID</span> . <span class="term-hostid">Host ID</span>
 
-Kelas B
-Net ID . Net ID . Host ID . Host ID
+<strong>Kelas B</strong>
+<span class="term-netid">Net ID </span> . <span class="term-netid">Net ID </span> . <span class="term-hostid">Host ID</span> . <span class="term-hostid">Host ID</span>
 
-Kelas C
-Net ID . Net ID . Net ID . Host ID</pre>
+<strong>Kelas C</strong>
+<span class="term-netid">Net ID </span> . <span class="term-netid">Net ID </span> . <span class="term-netid">Net ID </span> . <span class="term-hostid">Host ID</span></pre>
 
   <h2>Penulisan Alamat IP</h2>
   <p>Penulisan IP address umumnya adalah dengan <code>192.168.1.2</code>. Namun adakalanya ditulis dengan <code>192.168.1.2/24</code>.</p>
