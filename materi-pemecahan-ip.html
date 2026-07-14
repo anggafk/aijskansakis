@@ -13,7 +13,7 @@
 
 <div class="article-header">
   <a href="materi.html" class="btn-back">← Kembali ke Daftar Materi</a>
-  <h1>Pemecahan Alamat IP (Subnetting)</h1>
+  <h1>Menghitung IP Network, Host, dan Broadcast</h1>
 </div>
 
 <div class="article-content">
@@ -37,75 +37,98 @@
   <div class="callout info">💡 Kelas yang lebih besar bisa menggunakan prefix kelas yang lebih kecil.</div>
 
   <h2>B. Menentukan Subnetmask, IP Network, IP Broadcast dan IP Host (Kelas C)</h2>
+  <p>Sebelum masuk ke rumus perhitungan, kita perlu memahami bahwa setiap kali sebuah perangkat (seperti PC atau Laptop) diberikan sebuah alamat IP beserta prefix-nya (contoh: <code>192.168.10.150/26</code>), alamat tersebut menyimpan informasi tentang kelompok jaringannya.</p>
+  <p>Untuk mengonfigurasi jaringan dengan benar, kita harus bisa menguraikan 4 komponen penting dari alamat IP tersebut.</p>
 
+  <!--
+  <div class="callout info">
+    💡 Kode warna istilah di halaman ini:<br>
+    <span class="term-subnetmask">■ Subnetmask / Prefix</span> &nbsp;
+    <span class="term-oktet">■ Nilai Oktet ke-4</span> &nbsp;
+    <span class="term-bloksubnet">■ Blok Subnet</span> &nbsp;
+    <span class="term-angka">■ Angka Sebelum Koma</span> &nbsp;
+    <span class="term-network">■ IP Network</span> &nbsp;
+    <span class="term-broadcast">■ IP Broadcast</span>
+  </div>
+  -->
   <h3>1. Menghitung Blok Subnet dan Subnetmask</h3>
+  <p><strong>Subnet Mask</strong>: Penunjuk batas antara bagian network dan bagian host.</p>
+  <p><strong>Blok Subnet</strong>: Jarak atau kelipatan ukuran dari satu kelompok jaringan ke kelompok berikutnya.</p>
 
   <p><strong>a. Cara Pertama — Menghitung Subnetmask</strong></p>
   <p>Ubah prefix menjadi subnetmask biner, lalu konversikan menjadi desimal.</p>
   <pre>Contoh: 192.168.10.150/26
-Subnetmask biner = 11111111.11111111.11111111.11000000
+Subnetmask biner = <span class="term-subnetmask">11111111.11111111.11111111.11000000</span>
                     (26 bit pertama merupakan bilangan 1, bit tersisa merupakan bilangan 0)
 Dikonversi menjadi bilangan desimal:
-Subnetmask = 255.255.255.192</pre>
+Subnetmask = <span class="term-subnetmask">255.255.255.192</span></pre>
 
   <p><strong>Menghitung Blok Subnet</strong></p>
-  <pre>Blok Subnet = 256 - Oktet ke-4 Subnetmask
-
-Contoh: 192.168.10.150/26
-Blok subnet = 256 - 192
-Blok Subnet = 64</pre>
+  <div class="formula-box">Blok Subnet = 256 − <span class="term-subnetmask">Oktet ke-4 Subnetmask</span></div>
+  <pre>Contoh: 192.168.10.150/26
+Blok subnet = 256 - <span class="term-subnetmask">Oktet ke-4 Subnetmask</span>
+            = 256 - <span class="term-subnetmask">192</span>
+Blok Subnet = <span class="term-bloksubnet">64</span></pre>
 
   <p><strong>b. Cara Kedua — Menghitung Blok Subnet</strong></p>
-  <pre>Blok Subnet = 2^(32 - prefix)
-
-Contoh: 192.168.10.150/26
-Blok subnet = 2^(32 - 26)
+  <div class="formula-box">Blok Subnet = 2<sup>(<span class="term-subnetmask">32 − prefix</span>)</sup></div>
+  <pre>Contoh: 192.168.10.150/26
+Blok subnet = 2^(<span class="term-subnetmask">32 - prefix</span>)
+            = 2^(<span class="term-subnetmask">32 - 26</span>)
             = 2^6
-Blok Subnet = 64</pre>
+Blok Subnet = <span class="term-bloksubnet">64</span></pre>
 
   <p><strong>Menghitung Subnetmask</strong></p>
-  <pre>Subnetmask = 255.255.255.(256 - Blok Subnet)
-
-Contoh: 192.168.10.150/26
-Subnetmask = 255.255.255.(256 - 64)
-Subnetmask = 255.255.255.192</pre>
+  <div class="formula-box">Subnetmask = 255.255.255.(256 − <span class="term-bloksubnet">Blok Subnet</span>)</div>
+  <pre>Contoh: 192.168.10.150/26
+Subnetmask = 255.255.255.(256 - <span class="term-bloksubnet">Blok Subnet</span>)
+           = 255.255.255.(256 - <span class="term-bloksubnet">64</span>)
+Subnetmask = <span class="term-subnetmask">255.255.255.192</span></pre>
 
   <h3>2. Menghitung IP Network</h3>
+  <p><strong>IP Network</strong>: Alamat pertama yang menjadi identitas atau nama dari kelompok jaringan tersebut (tidak bisa dipakai oleh PC).</p>
   <p>Oktet ke-1 sampai oktet ke-3 tidak diubah, oktet ke-4 mengikuti perhitungan berikut:</p>
-  <pre>Nilai Oktet ke-4 / Blok Subnet, lalu:
-Angka Sebelum Koma x Blok Subnet
 
-Contoh: 192.168.10.150/26
-150 / 64 = 2,343
-2 x 64   = 128
+  <div class="formula-box"><span class="term-oktet">Nilai Oktet ke-4</span> ÷ <span class="term-bloksubnet">Blok Subnet</span></div>
+  <div class="formula-box"><span class="term-angka">Angka Sebelum Koma</span> × <span class="term-bloksubnet">Blok Subnet</span></div>
 
-IP Network = 192.168.10.128</pre>
+  <pre>Contoh: 192.168.10.150/26
+<span class="term-oktet">Nilai Oktet ke-4</span> / <span class="term-bloksubnet">Blok Subnet</span>   = <span class="term-oktet">150</span> / <span class="term-bloksubnet">64</span>
+                        = 2,343
+<span class="term-angka">Angka Sebelum Koma</span> x <span class="term-bloksubnet">Blok Subnet</span> = <span class="term-angka">2</span> x <span class="term-bloksubnet">64</span>
+                        = <span class="term-network">128</span>
+
+IP Network = 192.168.10.<span class="term-network">128</span></pre>
 
   <h3>3. Menghitung IP Broadcast</h3>
-  <pre>Nilai Oktet ke-4 IP Network + Blok Subnet - 1
+  <p><strong>IP Broadcast</strong>: Alamat terakhir yang digunakan untuk mengirim data ke semua perangkat dalam kelompok tersebut (tidak bisa dipakai oleh PC).</p>
 
-Contoh: 192.168.10.150/26
-128 + 64 - 1 = 191
+  <div class="formula-box"><span class="term-network">Nilai Oktet ke-4 IP Network</span> + <span class="term-bloksubnet">Blok Subnet</span> − 1</div>
 
-IP Broadcast = 192.168.10.191</pre>
+  <pre>Contoh: 192.168.10.150/26
+<span class="term-network">Nilai Oktet ke-4 IP Network</span> + <span class="term-bloksubnet">Blok Subnet</span> - 1 = <span class="term-network">128</span> + <span class="term-bloksubnet">64</span> - 1
+                                   = <span class="term-broadcast">191</span>
+
+IP Broadcast = 192.168.10.<span class="term-broadcast">191</span></pre>
 
   <h3>4. Menghitung IP Host</h3>
-  <p>IP Host adalah alamat IP yang bisa digunakan untuk konfigurasi perangkat jaringan — merupakan alamat IP yang berada di antara IP Network dan IP Broadcast.</p>
-  <pre>IP Network              IP Broadcast
-192.168.10.128          192.168.10.191
-           +1                      -1
-192.168.10.129  sampai  192.168.10.190
+  <p><strong>IP Host</strong>: Rentang alamat IP di antara Network dan Broadcast yang valid dan bisa digunakan untuk konfigurasi perangkat jaringan.</p>
+  <pre>Contoh: 192.168.10.150/26
+<span class="term-network">IP Network</span>                <span class="term-broadcast">IP Broadcast</span>
+192.168.10.<span class="term-network">128</span>          192.168.10.<span class="term-broadcast">191</span>
+           <span class="term-network">+1</span>                      <span class="term-broadcast">-1</span>
+192.168.10.<span class="term-network">129</span>  sampai  192.168.10.<span class="term-broadcast">190</span>
 
-IP Host = 192.168.10.129 - 192.168.10.190</pre>
+IP Host = 192.168.10.<span class="term-network">129</span> - 192.168.10.<span class="term-broadcast">190</span></pre>
 
   <div class="callout info">
     💡 Hasil akhir perhitungan alamat IP di atas:<br>
     Alamat IP&nbsp;&nbsp;&nbsp;&nbsp;: <code>192.168.10.150/26</code><br>
-    Subnetmask&nbsp;&nbsp;: <code>255.255.255.192</code><br>
-    Blok Subnet&nbsp;: <code>64</code><br>
-    IP Network&nbsp;&nbsp;: <code>192.168.10.128</code><br>
-    IP Broadcast: <code>192.168.10.191</code><br>
-    IP Host&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <code>192.168.10.129 - 192.168.10.190</code>
+    Subnetmask&nbsp;&nbsp;: <code class="term-subnetmask">255.255.255.192</code><br>
+    Blok Subnet&nbsp;: <code class="term-bloksubnet">64</code><br>
+    IP Network&nbsp;&nbsp;: <code class="term-network">192.168.10.128</code><br>
+    IP Broadcast: <code class="term-broadcast">192.168.10.191</code><br>
+    IP Host&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <code><span class="term-network">192.168.10.129</span> - <span class="term-broadcast">192.168.10.190</span></code>
   </div>
 
 </div>

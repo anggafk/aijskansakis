@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Perintah Dasar Router — Portal Belajar</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="materi">
+
+<div id="site-header"></div>
+
+<div class="article-header">
+  <a href="materi.html" class="btn-back">← Kembali ke Daftar Materi</a>
+  <h1>Perintah Dasar Router (CLI MikroTik)</h1>
+</div>
+
+<div class="article-content">
+
+  <p>Selain menggunakan Winbox (GUI), Router MikroTik juga bisa dikonfigurasi melalui <strong>CLI (Command Line Interface)</strong> dengan mengetikkan perintah langsung di jendela <strong>New Terminal</strong>. Halaman ini berisi kumpulan perintah CLI yang sering digunakan, mulai dari navigasi menu, konfigurasi, troubleshooting, sampai menghapus pengaturan.</p>
+
+  <div class="callout info">💡 Pada perintah CLI: teks <span style="color:#5b9dff; font-weight:600;">biru</span> adalah perintah tetap (hafalkan), sedangkan teks <span style="color:#111;">putih/hitam</span> adalah bagian yang perlu diubah sesuai kebutuhan.</div>
+
+  <h2>A. Navigasi Menu</h2>
+  <p>Struktur menu CLI MikroTik berbentuk folder bertingkat, mirip direktori. Perintah berikut digunakan untuk berpindah antar menu.</p>
+
+  <table>
+    <thead><tr><th>Perintah</th><th>Fungsi</th></tr></thead>
+    <tbody>
+      <tr><td><code>/</code></td><td>Kembali ke menu paling awal (root)</td></tr>
+      <tr><td><code>..</code></td><td>Kembali satu tingkat menu ke atas</td></tr>
+      <tr><td><code>?</code></td><td>Menampilkan daftar perintah yang tersedia di menu saat ini</td></tr>
+      <tr><td><code>[Tab]</code></td><td>Melengkapi otomatis (auto-complete) nama perintah atau parameter</td></tr>
+    </tbody>
+  </table>
+
+  <div class="cli-block">
+    <span class="cli-label">Mode CLI</span>
+    <pre><span class="cli-comment"># Pindah langsung ke menu IP Address tanpa harus bertahap</span>
+<span class="cli-cmd">/ip address</span>
+
+<span class="cli-comment"># Kembali ke menu utama dari mana pun posisi saat ini</span>
+<span class="cli-cmd">/</span></pre>
+  </div>
+
+  <h2>B. Perintah Konfigurasi</h2>
+  <p>Digunakan untuk menambah, mengubah, mengaktifkan, atau menonaktifkan suatu konfigurasi.</p>
+
+  <table>
+    <thead><tr><th>Perintah</th><th>Fungsi</th></tr></thead>
+    <tbody>
+      <tr><td><code>add</code></td><td>Menambahkan konfigurasi/data baru</td></tr>
+      <tr><td><code>set [nomor] parameter=nilai</code></td><td>Mengubah parameter dari konfigurasi yang sudah ada</td></tr>
+      <tr><td><code>enable [nomor]</code></td><td>Mengaktifkan kembali konfigurasi/aturan yang nonaktif</td></tr>
+      <tr><td><code>disable [nomor]</code></td><td>Menonaktifkan konfigurasi/aturan tanpa menghapusnya</td></tr>
+    </tbody>
+  </table>
+  <div class="callout info">💡 <strong>[nomor]</strong> adalah angka urutan (index) baris konfigurasi, bisa dilihat di kolom paling kiri saat perintah <code>print</code> dijalankan. Dimulai dari <code>0</code>.</div>
+
+  <div class="cli-block">
+    <span class="cli-label">Mode CLI</span>
+    <pre><span class="cli-comment"># Menambah alamat IP baru</span>
+<span class="cli-cmd">/ip address add address=</span><span class="cli-var">192.168.10.1/24</span> <span class="cli-cmd">interface=</span><span class="cli-var">ether1</span>
+
+<span class="cli-comment"># Mengubah hostname router (baris ke-0)</span>
+<span class="cli-cmd">/system identity set name=</span><span class="cli-var">Router-TKJ</span>
+
+<span class="cli-comment"># Menonaktifkan rule firewall baris ke-2</span>
+<span class="cli-cmd">/ip firewall filter disable</span> <span class="cli-var">2</span>
+
+<span class="cli-comment"># Mengaktifkan kembali rule firewall baris ke-2</span>
+<span class="cli-cmd">/ip firewall filter enable</span> <span class="cli-var">2</span></pre>
+  </div>
+
+  <h2>C. Melihat Informasi &amp; Troubleshooting</h2>
+  <p>Digunakan untuk memeriksa konfigurasi yang sudah dibuat, memantau kondisi jaringan, dan mencari sumber masalah koneksi.</p>
+
+  <table>
+    <thead><tr><th>Perintah</th><th>Fungsi</th></tr></thead>
+    <tbody>
+      <tr><td><code>print</code></td><td>Menampilkan daftar konfigurasi pada menu tersebut</td></tr>
+      <tr><td><code>print detail</code></td><td>Menampilkan daftar konfigurasi beserta detail lengkap tiap parameter</td></tr>
+      <tr><td><code>monitor [nomor]</code></td><td>Memantau status suatu konfigurasi secara langsung (real-time)</td></tr>
+      <tr><td><code>ping [tujuan]</code></td><td>Menguji koneksi ke suatu alamat IP atau domain</td></tr>
+      <tr><td><code>traceroute [tujuan]</code></td><td>Melacak jalur/rute yang dilewati paket data menuju suatu tujuan</td></tr>
+    </tbody>
+  </table>
+
+  <div class="cli-block">
+    <span class="cli-label">Mode CLI</span>
+    <pre><span class="cli-comment"># Melihat semua alamat IP yang terpasang di router</span>
+<span class="cli-cmd">/ip address print</span>
+
+<span class="cli-comment"># Memantau traffic (kecepatan data masuk/keluar) di ether1 secara real-time</span>
+<span class="cli-cmd">/interface monitor-traffic</span> <span class="cli-var">ether1</span>
+
+<span class="cli-comment"># Melihat penggunaan CPU, RAM, dan uptime router</span>
+<span class="cli-cmd">/system resource print</span>
+
+<span class="cli-comment"># Menguji koneksi ke internet</span>
+<span class="cli-cmd">ping</span> <span class="cli-var">google.com</span>
+
+<span class="cli-comment"># Melacak rute paket data menuju suatu alamat</span>
+<span class="cli-cmd">traceroute</span> <span class="cli-var">8.8.8.8</span></pre>
+  </div>
+  <div class="callout info">💡 Tekan tombol <strong>Ctrl + C</strong> untuk menghentikan perintah yang berjalan terus-menerus, seperti <code>ping</code>, <code>monitor</code>, atau <code>monitor-traffic</code>.</div>
+
+  <h2>D. Menghapus Konfigurasi</h2>
+  <p>Digunakan untuk menghapus satu atau beberapa baris konfigurasi, sampai menghapus seluruh pengaturan router.</p>
+
+  <table>
+    <thead><tr><th>Perintah</th><th>Fungsi</th></tr></thead>
+    <tbody>
+      <tr><td><code>remove [nomor]</code></td><td>Menghapus satu baris konfigurasi</td></tr>
+      <tr><td><code>remove [nomor1,nomor2]</code></td><td>Menghapus beberapa baris konfigurasi sekaligus</td></tr>
+      <tr><td><code>/system reset-configuration</code></td><td>Menghapus <strong>seluruh</strong> konfigurasi router dan mengembalikan ke pengaturan awal</td></tr>
+    </tbody>
+  </table>
+
+  <div class="cli-block">
+    <span class="cli-label">Mode CLI</span>
+    <pre><span class="cli-comment"># Menghapus alamat IP baris ke-1</span>
+<span class="cli-cmd">/ip address remove</span> <span class="cli-var">1</span>
+
+<span class="cli-comment"># Menghapus 3 rule firewall sekaligus (baris ke-0, 1, dan 3)</span>
+<span class="cli-cmd">/ip firewall filter remove</span> <span class="cli-var">0,1,3</span>
+
+<span class="cli-comment"># Reset total seluruh konfigurasi router (tanpa konfigurasi default)</span>
+<span class="cli-cmd">/system reset-configuration</span> <span class="cli-cmd">no-defaults=</span><span class="cli-var">yes</span></pre>
+  </div>
+  <div class="callout info">💡 Perintah <code>remove</code> dan <code>reset-configuration</code> <strong>tidak bisa dibatalkan</strong>. Pastikan nomor baris atau konfigurasi yang dihapus sudah benar sebelum menekan Enter.</div>
+
+  <h2>E. Backup &amp; Export Konfigurasi</h2>
+  <p>Digunakan untuk menyimpan salinan konfigurasi router, agar bisa dipulihkan kembali jika terjadi kesalahan atau saat mengganti perangkat.</p>
+
+  <table>
+    <thead><tr><th>Perintah</th><th>Fungsi</th></tr></thead>
+    <tbody>
+      <tr><td><code>/system backup save name=[nama]</code></td><td>Membuat file backup (<code>.backup</code>) — hanya bisa dibaca oleh RouterOS</td></tr>
+      <tr><td><code>/system backup load name=[nama]</code></td><td>Memuat kembali (restore) file backup</td></tr>
+      <tr><td><code>/export file=[nama]</code></td><td>Mengekspor konfigurasi ke file <code>.rsc</code> berupa teks perintah, bisa dibaca &amp; diedit manual</td></tr>
+      <tr><td><code>/import file-name=[nama].rsc</code></td><td>Menjalankan kembali file konfigurasi <code>.rsc</code></td></tr>
+    </tbody>
+  </table>
+
+  <div class="cli-block">
+    <span class="cli-label">Mode CLI</span>
+    <pre><span class="cli-comment"># Membuat file backup</span>
+<span class="cli-cmd">/system backup save name=</span><span class="cli-var">backup-router-tkj</span>
+
+<span class="cli-comment"># Mengekspor konfigurasi ke file teks .rsc</span>
+<span class="cli-cmd">/export file=</span><span class="cli-var">konfigurasi-router-tkj</span></pre>
+  </div>
+
+  <h2>F. Perintah Umum Lainnya</h2>
+
+  <table>
+    <thead><tr><th>Perintah</th><th>Fungsi</th></tr></thead>
+    <tbody>
+      <tr><td><code>/system identity print</code></td><td>Melihat nama (hostname) router</td></tr>
+      <tr><td><code>/system routerboard print</code></td><td>Melihat informasi hardware router (model, versi RouterOS, dsb)</td></tr>
+      <tr><td><code>/system clock print</code></td><td>Melihat tanggal &amp; waktu router</td></tr>
+      <tr><td><code>/user print</code></td><td>Melihat daftar user yang bisa login ke router</td></tr>
+      <tr><td><code>/system reboot</code></td><td>Merestart (nyalakan ulang) router</td></tr>
+      <tr><td><code>/system shutdown</code></td><td>Mematikan router</td></tr>
+    </tbody>
+  </table>
+
+</div>
+
+<div id="site-footer"></div>
+
+<script src="assets/components.js"></script>
+</body>
+</html>

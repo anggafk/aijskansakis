@@ -18,8 +18,8 @@
     { page: "praktik",  href: "praktik.html",  label: "Praktik"  },
     { page: "nilai",    href: "nilai.html",    label: "Nilai"    },
     { page: "tugas",    href: "tugas.html",    label: "Tugas"    },
-    { page: "aplikasi", href: "aplikasi.html", label: "Aplikasi" },
-    { page: "ujian",    href: "ujian.html",    label: "Ujian"    }
+  //  { page: "aplikasi", href: "aplikasi.html", label: "Aplikasi" },
+  //  { page: "ujian",    href: "ujian.html",    label: "Ujian"    }
   ];
 
   // Nama brand di pojok kiri atas
