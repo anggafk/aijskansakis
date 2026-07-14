@@ -81,8 +81,10 @@ code {
 pre {
   background: #f8f8f8; border: 1px solid #e8e8e8; border-radius: 6px;
   padding: 16px 18px; overflow-x: auto; margin: 12px 0 16px;
-  font-family: 'DM Mono', monospace; font-size: 13px; line-height: 1.65; color: #333;
+  font-family: 'DM Mono', 'Courier New', monospace; font-size: 13px; line-height: 1.65; color: #333;
 }
+.term-netid  { color: #2563eb; font-weight: 700; }
+.term-hostid { color: #d97706; font-weight: 700; }
 
 .article-content img {
   max-width: 100%; height: auto; display: block;
